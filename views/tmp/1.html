@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!--<link rel="import" href="./common/header.html?__inline">-->
+<!--<link rel="stylesheet" type="text/css" href="../static/css/myClass.scss">-->
+<title>我的跑班 - 不跑就出局</title>
+</head>
+<body id="my-class-v" class="body-class">
+	<div class="class-header">
+		<div class="head-1">
+			<span>正在参加</span>
+		</div>
+	</div>
+	<div class="myclass-content no-join" v-if="!nowClass">
+		<span>暂无正在参加的班级或活动</span>
+	</div>
+	<div class="myclass-content " v-if="nowClass" v-for="list in nowClass">
+		<div class="content-1" >
+			<div class="head-img" style="background: url({{list.avatar | nullImg}}) no-repeat center;background-size: cover; height: 3.5rem;"></div>
+		</div>
+		<span class="{{list.type=='activity'?'triangle-topleft':''}}"></span>
+		<span class="{{list.type=='activity'?'triangle-font':'triangle-fontnone'}}">活动</span>
+		<div class="content-2">
+			<div class="content-name">{{list.name}}</div>
+			<div class="myclass-date">{{list.start_date}}至{{list.finish_date}}</div>
+		</div>
+		<div class="content-3">
+			<div style="height: 1.5rem;">
+				<div class="state status {{list.status}}" style="text-align: right;"><span class="tag"></span></div>
+			</div>
+			
+			<div class="myclass-dur">{{list.duration}}天</div>
+		</div>
+	</div>
+	<div class="class-header">
+		<div class="head-1">
+			<span>历史记录</span>
+		</div>
+	</div>
+	<div class="myclass-content no-join" v-if="!finishedClass">
+		<span>没有更多记录了</span>
+	</div>
+	<div class="myclass-content" v-if="finishedClass" v-for="list in finishedClass">
+		<div class="content-1">
+			<div class="head-img" style="background: url({{list.avatar | nullImg}}) no-repeat center;background-size: cover; height: 3.5rem;"></div>
+		</div>
+		<span class="{{list.type=='activity'?'triangle-topleft':''}}"></span>
+		<span class="{{list.type=='activity'?'triangle-font':'triangle-fontnone'}}">活动</span>
+		<div class="content-2">
+			<div class="content-name">{{list.name}}</div>
+			<div class="myclass-date">{{list.start_date}}至{{list.finish_date}}</div>
+		</div>
+		<div class="content-3">
+			<div style="height: 1.5rem;">
+				<div class="state status {{list.status}}" style="text-align: right;"><span class="tag"></span></div>
+			</div>
+			
+			<div class="myclass-dur">{{list.duration}}天</div>
+		</div>
+	</div>
+	<div class="request-more" id="request-more" onclick="getInfo()">
+		还有{{Fcount}}条记录
+		<i class="iconfont icon-jiazaigengduo" style="color: #C8C8C8;"></i>
+	</div>
+</body>
+
+</html>
+<!--<link rel="import" href="./common/footer.html?__inline">
+<script type="text/javascript" src="../static/js/myClass.js"></script>-->

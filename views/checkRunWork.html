@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../static/css/owl.carousel.css">
+<link rel="import" href="./common/header.html?__inline">
+<link rel="stylesheet" type="text/css" href="../static/css/checkRunWork.scss">
+<script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<title>我</title>
+</head>
+
+<body id="check-work-v" class="scoll" v-cloak>
+	<div class="check-work-head">
+		<div class="width-70" id="owl-info-list">
+			<div class="check-head-item-list {{$index==0?'active':''}}" v-for="list in channels"><span class="text">{{list.name}}<span v-show="list.count" class="tag">{{list.count}}</span></span></div>
+		</div>
+		<a href="#showRules" class="width-30 text-center rules-intro link" onclick="MtaH5.clickStat('checkRunWork_rule');"><span>规则说明</span><i class="iconfont icon-guanyuwomen"></i></a>
+	</div>
+
+	<div class="check-work-body" v-if="!loading">
+		<div class="width-30 user-info">
+			<div class="head-img" style="background: url({{user&&user.avatar?user.avatar+'-120':'/images/photo.png'}}) no-repeat center;background-size: cover;"></div>
+			<div class="name text-center text-two-line {{user&&user.nickname?'':'color-96'}}">{{user&&user.nickname?user.nickname:'昵称'}}</div>
+			<div class="info-block">
+				<div class="label">应跑日期</div>
+				<div class="content">{{signIn.date | yearCut}}</div>
+			</div>
+			<div class="info-block">
+				<div class="label">应跑距离</div>
+				<div class="content">{{team?team.distance:'--'}}</div>
+			</div>
+			<div class="info-block">
+				<div class="label">输入距离</div>
+				<div class="content">{{signIn.distance | notNull}}</div>
+			</div>
+			<div class="handle-btns">
+				<div v-on:click="prevSign()" class="handle-btn link {{history&&(historyIndex<(history.length-1))?'':'disabled'}}">
+					<i class="iconfont icon-roundleftfill"></i>
+					<span class="text">回查</span>
+				</div>
+				<div v-on:click="nextSign()" class="handle-btn link {{historyIndex>0?'':'disabled'}}">
+					<i class="iconfont icon-roundrightfill"></i>
+					<span class="text">返回</span>
+				</div>
+			</div>
+		</div>
+		<div class="width-70 img" onclick="previewImg()">
+			<div class="notice-no-pass" style="display: none;">
+				<i class="iconfont icon-guanyuwomen"></i>
+				<span class="text">此作业已被不通过1次</span>
+			</div>
+			<img id="work-img" v-if="hasSignIn" class="vertical-middle" v-bind:src="hasSignIn?signIn.pic:'/images/no-work.jpg'" alt="今日跑步截图">
+			<img v-if="!hasSignIn" class="vertical-middle no-work" src="../static/images/no-work.jpg" alt="今日跑步截图">
+			<div class="hide-img"></div>
+			<div class="img-name">{{user&&user.nickname?("RO @ "+user.nickname):"RO @ 不跑就出局"}}</div>
+		</div>
+		
+	</div>
+
+	<!-- <div class="check-work-body" style="background: transparent;" v-if="!hasSignIn&&!loading">
+		<p class="text-center vertical-middle" style="top: 20%;">启禀陛下，今日暂无奏章<br><br>请陛下待会儿再来</p>
+	</div> -->
+
+	<div class="check-work-body" style="background: transparent;" v-if="loading">
+		<p class="text-center vertical-middle" style="top: 20%;">正在为陛下呈上奏章<br><br>请稍候...</p>
+	</div>
+
+	<div class="check-btn-list flex {{hasSignIn?'':'disabled'}}">
+		<div id="skip" class="flex-item " onclick="checkWork('ignore')">跳过</div>
+		<div class="pass flex-item" id="pass" onclick="checkWork('pass')">通过</div>
+		<div id="no-pass" class="flex-item" v-on:click="showNopass()">不通过</div>
+	</div>
+
+	<!-- 不通过 start -->
+	<div class="pop-out check-pop" style="display: none;" id="no-pass-pop">
+		<div class="pop-out-message">
+			<div class="pop-out-head pay-head text-left">
+				选择不予通过理由
+			</div>
+			<span v-on:click="hideNoPass()" id="close-rules" class="iconfont icon-guanbi1"></span>
+			<div class="pop-out-body">
+				<p class="reason">日期，跑步截图无跑步日期</p>
+				<p class="reason">截图，上传不相关图片</p>
+				<p class="reason">距离，公里数未达要求</p>
+				<p class="reason">输入，输入距离与实跑截图不符</p>
+				<p class="reason">配速，每公里超过15分钟</p>
+				<div class="reason"><span class="color-96">其他，</span><textarea type="text" maxlength=200 placeholder="点击手动输入"></textarea></div>
+				<span onclick="checkWork('reject')">确定</span>
+			</div>
+		</div>
+		<div class="pop-out-mask"></div>
+	</div>
+	<!-- 不通过 end -->
+
+	<div class="info-pop" v-show="showRule">
+		<div class="info-pop-head">
+			<span class="title">查作业判定规则</span>
+			<div class="bg"></div>
+		</div>
+		<div class="info-pop-body text-center">
+			<div class="info-pop-block">
+				<span class="title">作业截图说明</span>
+				<p class="text text-left">
+					1. 截图，截图需有当日日期、公里数等基本信息；<br>
+					2. 跑步机，跑步机照片需加日期水印，否则不合格；<br>
+					3. 配速，最慢不得超过15分/每公里，最快不得快于2.2分/每公里；<br>
+					4. 距离，距离需不低于班级要求（含报名活动）；<br>
+					5. 通过“微信运动”或只显示步数的计数，截图无效；<br>
+				</p>
+			</div>
+			<div class="info-pop-block">
+				<span class="title">判定生效说明</span>
+				<p class="text text-left">
+					作业通过：被一个跑友审核通过即可通过。<br>
+					作业不通过：被两个跑友审核不通过则不通过。<br><br>
+					注，作业被判不通过重新提交合格作业即可；<br><br>
+					平等、客观、互信是查作业的基础。请珍惜自己判定机会，有恶意判定行为的跑友将被永久T出平台。<br>
+				</p>
+			</div>
+			<div class="info-pop-block">
+				<p class="text text-left">
+					不跑就出局运营组<br>
+					平台保留对此规则最终解释权<br>
+				</p>
+			</div>
+			<i class="iconfont icon-guanbi1" v-on:click="hideRules()"></i>
+		</div>
+	</div>
+
+</body>
+
+</html>
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="../static/js/owl.carousel.js"></script>
+<link rel="import" href="./common/footer.html?__inline">
+<script type="text/javascript" src="../static/js/checkRunWork.js"></script>
+<script type="text/javascript">
+var overscroll = function(el) {
+  el.addEventListener('touchstart', function() {
+    var top = el.scrollTop
+      , totalScroll = el.scrollHeight
+      , currentScroll = top + el.offsetHeight;
+    if(top === 0) {
+      el.scrollTop = 1;
+    } else if(currentScroll === totalScroll) {
+      el.scrollTop = top - 1;
+    }
+  });
+  el.addEventListener('touchmove', function(evt) {
+    if(el.offsetHeight < el.scrollHeight)
+      evt._isScroller = true;
+  });
+}
+overscroll(document.querySelector('.scroll'));
+document.body.addEventListener('touchmove', function(evt) {
+  if(!evt._isScroller) {
+    evt.preventDefault();
+  }
+});
+</script>

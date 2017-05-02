@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="import" href="../common/header.html?__inline">
+		<link rel="stylesheet" type="text/css" href="../static/css/shop/index.scss">
+		<title>局市 </title>
+	</head>
+	<body id="bureau-city-v" v-cloak>
+		<!--
+			头部信息
+        -->
+		<div class="bureau-city-fixed">
+			<div class="bureau-city-head">
+				<div class="guide ticket {{headGuide==1||headGuide==''?'active':''}}" id="ticket">
+					<i class=" iconfont icon-jinbi {{headGuide==1||headGuide=='' ? 'active':''}}"></i>
+					<span class="header-font header-font1 {{headGuide==1||headGuide==''?'active':''}}">{{money}}局票</span>
+				</div>
+				<div class="guide Earn-ticket {{headGuide==2?'active':''}}" id="Earn-ticket">
+					<i class="iconfont icon-gouwuche {{headGuide==2?'active':''}}"></i>
+					<span class="header-font header-font2 {{headGuide==2?'active':''}}">赚局票</span>
+				</div>
+				<div class="guide ticket-Record {{headGuide==3?'active':''}}" id="ticket-Record">
+					<i class="iconfont icon-arrows48pxglyph1direction56 {{headGuide==3?'active':''}}"></i>
+					<span class="header-font header-font3 {{headGuide==3?'active':''}}">局票记录</span>
+				</div>
+			</div>
+		</div>
+		
+		
+        <div class="item-list-head">
+        </div>
+        <!--720局票-->
+        <div class="bureau-city-one" v-show="headGuide==1">
+        	<div class="item-list-head1">
+	        	<span>&nbsp;</span>&nbsp;&nbsp;
+	        	商品列表
+	        </div>
+	        <div class="item-list-content" style="text-align: center;">
+	        	<a class="item-list-item" v-for="list in itemList" href="/page/shop/item?itemId={{list._id}}" v-on:click="listTo()">
+	        		<div class="item-atavar">
+	        			<div class="head-img" style="background: url({{list.img_path | nullImg}}) no-repeat center;background-size: cover; height: 6.3rem;"></div>
+	        			<!--<img class="head-img" src="../../static/images/shop/huamijuan.jpg" style="height: 6.3rem;width: 100%;">-->
+	        				
+	        		</div>
+	        		<div class="item-name one-line">
+	        			{{list.name}}
+	        		</div>
+	        		<div class="item-duration one-line">
+	        			{{list.title}}
+	        		</div>
+	        		<div class="item-price">
+	        			<span>{{list.unit_price}}</span>
+	        			局票
+	        		</div>
+	        		
+	        	</a>
+	        	<!--<img src="../../static/images/jushi.png">-->
+	        </div>
+        </div>
+        <!--赚局票-->
+        <div class="bureau-city-second" v-show="headGuide==2">
+        	<div class="item-list-head1">
+	        	<span>&nbsp;</span>&nbsp;&nbsp;
+	        	赚票局
+	        </div>
+	        <div class="second-block">
+	        	 <a class="second-list" v-for="list in EranPoint" >
+	        		<div class="second-list-left">
+	        			{{list.name}}&nbsp;&nbsp;&nbsp;&nbsp;
+	        			<i v-on:click="showHelp()" v-if="list.help && list.name=='报名跑班(续班)'" class="iconfont icon-guanyuwomen color-96"></i>
+	        			<i v-on:click="checkWork()" v-if="list.help && list.name=='查作业奖局票'" class="iconfont icon-guanyuwomen color-96"></i>
+	        		</div>
+	        		<div class="second-list-right" v-on:click="doPointTask(list.button_type,list.url)">
+	        			<div class="list-right-div">
+	        				<div v-if="list.button_text=='已完成'" class="right-div-1-green">{{list.value}}</div>
+	        				<div v-if="list.button_text!='已完成'" class="right-div-1">{{list.value}}</div>
+	        				
+	        				<div v-if="list.button_text=='已完成'" class="right-div-2-green">{{list.button_text}}</div>
+	        				<div v-if="list.button_text!='已完成'" class="right-div-2">{{list.button_text}}</div>
+	        				
+	        			</div>
+	        		</div>
+	        	 </a>
+	        </div>
+	       
+        </div>
+        <!--局票记录-->
+        <div class="bureau-city-three" v-show="headGuide==3">
+        	<div class="item-list-head1">
+	        	<span>&nbsp;</span>&nbsp;&nbsp;
+	        	局票记录
+	        </div>
+	        <div class="bureau-city-three-list" v-for="list in pointTally">
+	        	 <div class="record-list" >
+		        	<div class="list-name">
+		        		<p class="list-name-name {{list.type}}"></p>
+		        		<p class="list-name-time">{{list.timestamp | timestamp}}</p>
+		        	</div>
+		        	<div class="list-number">
+		        		<p class="list-number-number" v-if="list.type=='exchange'" style="color: #fc4548;">-{{list.increment}}</p>
+		        		<p class="list-number-number" v-if="list.type!='exchange'" style="color: #11cd6e;">+{{list.increment}}</p>
+		        		<p class="list-number-last">局票剩余{{list.balance}}</p>
+		        	</div>
+		        </div>
+		       
+	        </div>
+	        <div class="jiazai-more" onclick="getRecord(1)" v-show="isMoreshow">点击加载更多</div>
+	        <div class="jiazai-more jiazai-no-more" v-show="!isMoreshow">没有更多了</div>
+        </div>
+        <!--toast弹窗-->
+        <div id="toast" style="display: none;">
+			<div class="dz_toast">
+				<p class="dz_toast_content color-fff">操作成功</p>
+			</div>
+		</div>
+		
+		<!--续班弹框-->
+		<div class="pop-out" v-show="help">
+		<div class="pop-body">
+			<div class="pop-head flex">
+				<span class="text flex-item">一次报名</span>
+				<span class="text flex-item">局票数</span>
+				<span class="text flex-item"></span>
+				<span class="text flex-item" style="text-align: right;">
+					<i class="iconfont icon-guanbi1" v-on:click="hidePop()"></i>
+				</span>
+			</div>
+			<div class="pop-content flex">
+				<span class="text flex-item">1周</span>
+				<span class="text flex-item color-red">1</span>
+				<span class="text flex-item">7周</span>
+				<span class="text flex-item color-red">28</span>
+			</div>
+			<div class="pop-content flex">
+				<span class="text flex-item">2周</span>
+				<span class="text flex-item color-red">3</span>
+				<span class="text flex-item">8周</span>
+				<span class="text flex-item color-red">36</span>
+			</div>
+			<div class="pop-content flex">
+				<span class="text flex-item">3周</span>
+				<span class="text flex-item color-red">6</span>
+				<span class="text flex-item">9周</span>
+				<span class="text flex-item color-red">45</span>
+			</div>
+			<div class="pop-content flex">
+				<span class="text flex-item">4周</span>
+				<span class="text flex-item color-red">10</span>
+				<span class="text flex-item">10周</span>
+				<span class="text flex-item color-red">55</span>
+			</div>
+			<div class="pop-content flex">
+				<span class="text flex-item">5周</span>
+				<span class="text flex-item color-red">15</span>
+				<span class="text flex-item">11周</span>
+				<span class="text flex-item color-red">65</span>
+			</div>
+			<div class="pop-content flex">
+				<span class="text flex-item">6周</span>
+				<span class="text flex-item color-red">21</span>
+				<span class="text flex-item">n周</span>
+				<span class="text flex-item color-red">55+(n-10)10</span>
+			</div>
+			<div class="pop-footer text-left">
+				<span class="text">说明:报名周数以七日为一周，非周一至周日自然周</span>
+			</div>
+		</div>
+	</div>
+	</body>
+</html>
+<link rel="import" href="../common/footer.html?__inline">
+<script type="text/javascript" src="../../static/js/shop/index.js"></script>

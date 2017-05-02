@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="import" href="../common/header.html?__inline">
+<link rel="stylesheet" type="text/css" href="../../static/css/point/point.scss">
+<title>局票明细 - 不跑就出局</title>
+</head>
+
+<body id="v-shop-points-detail" class="shop-points" v-cloak>
+
+	<div class="content">
+
+		<div class="head">
+			<div class="img vertical-middle" style="background: url({{userData.avatar?userData.avatar+'-120':'../../static/images/photo.png'}}) no-repeat center;background-size: cover;"></div>
+			<div class="points vertical-middle">
+				<span class="number">{{userData.total_point}}</span>
+				局票
+			</div>
+		</div>
+
+		<div class="body">
+			<div class="menu-list-body points-detail">
+				<a class="item link" href="/page/point/point_task">
+					<span class="text fll">局票记录</span>
+					<i class="flr iconfont icon-xiangyou1"></i>
+					<span class="text flr">赚局票</span>
+				</a>
+			</div>
+
+			<div class="line-list-body points-detail">
+				<a class="item link" v-for="list in pointTally">
+					<span class="text fll vertical-middle info one-line">{{list.name}}<br><span class="sub-info">{{list.timestamp | timestamp}}</span></span>
+					<span class="text flr vertical-middle info one-line text-right"><span class="{{list.increment>0?'color-green':'color-red'}} first-info">{{list.increment>0?("+"+list.increment):(list.increment)}}</span><br><span class="sub-info">剩余局票{{list.balance}}</span></span>
+				</a>
+			</div>
+			<p v-show="noMore" class="text-center no-more color-c8">没有更多数据了</p>
+
+		</div>
+
+		<div class="fixed-footer flex">
+			<a class="flex-item tab active link"><i class="iconfont icon-geren"></i>我的局票</a>
+			<a class="flex-item tab link" href="/page/shop"><i class="iconfont icon-gouwuche"></i>局市</a>
+		</div>
+	
+	</div>
+	
+</body>
+</html>
+<link rel="import" href="../common/footer.html?__inline">
+<script type="text/javascript" src="../../static/js/point/pointDetail.js"></script>

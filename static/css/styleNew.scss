@@ -1,0 +1,26 @@
+/* 初始化 */
+@import './base/normalize.scss';
+/* 字体 */
+@import './fonts/fonts.scss';
+/* 页面结构 */
+@import './base/layout.scss';
+/* alert弹窗 */
+@import './base/alert.scss';
+/* 颜色配置 */
+@import './base/color.scss';
+/* 侧滑页以及弹出页 */
+@import './base/slide-pop.scss';
+/* 支付弹窗 */
+@import './base/pay-pop.scss';
+/* 按钮样式 */
+@import './base/buttons.scss';
+/* 文本样式 */
+@import './base/text.scss';
+/* ios相关 */
+@import './base/ios.scss';
+/* 菜单和列表项 */
+@import './base/menu-list.scss';
+/* 表单相关 */
+@import './base/form.scss';
+
+

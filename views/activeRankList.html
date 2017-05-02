@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="import" href="./common/header.html?__inline">
+<link rel="stylesheet" type="text/css" href="../static/css/rankList.scss">
+<title>排行榜 </title>
+</head>
+
+<body id="rank-list-v" v-cloak>
+	<div class="rank-type-head flex">
+		<div class="flex-item link" v-on:click='toNormalRank()'><span class="text">跑班排行榜</span></div>
+		<div class="flex-item active link"><span class="text">活动排行榜</span></div>
+	</div>
+	<div class="rank-head active-rank-head index-head-tab" style="display: none;">
+		<div class="active-tags flex flex-start">
+			<div class="item flex-item flex-item-3 active" data-url='/init/rank/hundred/577db8416da0df252b02a9ae'><span class="text">100天百日跑</span></div>
+			<div class="item flex-item flex-item-3" data-url='/init/rank/hundred/577db8416da0df252b02a9af'><span class="text">120天百日跑</span></div><!-- 
+			<div class="item flex-item flex-item-3" data-url='/init/rank/fangduoduo/57e0fbb46da0df3e0a1abc22'><span class="text">一键约跑</span></div> -->
+		</div>
+		<p class="head-info">排名数为累计公里数及今日打卡进度</p>
+	</div>
+	<div class="rank-list-body">
+		<p class="text-center">暂无排名</p>
+	</div>
+	<div class="rank-list-body" v-show="class">
+		<a href="/page/team/detail?id={{class.team_id}}" class="rank-list-item class-item text-center">
+			<div class="head-img" style="background: url({{class.avatar | nullImg}}) no-repeat center;background-size: cover;"></div>
+			<div class="class-name">
+				{{class.name}}
+			</div>
+			<i class="iconfont icon-xiangyou1"></i>
+		</a>
+	</div>
+
+	<div class="rank-list-body" v-show="user">
+		<div class="rank-list-item">
+			<div class="head-img" style="background: url({{user.avatar | nullImg}}) no-repeat center;background-size: cover;"></div>
+			<span class="user-info">{{user.nickname}}<br><span class="color-96">第{{user.rank}}名</span></span>
+			<span class="rank-number vertical-middle">
+				<span class="text distance color-red">{{user.distance?parseInt(user.distance):'--'}}KM</span>
+				<br>
+				<span class="text day color-96">{{user.run_day}}/{{user.duration}}</span>
+			</span>
+		</div>
+	</div>
+
+	<div class="rank-list-body" v-show="rankList.length!=0">
+		<div class="rank-list-item" v-for="list in rankList">
+			<span class="rank-index vertical-middle color-96" style="font-size: 0.86rem;">{{$index+1}}</span>
+			<div class="head-img" style="background: url({{list.avatar | nullImg}}) no-repeat center;background-size: cover;"></div>
+			<span class="user-info">{{list.nickname}}</span>
+			<span class="rank-number vertical-middle">
+				<span class="text distance color-red">{{list.distance?parseInt(list.distance):'--'}}KM</span>
+				<br>
+				<span class="text day color-96">{{list.run_day}}/{{list.duration}}</span>
+			</span>
+		</div>
+	</div>
+	<div class="rank-list-body" v-show="!hasMore">
+		<div class="text-center font-30 color-96" style="margin-top: 0.86rem;padding-bottom: 0.86rem;">没有更多了</div>
+	</div>
+
+</body>
+
+</html>
+<link rel="import" href="./common/footer.html?__inline">
+<script type="text/javascript" src="../static/js/activeRankList.js"></script>

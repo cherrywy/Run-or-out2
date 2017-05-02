@@ -1,0 +1,38 @@
+@import 'mixins.scss';
+.btn{
+	display: block;
+	background: #fc4548;
+	color: #fff;
+	height: 2.8rem;
+	line-height: 2.8rem;
+	font-size: 1.05rem;
+	width: 92.5%;
+	margin: 0 auto;
+	border-radius: 0.2rem;
+	@include transition(0.3s);
+	text-align: center;
+}
+.btn-middle{
+	width: 60%;
+}
+.btn-small{
+	width: 5rem;
+	height: 2.2rem;
+	line-height: 2.2rem;
+	font-size: 0.9rem;
+}
+.btn-success{
+	background: #11cd6e;
+}
+.btn-disabled{
+	background: #ccc;
+}
+.btn:active{
+	background: #c93239;
+}
+.btn-success:active{
+	background: #13af60;
+}
+.btn-disabled:active{
+	background: #ccc;
+}

@@ -1,0 +1,93 @@
+.shop-points{
+	padding-bottom: 5rem;
+}
+.shop-points .head{
+	height: 8rem;
+	background: url('../../images/shop/shop-index.png') no-repeat center;
+	background-size: cover;
+}
+.shop-points .head .img{
+	height: 3rem;
+	width: 3rem;
+	border-radius: 50%;
+	background: #ccc;
+	margin-left: 1rem;
+}
+.shop-points .head .points{
+	position: absolute;
+	right: 1rem;
+	color: #fff;
+	font-size: 0.86rem;
+}
+.shop-points .head .points .number{
+	color: #fff;
+	font-size: 2.8rem;
+	font-weight: lighter;
+	margin-right: 0.5rem;
+}
+.line-list-body .item .btn{
+	margin-left: 1.5rem;
+}
+.line-list-body .item .success{
+	margin-left: 1.5rem;
+	width: 5rem;
+	text-align: center;
+}
+
+/* 积分明细 */
+.points-detail.menu-list-body .item{
+	border-bottom: 0;
+}
+.points-detail.line-list-body{
+	padding-left: 0;
+}
+.points-detail.line-list-body .item{
+	padding-left: 1rem;
+	border-bottom: 0;
+}
+.points-detail.line-list-body .item:nth-child(2n-1){
+	background: #fafafa;
+}
+.points-detail.line-list-body .item .info{
+	line-height: 1.6;
+	max-width: 12rem;
+}
+.points-detail.line-list-body .item .info .first-info{
+	font-size: 1.2rem;
+	line-height: 1;
+}
+.points-detail.line-list-body .item .info .sub-info{
+	font-size: 0.86rem;
+	color: #969696;
+	font-weight: lighter;
+}
+
+.no-more{
+	margin-bottom: 2rem;
+}
+
+.pop-out .pop-body{
+	padding: 1rem;
+}
+.pop-out .pop-head{
+	padding-bottom: 0.8rem;
+	border-bottom: 1px solid #eee;
+	margin-bottom: 0.5rem;
+}
+.pop-out .pop-content{
+	padding: 0.5rem 0;
+}
+.pop-out .pop-footer{
+	padding-top: 0.8rem;
+	border-top: 1px solid #eee;
+	margin-top: 0.5rem;
+	padding-right: 0.8rem;
+}
+.pop-out .pop-content .text,.pop-out .pop-head .text,.pop-out .pop-footer .text{
+	font-size: 0.8rem;
+	color: #969696;
+	font-weight: lighter;
+}
+.pop-out .pop-footer .text{
+	font-size: 0.75rem;
+}

@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="import" href="../../common/header.html?__inline">
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<title>情侣跑 - 不跑就出局</title>
+<style type="text/css">
+	.color-pink{
+		color: #ff4081;
+	}
+	.banner{
+		height: 11rem;
+		background: url('https://www.runorout.cn/images/couple-bg.jpg') no-repeat center;
+		background-size: cover;
+		padding: 1rem;
+		text-align: center;
+	}
+	.banner *{
+		z-index: 2;
+	}
+	.banner .bg{
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background: rgba(0,0,0,0.3);
+		z-index: 1;
+	}
+	.banner .logo{
+		width: 5rem;
+		position: absolute;
+		left: 1rem;
+	}
+	.banner .title{
+		margin-top: 1.5rem;
+		font-size: 2.5rem;
+		color: #fff;
+	}
+	.banner .sub-title{
+		color: #fff;
+	}
+	.banner .text{
+		color: #fff;
+		font-size: 0.86rem;
+		position: absolute;
+		text-align: center;
+		width: 100%;
+		bottom: 1rem;
+		left: 0;
+	}
+	.block{
+		background: #fff;
+		margin-bottom: 0.5rem;
+	}
+	.block .head{
+		padding: 1rem;
+		border-bottom: 1px solid rgba(0,0,0,0.1);
+	}
+	.block .head .right-title{
+		float: right;
+	}
+	.block .head .right-title .iconfont{
+		font-size: 1rem;
+		padding-left: 0.1rem;
+	}
+	.block .body{
+		padding: 1.5rem 1rem;
+	}
+	.block .body .rules{
+		padding: 1rem 1rem 0 1rem;
+		background: rgba(255,64,129,0.05);
+		margin-top: -1.5rem;
+	}
+	.block .body .rules .item{
+		width: 50%;
+		display: inline-block;
+		height: 3rem;
+		margin-bottom: 1rem;
+	}
+	.block .body .rules .item .number{
+		float: left;
+		font-size: 2.6rem;
+		line-height: 3.5rem;
+		font-style: italic;
+	}
+	.block .body .rules .item .info{
+		float: left;
+		line-height: 2.2;
+		font-size: 0.7rem;
+		padding-left: 1rem;
+	}
+	.block .body .rules .item .info p{
+		color: #666;
+	}
+	.block .body .choose-item{
+		border: 1px solid #969696;
+		padding: 1rem;
+		line-height: 1.6;
+		border-radius: 0.2rem;
+		margin-bottom: 1rem;
+	}
+	.block .body .choose-item:last-child{
+		margin-bottom: 0;
+	}
+	.block .body .choose-item .line-1{
+		font-size: 1.05rem;
+	}
+	.block .body .choose-item .line-2{
+		font-size: 0.86rem;
+	}
+	/*.block .body .choose-item.active{
+		border: 1px solid #ff4081;
+	}*/
+	/*.block .body .choose-item.active .line-1 .text,.block .body .choose-item.active .line-2 .text{
+		color: #ff4081;
+	}*/
+	.btn.joined{
+		background: #ff4081;
+		margin: 1rem;
+		font-size: 1.15rem;
+		text-align: center;
+		color: #fff;
+		padding: 0.8rem;
+		border-radius: 5px;
+	}
+	.btn.joined:active{
+		background: #e1346f;
+	}
+	.btn.joined{
+		background: #ccc;
+	}
+	.btn.joined:active{
+		background: #ccc;
+	}
+
+	.rules-page{
+		background: rgba(255,255,255,1);
+		position: fixed;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		padding: 2rem 1rem;
+		z-index: 9;
+	}
+	.rules-page .rule-head{
+		font-size: 1.05rem;
+		position: fixed;
+		left: 50%;
+		transform: translateX(-50%);
+		-webkit-transform: translateX(-50%);
+		color: #ff4081;
+		font-weight: bold;
+	}
+	.rule-body{
+		margin-top: 2rem;
+		height: 90%;
+		overflow: auto;
+	}
+	.rule-body p{
+		font-size: 0.86rem;
+		line-height: 1.6;
+		color: #ff4081;
+	}
+	.rule-body p img{
+		width: 100%;
+	}
+	.rule-body .title{
+		font-weight: bold;
+		text-align: center;
+		margin-top: 1rem;
+	}
+	.rule-body .sub-title{
+		font-weight: bold;
+		margin-top: 1rem;
+	}
+	.rule-body .item{
+		margin-top: 1rem;
+	}
+	.rule-body .sub-item{
+		padding-left: 1rem;
+	}
+	.icon-guanbi1{
+		position: fixed;
+		right: 1.5rem;
+		top: 1rem;
+		font-size: 1.8rem;
+		color: #ff4081;
+	}
+</style>
+</head>
+
+<body id="couple-index" v-cloak>
+	<div class="banner">
+		<img src="https://www.runorout.cn/images/logo-weight-small.png" class="logo"/>
+		<div class="title">七夕情侣跑</div>
+		<div class="sub-title">带上你的TA，让爱永不止步</div>
+		<div class="text">8月10日截止报名 | 8月11日-10月1日为爱奔跑</div>
+		<div class="bg"></div>
+	</div>
+	<div class="block">
+		<div class="head" style="border-bottom: none;">
+			<span class="title">赛事流程</span>
+			<span class="right-title" id="rules"><span class="color-pink">规则详情</span><i class="iconfont icon-jiahao1  color-pink"></i></span>
+		</div>
+		<div class="body">
+			<div class="rules">
+				<div class="item">
+					<span class="number">1</span>
+					<div class="info">
+						<p>报名活动</p>
+						<p>支付契约金52元</p>
+					</div>
+				</div><div class="item">
+					<span class="number">2</span>
+					<div class="info">
+						<p>邀请我的对象报名</p>
+						<p>或进单身群找对象</p>
+					</div>
+				</div><div class="item">
+					<span class="number">3</span>
+					<div class="info">
+						<p>一起打卡52天</p>
+						<p>督促对方不出局</p>
+					</div>
+				</div><div class="item">
+					<span class="number">4</span>
+					<div class="info">
+						<p>返还契约金</p>
+						<p>分配活动奖金</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="block">
+		<div class="head">
+			<span class="title">按情况选择</span>
+		</div>
+		<div class="body">
+			<div class="choose-item active" data-team-id="{{team.couple.id}}">
+				<div class="line-1">
+					<span class="text">我有对象</span>
+					<span class="text flr">{{team.couple.people}}人</span>
+				</div>
+				<div class="line-2">
+					<span class="text">带上对象一起跑</span>
+					<span class="text flr">52.00元/人</span>
+				</div>
+			</div>
+			<div class="choose-item" data-team-id="{{team.single.id}}">
+				<div class="line-1">
+					<span class="text">没有对象</span>
+					<span class="text flr">{{team.single.people}}人</span>
+				</div>
+				<div class="line-2">
+					<span class="text">进单身群，跑步又脱单</span>
+					<span class="text flr">52.00元/人</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="btn joined">{{(user&&user.participate)?'已报名':'报名已结束，敬请关注下期赛事'}}</div>
+
+	<div class="rules-page" style="display: none;">
+		<div class="rule-head text-center">
+			情侣跑赛事规则
+		</div>
+		<i class="iconfont icon-guanbi1"></i>
+		<div class="rule-body">
+			<div id="img-content" class="rich_media_area_primary">
+                <div class="rich_media_content " id="js_content">
+                    <p style="line-height: 25.6px; text-align: center; background-color: rgb(255, 255, 255);"><span style="font-size: 16px;"><strong><span style="line-height: 22.4px; color: rgb(255, 172, 213);"><br></span></strong></span></p><p style="text-align: center; background-color: rgb(255, 255, 255);"><span style="color: rgb(255, 172, 213); line-height: 22.4px;"><strong  style="color: rgb(255, 172, 213);">第一步：绑定情侣关系</strong></span></p><p style="text-align: center; background-color: rgb(255, 255, 255);"><br></p><p style="line-height: 25.6px; text-align: left;"><strong>情侣组</strong></p><p style="text-align: left;"><span style="font-size: 14px; line-height: 22.4px;">1，情侣两人中的一人，进入情侣报名页面支付单人契约金52元</span></p><p style="text-align: left;"><span style="font-size: 14px; line-height: 22.4px;">2，该人支付成功后将邀请页面分享给另一人</span></p><p style="text-align: left;"><span style="font-size: 14px; line-height: 22.4px;">3，另一人在该页面支付单人契约金52元</span></p><p style="text-align: left;"><span style="font-size: 14px; line-height: 22.4px;">4，两人成功绑定情侣关系，进入情侣群</span></p><p><br></p><p><br></p><p style="line-height: 25.6px; text-align: left; background-color: rgb(255, 255, 255);"><strong><span style="line-height: 22.4px; color: rgb(255, 172, 213);"></span></strong></p><p style="line-height: 25.6px; text-align: left; background-color: rgb(255, 255, 255);"><span style="font-size: 16px; color: rgb(0, 0, 0);"><strong><span style="font-size: 16px; line-height: 22.4px;">单身组</span></strong></span></p><p style="line-height: 25.6px; text-align: left; background-color: rgb(255, 255, 255);"><strong><span style="font-size: 14px;">1，单身群内配对</span></strong></p><ul class="list-paddingleft-2" style="list-style-type: disc;"><li><p style="line-height: 25.6px; text-align: left; background-color: rgb(255, 255, 255);"><span style="font-size: 14px;">报名进入单身速配群，群内找到合适的对象</span></p></li><li><p style="line-height: 25.6px; text-align: left; background-color: rgb(255, 255, 255);"><span style="font-size: 14px;">将你支付成功的邀请页面分享给TA</span></p></li><li><p style="line-height: 25.6px; text-align: left; background-color: rgb(255, 255, 255);"><span style="font-size: 14px;">TA点击【确认组队】按钮，即可绑定情侣关系，</span><span style="font-size: 14px; line-height: 25.6px;">从单身群退出，进入情侣群</span></p></li></ul><p style="line-height: 25.6px; text-align: left; background-color: rgb(255, 255, 255);"><span style="font-size: 14px;"><br></span></p><p style="line-height: 25.6px; text-align: left; background-color: rgb(255, 255, 255);"><strong><span style="font-size: 14px;">2，自己配对</span></strong></p><ul class="list-paddingleft-2" style="list-style-type: disc;"><li><p style="line-height: 25.6px; text-align: left; background-color: rgb(255, 255, 255);"><span style="font-size: 14px;">报名后，在自己的身边找到了合适的对象</span></p></li><li><p style="line-height: 25.6px; text-align: left; background-color: rgb(255, 255, 255);"><span style="font-size: 14px; line-height: 25.6px; white-space: pre-wrap; background-color: rgb(255, 255, 255);">将你支付成功的邀请页面分享给TA</span></p></li><li><p style="line-height: 25.6px; text-align: left; background-color: rgb(255, 255, 255);"><span style="font-size: 14px; line-height: 25.6px; white-space: pre-wrap; background-color: rgb(255, 255, 255);">TA</span><span style="font-size: 14px; line-height: 22.4px;">在该页面支付单人契约金52元</span></p></li><li><p style="text-align: left;"><span style="font-size: 14px; line-height: 22.4px; white-space: pre-wrap;">两人成功绑定情侣关系，<span style="font-size: 14px; line-height: 25.6px; white-space: pre-wrap; background-color: rgb(255, 255, 255);">从单身群退出，进入情侣群</span></span></p></li></ul><p><br></p><p style="line-height: 25.6px; text-align: left; background-color: rgb(255, 255, 255);"><span style="font-size: 14px;"><strong>3，<strong style="line-height: 25.6px;"><span style="line-height: 22.4px;">配对失败将以单身者的身份跑完52天</span></strong></strong></span></p><p style="line-height: 25.6px; text-align: left; background-color: rgb(255, 255, 255);"><strong style="line-height: 25.6px;"><span style="line-height: 22.4px; font-size: 14px;"><br></span></strong></p><p style="line-height: 25.6px; text-align: center; background-color: rgb(255, 255, 255);"><span style="color: rgb(255, 172, 213);"><strong style="color: rgb(255, 172, 213);">第二步：跑步</strong></span></p><p style="line-height: 25.6px; text-align: center; background-color: rgb(255, 255, 255);"><br></p><p style="line-height: 25.6px;"><span style="font-size: 14px; line-height: 22.4px;">1，<span style="font-size: 14px; line-height: 22.4px; color: rgb(0, 0, 0);">无论情侣身份是否绑定成功，8月11日所有人开跑</span></span></p><p style="line-height: 25.6px;"><span style="font-size: 14px; line-height: 22.4px;">2，<span style="font-size: 14px; line-height: 22.4px; white-space: pre-wrap;">关注【不跑就出局】公众号，</span>在8月11日—10月1日的52天内每天跑步，打卡不低于2公里，配速不低于15分钟／每公里</span></p><p style="line-height: 25.6px;"><span style="font-size: 14px; line-height: 22.4px;">3，标准打卡方法<a href="http://mp.weixin.qq.com/s?__biz=MzIwNjM2NzQ1Nw==&amp;mid=100000008&amp;idx=1&amp;sn=b2e0d5e7854b3d5f076351e4d779f276&amp;scene=0#wechat_redirect" target="_blank" data_ue_src="http://mp.weixin.qq.com/s?__biz=MzIwNjM2NzQ1Nw==&amp;mid=100000008&amp;idx=1&amp;sn=b2e0d5e7854b3d5f076351e4d779f276&amp;scene=0#wechat_redirect">请点击这里</a></span></p><p style="line-height: 25.6px;"><br></p><p style="line-height: 25.6px; text-align: center;"><span style="font-size: 16px; color: rgb(255, 172, 213);"><strong><span style="color: rgb(255, 172, 213);">第三步：结算</span></strong></span></p><p style="line-height: 25.6px; text-align: center;"><span style="font-size: 16px; color: rgb(255, 172, 213);"><strong><span style="font-size: 16px; line-height: 22.4px;"><br></span></strong></span></p><p style="line-height: 25.6px; text-align: left;"><span style="font-size: 16px; color: rgb(0, 0, 0);"><span style="font-size: 16px; line-height: 22.4px;"><span style="font-size: 14px; line-height: 25.6px; white-space: pre-wrap; background-color: rgb(255, 255, 255);">1，</span><span style="font-size: 14px; white-space: pre-wrap; line-height: 22.4px; background-color: rgb(255, 255, 255);">情侣组与单身组独立结算</span></span></span></p><p style="line-height: 25.6px;"><span style="font-size: 14px; line-height: 22.4px; background-color: rgb(255, 255, 255);">2，情侣两人绑定，两人必须都完成打卡。其中一人缺跑一天，则两人这一天的契约金都被扣除。</span></p><p style="line-height: 25.6px;"><span style="font-size: 14px; line-height: 22.4px; background-color: rgb(255, 255, 255);">3，所有配对失败的单身者，缺跑一天扣除一天契约金</span></p><p style="line-height: 25.6px;"><span style="font-size: 14px; line-height: 22.4px; background-color: rgb(255, 255, 255);"></span></p><p style="line-height: 25.6px;"><span style="font-size: 14px; line-height: 22.4px; background-color: rgb(255, 255, 255);">4，扣除的契约金纳入奖金池，活动结束后，将作为奖金平分给成功坚持52天的情侣，</span><span style="font-size: 14px; line-height: 22.4px; background-color: rgb(255, 255, 255);">奖金在活动周期结束后统一结算并返还到RO账户</span></p><p style="line-height: 25.6px;"><br></p>
+            	</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
+<link rel="import" href="../../common/footer.html?__inline">
+<script type="text/javascript" src="../../../static/js/activitys/couple/index.js"></script>

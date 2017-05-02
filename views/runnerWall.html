@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html id="runner-wall-v">
+<head>
+<link rel="import" href="./common/header.html?__inline">
+<link rel="stylesheet" type="text/css" href="../static/css/runnerWall.scss">
+<title>跑友墙</title>
+</head>
+<body v-cloak>
+	<div class="class-join-people-head text-center">
+		<p class="text">{{team.name}}</p>
+		<p class="text">跑友墙</p>
+		<div class="bg"></div>
+	</div>
+	<div class="class-join-people-body">
+		<div class="box">
+			<span class="text">本周挑战<span class="number">{{nowJoin?nowJoin.length:0}}人</span></span>
+			<div class="join-list-box"><div class="join-list" v-for="list in nowJoin">
+				<img class="head-img" v-bind:src="list.avatar | nullImg" alt="{{list.avatar | nickname}}">
+				<span class="name">{{list.nickname?list.nickname:" "}}</span>
+			</div></div>
+		</div>
+	</div>
+
+	<div class="class-join-people-body">
+		<div class="box">
+			<span class="text">下周已报名<span class="number">{{nextJoin?nextJoin.length:0}}人</span></span>
+			<div class="join-list-box"><div class="join-list" v-for="list in nextJoin">
+			<img class="head-img" v-bind:src="list.avatar | nullImg" alt="{{list.avatar | nickname}}"><span class="name">{{list.nickname?list.nickname:" "}}</span>
+			</div></div>
+		</div>
+	</div>
+
+	<div class="footer">
+		<img src="../static/images/logo-black.png" alt="RO不跑就出局">
+	</div>
+</body>
+</html>
+<link rel="import" href="./common/footer.html?__inline">
+<script type="text/javascript" src="../static/js/runnerWall.js"></script>

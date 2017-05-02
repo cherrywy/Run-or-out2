@@ -1,0 +1,171 @@
+.pay-page-head{
+	height: 6rem;
+	background: #fff;
+	padding: 0rem 2rem;
+    /* line-height: 6rem; */
+    font-size: 1.2rem;
+    /* text-align: center; */
+    /* margin: 0 auto; */
+    border-bottom: 1px solid #f4f4f4;
+    padding-top: 1.3rem;
+}
+.pay-title{
+	margin-top: 2rem;
+	font-size: 1.15rem;
+}
+.pay-money{
+	font-size: 2rem;
+    height: 3rem;
+    line-height: 3rem;
+}
+.pay-intro{
+	color: #c8c8c8;
+	line-height: 1.5;
+	font-size: 0.86rem;
+}
+.pay-page-body{
+	padding: 0.8rem 2rem;
+	background: #fff;
+}
+.pay-list{
+	line-height: 1.4;
+}
+.pay-list > *{
+ 	font-size: 0.86rem;
+}
+.pay-list > span:first-child{
+ 	
+}
+.pay-list > span:last-child{
+ 	position: absolute;
+ 	right: 0;
+}
+.pay-week{
+	margin-top: 1.8rem;
+	font-size: 1rem;
+	margin-bottom: 1rem;
+	line-height: 1.6;
+}
+.about-week{
+	position: absolute;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+}
+.about-week > span{
+	display: inline-block;
+    width: 2.4rem;
+    height: 1.8rem;
+    background: #f7f7f7;
+    line-height: 1.8rem;
+    vertical-align: middle;
+}
+.minus-week,.add-week{
+	font-weight: 500;
+	font-size: 1.3rem;
+	color: #969696;
+	vertical-align: middle;
+}
+.minus-week:active,.add-week:active{
+	background: #eee!important;
+}
+.about-week > #week{
+	background: #fff;
+	width: 3.5rem;
+    font-size: 1.4rem;
+	color: #969696;
+}
+.pay-discount{
+	margin-top: 1rem;
+	border-top: 1px solid #f4f4f4;
+	font-size: 1rem;
+	height: 3.5rem;
+	line-height: 3.5rem;
+	margin-bottom: 1.5rem;
+	margin-left: 0;
+	margin-right: 0;
+}
+.pay-discount:active{
+	background: #eee;
+}
+.money-details{
+	text-align: left;
+	line-height: 1.6;
+}
+.money-details > span{
+	float: right;
+}
+.read-deal{
+	margin-top: 1.5rem;
+	margin-bottom: 5rem;
+}
+.read-deal > a{
+	color: #0e73c0;
+}
+.pay-page-footer > div{
+	position: fixed;
+	height: 4rem;
+	line-height: 4rem;
+	bottom: 0;
+	color: #fff;
+	font-size: 1.15rem;
+}
+#truely-pay{
+	background: #434343;
+	width: 80%;
+	left: 0;
+	padding-left: 2rem;
+	border-radius: 0 0 0 0rem;
+}
+#truely-pay > span{
+	padding-left: 1.8rem;
+	color: #fff;
+	font-size: 1.15rem;
+}
+#pay-weichat{
+	background: #fc4548;
+	right: 0;
+	width: 10rem;
+	text-align: center;
+	border-radius: 0 0 0rem 0;
+}
+#pay-weichat:active{
+	background: #c93239;
+}
+#pay-weichat.disabled{
+	background: #969696!important;
+}
+#alert-out-create input{
+	border: none;
+    width: 100%;
+    height: 2.8rem;
+    border-radius: 3px;
+    font-size: 1rem;
+	padding-left: 0.5rem;
+	text-align: center;
+}
+#alert-out-create .alert-message{
+	padding-top: 1.5rem;
+    padding-left: 0rem;
+    padding-right: 0rem;
+    text-align: center;
+    padding-bottom: 0;
+}
+#alert-out-create .alert-message > div{
+	margin-top: 1rem;
+    border-top: 1px solid #f4f4f4;
+    border-bottom: 1px solid #f4f4f4;
+}
+#alert-out-create .alert-foot{
+	border-top: none;
+}
+#alert-out-create .alert-footer:active{
+	background: #f4f4f4;
+}
+#wrong-tel{
+	position: absolute;
+    width: 100%;
+    bottom: 1rem;
+    text-align: right;
+    padding-right: 0.5rem;
+}

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="import" href="./common/header.html?__inline">
+<script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<link rel="stylesheet" type="text/css" href="../static/css/manageClass.scss">
+<title>班级设置</title>
+</head>
+
+<body id="manage-class-v" style="padding-bottom: 1rem;" v-cloak>
+	<div id="manage-body">
+		<a onclick="gotoQRcode()" class="manager-head-item">
+			<div class="head-img vertical-middle" style="background: url({{classInfo.avatar | nullImg}}) no-repeat center;background-size: cover;"></div>
+			<span class="word vertical-middle">头像及班级二维码</span>
+			<span v-if="codeDay" class="update-day vertical-middle">{{codeDay | updateDay}}</span>
+			<i class="iconfont icon-erweima vertical-middle"></i>
+			<i class="iconfont icon-xiangyou1 vertical-middle"></i>
+		</a>
+		<!--<div class="normal-menu-body manager-class-item">
+			<div class="normal-menu-list no-icon">
+				<span class="normal-menu-title">私密班级</span>
+				<span class="normal-menu-sub-title">
+					<input type="checkbox" class="dz-switch" id="private-class">
+				</span>
+			</div>
+		</div>
+		<p class="text private-class-intro">开启后仅可通过分享班级主页或邀请卡邀请好友加入。</p>-->
+		<div class="normal-menu-body manager-class-item">
+			<div class="normal-menu-list slide-input" id="class-name" data-name="name" data-value="{{classInfo.name}}">
+				<span class="normal-menu-title">班级名称 <span class="color-red">*</span></span>
+				<span class="normal-menu-sub-title color-c8 sub-value">{{classInfo.name?classInfo.name:'点击输入名称'}}</span>
+				<i class="iconfont icon-xiangyou1"></i>
+			</div>
+			
+			<div class="normal-menu-list" id="private" v-on:click="gotoSetprivate()">
+				<span class="normal-menu-title">私密班级</span>
+				<span class="normal-menu-sub-title" v-if="isOpened">已开启</span>
+				<span class="normal-menu-sub-title" v-if="!isOpened">已关闭</span>
+				<i class="iconfont icon-xiangyou1"></i>
+			</div>
+			
+			<div class="normal-menu-list slide-out" id="run-week" data-relate-id="run-week-pop" data-choosed-data="{{week}}">
+				<span class="normal-menu-title">报名周数</span>
+				<span class="normal-menu-sub-title">至少报{{week}}周</span>
+				<i class="iconfont icon-xiangyou1"></i>
+			</div>
+			
+			
+			<div class="normal-menu-list slide-out" id="run-location" data-relate-id="run-location-pop">
+				<span class="normal-menu-title">所在地区</span>
+				<span class="normal-menu-sub-title">{{province?province:"任意"}}</span>
+				<i class="iconfont icon-xiangyou1"></i>
+			</div>
+		</div>
+		<p class="editKDM" v-on:click="editKDM()">想修改班级其他属性<i class="iconfont icon-bangzhu"></i></p>
+		<div class="normal-menu-body manager-class-item">
+			<div class="normal-menu-list other-manage-info-item slide-out" data-relate-id="class-tags-pop" id="class-tags-slide">
+				<span class="normal-menu-title">班级标签 <span class="color-red">*</span></span>
+				<div class="info-text tags-body vertical-middle">
+					<div class="tag-list one-line">
+						<span v-for="list in tagList">{{list}}</span>
+					</div>
+					<i class="iconfont icon-xiangyou1 color-96 vertical-middle"></i>
+				</div>
+			</div>
+			<div class="normal-menu-list other-manage-info-item slide-input" data-name="master" id="class-master" data-value-name="{{classInfo.monitor.name}}" data-value-one="{{classInfo.monitor.introduction}}" data-value-intro="{{classInfo.monitor.description}}">
+				<span class="normal-menu-title">班长头衔 <span class="color-red">*</span></span>
+				<i class="iconfont icon-xiangyou1"></i>
+				<div class="info-text sub-value one-line vertical-middle">
+					{{classInfo.monitor.introduction?(classInfo.monitor.introduction):"暂无"}}
+				</div>
+			</div>
+			<div class="normal-menu-list other-manage-info-item slide-input" data-name="note" id="class-note" data-value="{{classInfo.description}}">
+				<span class="normal-menu-title">班级介绍 <span class="color-red">*</span></span>
+				<i class="iconfont icon-xiangyou1"></i>
+				<div class="info-text sub-value one-line vertical-middle">
+					{{classInfo.description?classInfo.description:"暂无"}}
+				</div>
+			</div>
+		</div>
+		
+		<div class="btnDIV">
+			<div class="btn" v-on:click="deleteClass()">删除班级</div>
+		</div>
+
+		<!-- <div class="normal-menu-body manager-class-item">
+			<div class="normal-menu-list no-icon">
+				<span class="normal-menu-title">单日契约金</span>
+				<span class="normal-menu-sub-title">￥{{money}}</span>
+			</div>
+			<div class="normal-menu-list no-icon">
+				<span class="normal-menu-title">每周出勤</span>
+				<span class="normal-menu-sub-title">一周跑{{day}}天</span>
+			</div>
+			<div class="normal-menu-list slide-out {{classInfo.people!=0?'disabled':''}}" id="run-distance" data-relate-id="run-distance-pop" data-choosed-data="{{distance}}">
+				<span class="normal-menu-title">每日公里数</span>
+				<span class="normal-menu-sub-title">{{distance}}KM</span>
+				<i class="iconfont icon-xiangyou1"></i>
+			</div>
+			<div class="normal-menu-list slide-out disabled" id="run-date" data-relate-id="run-date-pop" data-choosed-data="{{startDay.date}}">
+				<span class="normal-menu-title">开跑日期</span>
+				<span class="normal-menu-sub-title">{{startDay.dayWords}}</span>
+				<i class="iconfont icon-xiangyou1"></i>
+			</div>
+		</div> -->
+
+		<div class="footer">
+			<img src="../static/images/logo-black.png" alt="RO不跑就出局">
+		</div>
+		<div class="item-btn">
+			<div id="submit-update" class="btn" onclick="submitUpdate()">完成提交，去班级主页看看</div>
+		</div>
+	</div>
+	<!-- 弹出框 start -->
+	<div class="create-slide run-distance-body" id="run-distance-pop">
+		<p class="choose-info">你希望报名班级跑友每次至少跑多少公里？</p>
+		<div class="choose-distance-body">
+			<div class="distance-list {{distance==2?'active':''}}" data-distance="2">
+				2KM
+			</div>
+			<div class="distance-list {{distance==3?'active':''}}" data-distance="3">
+				3KM
+			</div>
+			<div class="distance-list {{distance==5?'active':''}}" data-distance="5">
+				5KM
+			</div>
+			<div class="distance-list {{distance==8?'active':''}}" data-distance="8">
+				8KM
+			</div>
+			<div class="distance-list {{distance==10?'active':''}}" data-distance="10">
+				10KM
+			</div>
+		</div>
+	</div>
+
+	<div class="create-slide run-distance-body" id="run-week-pop">
+		<p class="choose-info">你希望班级跑友每次至少报名多少周？</p>
+		<div class="choose-distance-body">
+			<div class="distance-list {{week==1?'active':''}}" data-week="1">
+				至少报1周
+			</div>
+			<div class="distance-list {{week==2?'active':''}}" data-week="2">
+				至少报2周
+			</div>
+			<div class="distance-list {{week==3?'active':''}}" data-week="3">
+				至少报3周
+			</div>
+			<div class="distance-list {{week==4?'active':''}}" data-week="4">
+				至少报4周
+			</div>
+			<div class="distance-list {{week==8?'active':''}}" data-week="8">
+				至少报8周
+			</div>
+			<div class="distance-list {{week==10?'active':''}}" data-week="10">
+				至少报10周
+			</div>
+		</div>
+	</div>
+
+	<div class="create-slide run-distance-body" id="run-date-pop">
+		<p class="choose-info">请选择开跑时间</p>
+		<div class="choose-distance-body">
+			<div class="distance-list {{$index==0?'active':''}}" v-for="list in dayList" data-date="{{$index}}">
+				{{list.dayWords}}
+			</div>
+		</div>
+	</div>
+
+	<div class="create-slide run-distance-body" id="run-location-pop" style="overflow: auto;">
+		<p class="choose-info">选择您的班级所在地</p>
+		<div class="choose-distance-body">
+			<div class="distance-list {{provinceList.indexOf(province)!=-1?'':'active'}}" data-data="">
+				任意
+			</div>
+			<div class="distance-list {{province==list?'active':''}}" v-for="list in provinceList" data-data="{{list}}">
+				{{list}}
+			</div>
+		</div>
+	</div>
+
+	<div class="create-slide input-text" id="class-name-pop">
+		<p class="guide-word" style="margin-top: 1rem;">班级名称(15字内)</p>
+		<div class="item-block" style="margin-top: 0rem;">
+			<input value="{{classInfo.name}}" class="input-text" type="text" placeholder="如罗胖粉丝团、黎明脚步、毛线团" maxlength="16">
+		</div>
+		<div class="create-btn">确定</div>
+		<div class="cancel-choose">取消</div>
+	</div>
+
+	<div class="create-slide input-text" id="class-tags-pop" style="background: #fff;">
+		<p class="choose-info">当前班级标签</p>
+		<div class="my-tag-list" v-if="showTags">
+			<span v-for="list in tagList">{{list}}<i v-on:click="deleteTag($index)" class="iconfont icon-guanbi2fill"></i></span>
+		</div>
+		<div class="item-block">
+			<input id="class-tags-pop-input" class="input-text" type="text" placeholder="输入要添加的标签名" maxlength="5">
+			<span class="add-tags-btn">点击添加</span>
+		</div>
+		<p class="choose-info color-c8">平台最热标签</p>
+		<div class="other-tag-list">
+			<span v-for="list in otherTagList" v-on:click="addOtherTag(list)">{{list}}</span>
+		</div>
+		<div class="create-btn">确定</div>
+		<div class="cancel-choose">取消</div>
+	</div>
+
+	<div class="create-slide input-text" id="class-note-pop">
+		<p class="guide-word" style="margin-top: 1rem;">班级介绍(50字以内)</p>
+		<div class="item-block" style="margin-top: 0rem;">
+			<textarea value="{{classInfo.description}}" class="input-text" placeholder="介绍你的跑班有什么不一样的地方，将在加入班级页显示" maxlength="50"></textarea>
+		</div>
+		<div class="create-btn">确定</div>
+		<div class="cancel-choose">取消</div>
+	</div>
+
+	<div class="create-slide input-text" id="class-master-pop">
+		<p class="guide-word" style="margin-top: 1rem;">班长头衔(10字以内)</p>
+		<div class="item-block" style="margin-top: 0rem;">
+			<input class="input-text-one" value="{{classInfo.monitor.introduction}}" type="text" placeholder="NB北京跑团团长；电台DJ；Alibaba PM" maxlength="10">
+		</div>
+		<div class="create-btn">确定</div>
+		<div class="cancel-choose">取消</div>
+	</div>
+
+	<div class="create-slide input-text" id="run-location-pop">
+		<div class="location-head">
+			<div class="title text-center">
+				<i class="iconfont icon-guanbi1"></i>
+				跑班城市设置
+			</div>
+			<p class="color-96">重要提醒：任何跑友都可以随时加入平台任意班级。我们建议只有在你后期有意组织同班跑友线下活动，希望跑班跑友同城市居多时，才设置班级城市项。</p>
+			<span class="text-center color-red cancel-choose">好的，取消设置并返回</span>
+		</div>
+		<div class="item-block">
+			<i class="iconfont icon-dingwei color-red"></i>
+			<span class="location color-red">武汉</span>
+			<span class="word color-96">当前定位城市</span>
+			<span class="cancel color-red vertical-middle">取消设置城市</span>
+		</div>
+		<div class="item-block">
+			<span class="province color-c8">省</span>
+			<span class="city color-c8">市</span>
+			<i class="iconfont icon-xiangyou1 color-96 vertical-middle" style="position: absolute;right: 1rem;"></i>
+		</div>
+		<div class="create-btn">确定</div>
+		<div class="cancel-choose">取消</div>
+	</div>
+	<!-- 弹出框 end -->
+</body>
+</html>
+
+<link rel="import" href="./common/footer.html?__inline">
+<script type="text/javascript" src="../static/js/manageClass.js"></script>

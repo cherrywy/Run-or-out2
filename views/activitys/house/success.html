@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="import" href="../../common/header.html?__inline">
+<script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<title>报名成功 - 不跑就出局&房多多</title>
+<style type="text/css">
+	body{
+		background: #000;
+	}
+	.content{
+		padding-bottom: 6.5rem;
+	}
+	.fixed-footer{
+		background: rgba(0,0,0,0.9);
+		border-top: 1px solid #ffe878;
+	}
+	.fixed-footer{
+		padding: 0 0.5rem;
+		height: 6rem;
+		padding-top: 1rem;
+	}
+	.fixed-footer .btn{
+		background: transparent;
+		color: #ffe878;
+		border: 1px solid #ffe878;
+	}
+	.fixed-footer .btn:active{
+		background: #d0bd62;
+	}
+	.fixed-footer .angel{
+		width: 0;
+	    height: 0;
+	    border-left: 0.8rem solid transparent;
+	    border-right: 0.8rem solid transparent;
+	    border-top: 1rem solid #ffe878;
+	    position: absolute;
+	    top: 0;
+		right: 22%;
+	}
+	.head{
+		height: 5rem;
+		background: #ffe878;
+		padding: 0 1rem;
+		z-index: 1;
+	}
+	.head .iconfont{
+		font-size: 2rem;
+		vertical-align: top;
+		position: absolute;
+	}
+	.head .text.title{
+		font-size: 1.3rem;
+		position: absolute;
+		left: 3.8rem;
+	}
+	.head .text.close{
+		font-size: 1.05rem;
+		padding-right: 1rem;
+		position: absolute;
+		right: 1rem;
+	}
+	.body{
+		padding-top: 2rem;
+		text-align: center;
+	}
+	.body .text{
+		color: #ffe878;
+	}
+	.body .text.title{
+		font-size: 1.5rem;
+		margin-top: 0.5rem;
+	}
+	.body .qrcode{
+		width: 14rem;
+		margin-top: 2rem;
+	}
+	.left-angle{
+		position: absolute;
+		top: -5rem;
+		left: 0;
+		width: 100%;
+		z-index: 0;
+	}
+</style>
+</head>
+
+<body id="house-success" v-cloak>
+
+	<div class="content">
+
+		<div class="head">
+			<i class="iconfont icon-gouxuan1 vertical-middle"></i>
+			<span class="text title vertical-middle">报名成功</span>
+			<span class="text close vertical-middle link" v-on:click="closePage()">返回</span>
+		</div>
+
+		<div class="body">
+			<img class="left-angle" src="../../../static/images/house/left-angle.jpg" alt="" class="left-angle">
+			<p class="text">最后一步</p>
+			<p class="text title">加徐婷微信，备注一键约跑，拉你入群</p>
+			<img class="qrcode" src="../../../static/images/house/qrcode-xuting.jpg" alt="">
+		</div>
+
+		<div class="fixed-footer flex">
+			<div class="angel"></div>
+			<a class="flex-item tab link">
+				<span class="btn" v-on:click="invite()">邀请好友参赛</span>
+			</a>
+			<a class="flex-item tab link">
+				<span class="btn">进参赛群</span>
+			</a>
+		</div>
+
+	</div>
+</body>
+</html>
+<link rel="import" href="../../common/footer.html?__inline">
+<script type="text/javascript" src="../../../static/js/activitys/house/success.js"></script>

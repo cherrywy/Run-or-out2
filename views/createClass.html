@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="import" href="./common/header.html?__inline">
+		<link rel="stylesheet" type="text/css" href="../static/css/createClass.scss">
+		<!--<script type="text/javascript" src="//pingjs.qq.com/h5/stats.js" name="MTAH5" sid="500128111" cid="500128144" ></script>-->
+		<title>创建跑班 </title>
+	</head>
+	<body id="create-class-v">
+		<div class="join-class-head text-center" style="z-index: 10;">
+			<div class="bg"></div>
+			<div class="flex-item link"><span class="text">三步完成创建</span></div>
+			<div class="guide">
+				<div class="flex">
+					<div class="flex-item  active">
+						<span class="text">班级设置</span>
+						<div class="dot"></div>
+					</div>
+					<div class="flex-item">
+						<span class="text">支付契约金</span>
+						<div class="dot"></div>
+					</div>
+					<div class="flex-item">
+						<span class="text">完善班级信息</span>
+						<div class="dot"></div>
+					</div>
+				</div>
+				<div class="underline-1"></div>
+				<div class="underline-2"></div>
+			</div>
+		</div>
+		<!-- <div class="create-guide text-center">创建一个自己的跑班，拉上朋友一起跑步</div>
+		<div class="normal-menu-body" style="margin-top: 1rem;"> -->
+			<!-- <div class="normal-menu-list" id="run-week" data-relate-id="run-week-pop" data-choosed-data="1"> -->
+			<!-- <div class="normal-menu-list">
+				<span class="normal-menu-title">班级名</span>
+				<input type="text" class="normal-menu-sub-title name"  id="className"  placeholder="点击输入" />
+			</div> -->
+			<div class="normal-menu-list" id="run-distance" data-relate-id="run-distance-pop" data-choosed-data="3">
+				<span class="normal-menu-title">每日公里数</span>
+				<span class="normal-menu-sub-title" id="distance">3KM</span>
+				<i class="iconfont icon-xiangyou1"></i>
+			</div>
+			<div class="normal-menu-list" id="run-day" data-relate-id="run-day-pop" data-choosed-data="5">
+				<span class="normal-menu-title">每周出勤</span>
+				<span class="normal-menu-sub-title" id="duration">一周跑5天</span>
+				<i class="iconfont icon-xiangyou1"></i>
+			</div>
+			<div class="normal-menu-list" id="choose-money" data-relate-id="choose-money-pop" data-choosed-data="20">
+				<span class="normal-menu-title">单日契约金</span>
+				<span class="normal-menu-sub-title" id="money">20元</span>
+				<i class="iconfont icon-xiangyou1"></i>
+			</div>
+			<div class="normal-menu-list" id="run-date" data-relate-id="run-date-pop" data-choosed-data="">
+				<span class="normal-menu-title">开跑日期</span>
+				<span class="normal-menu-sub-title" id="start-date"></span>
+				<i class="iconfont icon-xiangyou1"></i>
+			</div>
+		</div>
+		<div class="create-btn" id="submit-create-class" onclick="MtaH5.clickStat('createClass_btn');">
+			下一步
+		</div>
+		<div class="create-guide text-center" style="background: transparent;border-bottom: none;    padding: 1rem 3rem;line-height: 1.6;">
+			新班级，班长需第一个报名并支付契约金<br>
+			<!-- 2. 创建成功后班级会一直保留，可随时报班<br>
+			3. 建班有疑问，寻求帮助请点击 <a class="link color-red" href="/page/feedback/emergency">问题咨询</a><br> -->
+		</div>
+		<!-- 弹出框 start -->
+		<div class="create-slide run-distance-body" id="run-distance-pop">
+			<p class="choose-info">你希望报名班级跑友每次至少跑多少公里？</p>
+			<div class="choose-distance-body">
+				<div class="distance-list" data-distance="2">
+					2KM
+				</div>
+				<div class="distance-list active" data-distance="3">
+					3KM
+				</div>
+				<div class="distance-list" data-distance="5">
+					5KM
+				</div>
+				<div class="distance-list" data-distance="8">
+					8KM
+				</div>
+				<div class="distance-list" data-distance="10">
+					10KM
+				</div>
+			</div>
+		</div>
+		<div class="create-slide run-distance-body" id="run-day-pop">
+			<p class="choose-info">你希望报名班级跑友每周出勤多少天？</p>
+			<div class="choose-distance-body">
+				<div class="distance-list" data-day="2">
+					1周跑2天
+				</div>
+				<div class="distance-list" data-day="3">
+					1周跑3天
+				</div>
+				<div class="distance-list" data-day="4">
+					1周跑4天
+				</div>
+				<div class="distance-list active" data-day="5">
+					1周跑5天
+				</div>
+				<div class="distance-list" data-day="6">
+					1周跑6天
+				</div>
+				<div class="distance-list" data-day="7">
+					1周跑7天
+				</div>
+			</div>
+		</div>
+		<div class="create-slide run-distance-body" id="run-week-pop">
+			<p class="choose-info">你希望跑友每次最少报名多少周？</p>
+			<div class="choose-distance-body">
+				<div class="distance-list active" data-week="1">
+					至少报1周
+				</div>
+				<div class="distance-list" data-week="2">
+					至少报2周
+				</div>
+				<div class="distance-list" data-week="3">
+					至少报3周
+				</div>
+				<div class="distance-list" data-week="4">
+					至少报4周
+				</div>
+				<div class="distance-list" data-week="8">
+					至少报8周
+				</div>
+				<div class="distance-list" data-week="10">
+					至少报10周
+				</div>
+			</div>
+		</div>
+		<div class="create-slide choose-money-body" id="choose-money-pop">
+			<p class="choose-info">你希望报名本班的跑友每日契约金为多少？</p>
+			<div class="choose-money-list">
+				
+				<div class="money-tab" data-money="5">
+					<div class="money-number">￥5</div>
+					<div class="money-info">
+						<p>富农模式</p>
+						<p>11%跑友选择</p>
+					</div>
+				</div>
+				<div class="money-tab" data-money="10">
+					<div class="money-number">￥10</div>
+					<div class="money-info">
+						<p>猎人模式</p>
+						<p>24%跑友选择</p>
+					</div>
+				</div>
+				<div class="money-tab active" data-money="20">
+					<div class="money-number">￥20</div>
+					<div class="money-info">
+						<p>商人模式</p>
+						<p>27%跑友选择</p>
+					</div>
+				</div>
+				<div class="money-tab" data-money="30">
+					<div class="money-number">￥30</div>
+					<div class="money-info">
+						<p>地主模式</p>
+						<p>8%跑友选择</p>
+					</div>
+				</div>
+				<div class="money-tab" data-money="50">
+					<div class="money-number">￥50</div>
+					<div class="money-info">
+						<p>财主模式</p>
+						<p>2%跑友选择</p>
+					</div>
+				</div>
+				<div class="money-tab" data-money="100">
+					<div class="money-number">￥100</div>
+					<div class="money-info">
+						<p>土豪模式</p>
+						<p>1%跑友选择</p>
+					</div>
+				</div>
+				
+			</div>
+			<div class="choose-another-money">
+				<span>我想选择其它金额</span>
+				<input type="text" maxlength="8" id="choose-other-money" placeholder="输入任意金额">
+				<span class="vertical-middle" style="position: absolute;right: 1.5rem;">元</span>
+			</div>
+			<div class="create-btn" id="sub-money">确定</div>
+		</div>
+		<div class="create-slide run-distance-body" id="run-date-pop">
+			<p class="choose-info">你希望哪天开始跑步？</p>
+			<div class="choose-distance-body" id="choose-start-list">
+				
+			</div>
+		</div>
+		<!-- 弹出框 end -->
+		<!-- <div class="bottom-pay-pop">
+			<div class="bottom-pay-pop-content" v-show="payStep==1">
+				<div class="pay-header">
+					<i class="iconfont icon-shijianzhongbiao2 success-icon"></i>
+					<span class="text title">支付契约金</span>
+					<span class="money">￥90.00</span>
+					<div class="guide">
+						<div class="flex">
+							<div class="flex-item active">
+								<span class="text">班级设置</span>
+								<div class="dot"></div>
+							</div>
+							<div class="flex-item active">
+								<span class="text">支付契约金</span>
+								<div class="dot"></div>
+							</div>
+							<div class="flex-item">
+								<span class="text">完善班级信息</span>
+								<div class="dot"></div>
+							</div>
+						</div>
+						<div class="underline-1 active"></div>
+						<div class="underline-2"></div>
+					</div>
+				</div>
+				<div class="pay-body">
+					<div class="pay-line clear-fix">
+						<label class="label">联系电话</label>
+						<input type="text" class="tel" placeholder="输入11位数字">
+					</div>
+				</div>
+				<div class="pay-footer pay-body pay-step-two" style="padding-top: 0;padding-bottom: 0;">
+					<div class="pay-line clear-fix" style="margin-bottom: 1rem">
+						<label class="label">支付方式</label>
+						<span class="pay-type"><i class="iconfont icon-umidd16"></i>微信支付</span>
+					</div>
+					<div class="pay-line clear-fix">
+						<label class="label">余额抵扣</label>
+						<span class="pay-account" v-on:click="useRoAccount()"><i class="iconfont choose-account-pay" id="use-ro-account"></i>可抵58.2元</span>
+					</div>
+					<div class="btn" v-on:click="pay()">还需支付37.81元</div>
+					<p class="text user-deal">报名即表示同意 <a class="link" href="https://mp.weixin.qq.com/s?__biz=MzIwNjM2NzQ1Nw==&mid=100001183&idx=1&sn=f3e7e30b4032a112ba87e935453fe03e&scene=1&srcid=0912omTAKLPr9Fu5vW5oQZC3&key=7b81aac53bd2393d052cdd0f7b2f72c9d79cf609959fe6295eba1bce532d8f8756db38b9efac86bbbfa4431fc09f7691&ascene=0&uin=NzA4NzQ5NQ%3D%3D&devicetype=iMac+MacBookPro10%2C2+OSX+OSX+10.11.3+build(15D21)&version=11020012&pass_ticket=tjX6zymucruZjpFkOty6JT6oFzUklNkcKjJdGl5jnWs%3D">用户协议</a></p>
+				</div>
+			</div>
+			<div class="bottom-pay-pop-content" v-show="payStep==2">
+				<div class="pay-header">
+					<i class="iconfont icon-gouxuan1 success-icon"></i>
+					<span class="text title">支付完成，创班成功</span>
+					<div class="guide">
+						<div class="flex">
+							<div class="flex-item active">
+								<span class="text">班级设置</span>
+								<div class="dot"></div>
+							</div>
+							<div class="flex-item active">
+								<span class="text">支付契约金</span>
+								<div class="dot"></div>
+							</div>
+							<div class="flex-item">
+								<span class="text">完善班级信息</span>
+								<div class="dot"></div>
+							</div>
+						</div>
+						<div class="underline-1 active"></div>
+						<div class="underline-2 active"></div>
+					</div>
+				</div>
+				<div class="pay-body pay-step-two">
+				</div>
+				<div class="pay-footer pay-body pay-step-two" style="padding-top: 1.5rem;">
+					<div class="btn">去完善班级信息</div>
+				</div>
+			</div>
+			<div class="bg" v-on:click="hidePay()"></div>
+		</div> -->
+	</body>
+</html>
+<link rel="import" href="./common/footer.html?__inline">
+<script type="text/javascript" src="../static/js/createClass.js"></script>

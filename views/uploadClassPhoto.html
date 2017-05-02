@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="import" href="./common/header.html?__inline">
+<script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<title>上传头像及二维码</title>
+<style type="text/css">
+	.photo-head-icon{
+		position: absolute;
+	    display: block;
+	    width: 2.5rem;
+	    height: 2.5rem;
+	    border-radius: 50%;
+	    background: #fff;
+	    border: 1px solid rgba(0,0,0,0.1);
+	    bottom: -0.5rem;
+	    right: -1rem;
+	    line-height: 2.3rem;
+	}
+	
+	.item-btn{
+	    position: fixed;
+	    bottom: 0;
+	    background-color: #fafafa;
+	    height: 4.3rem;
+	    width: 100%;
+	}
+	.item-btn .btn{
+	    margin-top: 0.82rem;
+	} 
+</style>
+</head>
+
+<body class="upload-class-photo" style="padding-bottom: 1.5rem;">
+	<div class="class-photo-head">
+		<a href="javascript:void(0)" onclick="chooseImg('headImg')" class="upload-ico" data-url="">
+			<span class="photo-head-icon">
+				<i class="iconfont icon-xiangji color-96"></i>
+			</span>
+		</a>
+	</div>
+
+	<div class="class-photo-body">
+		<p class="text-center color-96" style="font-size: 0.8rem;">创建班级微信群并保存群二维码图上传，7天需更新一次；或上传班长微信二维码，长期有效，每次拉新跑友进群。</p>
+		<a href="javascript:void(0)" onclick="chooseImg('qrCode')" class="upload-ico with-word" data-url="">
+		</a>
+	</div>
+
+	<!--<div class="create-btn" onclick="submitUpdate()">设置成功提交</div>-->
+	
+	<div class="item-btn">
+			<div  class="btn" onclick="submitUpdate()">设置成功提交</div>
+	</div>
+</body>
+
+</html>
+<link rel="import" href="./common/footer.html?__inline">
+<script type="text/javascript" src="../static/js/uploadClassPhoto.js"></script>

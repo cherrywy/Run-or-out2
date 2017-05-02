@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="import" href="./common/header.html?__inline">
+<link rel="stylesheet" type="text/css" href="../static/css/userInfo.scss">
+<script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<title>个人信息</title>
+</head>
+
+<body id="user-info-v" v-cloak>
+    <div class="normal-menu-body" style="margin-top: 1rem;">
+        <label class="normal-menu-list">
+            <span class="normal-menu-title">姓名</span>
+            <input class="text-input vertical-middle" type="text" placeholder="名字" maxlength="20" v-model="user.real_name">
+        </label>
+        <label class="normal-menu-list">
+            <span class="normal-menu-title"><span class="need-fill">*</span>性别</span>
+            <select class="text-input vertical-middle {{user.sex?'':'color-c8'}}" v-model="user.sex">
+                <option value="0">请选择</option>
+                <option value="1">男</option>
+                <option value="2">女</option>
+            </select>
+        </label>
+        <label class="normal-menu-list">
+            <span class="normal-menu-title"><span class="need-fill">*</span>年龄</span>
+            <input id="age" class="text-input vertical-middle" type="text" placeholder="你的年龄" maxlength="3" v-model="user.age">
+        </label>
+        <label class="normal-menu-list">
+            <span class="normal-menu-title"><span class="need-fill">*</span>手机号码</span>
+            <input id="tel" class="text-input vertical-middle" type="text" placeholder="输入11位数字" maxlength="11" v-model="user.mobile">
+        </label>
+        
+        <label class="normal-menu-list" v-if="user.subscribe_from=='other'">
+            <span class="normal-menu-title"><span class="need-fill">*</span>其他方式</span>
+            <input id="other-from" class="text-input vertical-middle" type="text" placeholder="输入其他方式" maxlength="20" v-model="user.other_from">
+        </label>
+        <label class="normal-menu-list">
+            <span class="normal-menu-title"><span class="need-fill">*</span>请选择省</span>
+            <select class="text-input vertical-middle {{user.province?'':'color-c8'}}" id="province" v-model="user.province">
+                <option value="">请选择省</option>
+                <option v-for="list in provinceList" value="{{list.value}}">{{list.name}}</option>
+            </select>
+        </label>
+
+        <label class="normal-menu-list">
+            <span class="normal-menu-title"><span class="need-fill">*</span>请选择市</span>
+            <select class="text-input vertical-middle {{user.city?'':'color-c8'}}" id="city" v-model="user.city">
+                <option value="">请选择市</option>
+                <option v-for="list in cityList" value="{{list.value}}">{{list.name}}</option>
+            </select>
+        </label>
+
+        <label class="normal-menu-list">
+            <span class="normal-menu-title"><span class="need-fill">*</span>选择区/县</span>
+            <select class="text-input vertical-middle {{user.province?'':'color-c8'}}" id="area" v-model="user.area">
+                <option value="">选择区/县</option>
+                <option v-for="list in areaList" value="{{list.value}}">{{list.name}}</option>
+            </select>
+        </label>
+        <label class="normal-menu-list">
+            <span class="normal-menu-title"><span class="need-fill">*</span>详细地址</span>
+            <input v-model="user.address" class="text-input vertical-middle" type="text" placeholder="输入详细地址" maxlength="30">
+        </label>
+        <label class="normal-menu-list" v-show="user.show_hundred_day_prop">
+            <span class="normal-menu-title"><span class="need-fill">*</span>选择礼物</span>
+            <select class="text-input vertical-middle {{user.province?'':'color-c8'}}" id="hundred" v-model="user.hundred">
+                <option value="">请选择礼物</option>
+                <option value="calendar">独家定制2017跑步台历</option>
+                <option value="prop_s">运动护肘S码（90-120斤）</option>
+                <option value="prop_m">运动护肘M码（120-150斤）</option>
+            </select>
+        </label>
+    </div>
+    <div class="normal-menu-body" style="margin-top: 1rem;margin-bottom: 4.5rem;">
+        <label class="normal-menu-list">
+            <span class="normal-menu-title">记步方式</span>
+            <select class="text-input vertical-middle {{user.app?'':'color-c8'}}" v-model="user.app">
+                <option value="">请选择</option>
+                <option value="Nike+">Nike+</option>
+                <option value="悦跑圈">悦跑圈</option>
+                <option value="咕咚">咕咚</option>
+                <option value="悦动圈">悦动圈</option>
+                <option value="跑步机">跑步机</option>
+                <option value="手环">手环</option>
+            </select>
+        </label>
+        <label class="normal-menu-list">
+            <span class="normal-menu-title"><span class="need-fill">*</span>知道我局</span>
+            <select id="subscribe-from" class="text-input vertical-middle {{user.subscribe_from?'':'color-c8'}}" v-model="user.subscribe_from">
+                <option value="unknown">请选择</option>
+                <option value="zhihu">知乎</option>
+                <option value="weibo">微博</option>
+                <option value="search">百度等搜索引擎</option>
+                <option value="news">搜狐、网易新闻等</option>
+                <option value="bbs">贴吧等论坛</option>
+                <option value="friend">朋友分享</option>
+                <option value="other">其他方式</option>
+            </select>
+        </label>
+    </div>
+    <div class="withdraw-btn">
+        提交信息
+    </div>
+
+</body>
+
+</html>
+<link rel="import" href="./common/footer.html?__inline">
+<script type="text/javascript" src="../static/js/userInfo.js"></script>

@@ -1,0 +1,40 @@
+.normal-menu-body:last-child{
+    margin-bottom: 4.5rem;
+}
+.normal-menu-list {
+    width: 100%;
+    display: block;
+}
+.normal-menu-list .normal-menu-title {
+    width: 6rem;
+    display: inline-block;
+}
+.normal-menu-list .text-input {
+    height: 2rem;
+    display: inline-block;
+    position: absolute;
+    font-size: 1rem;
+    left: 5.5rem;
+    border: none;
+    line-height: 2rem;
+    width: 15rem;
+    background: #fff;
+}
+.normal-menu-list .text-input.city {
+    width: 6rem;
+}
+.normal-menu-list .text-input.city-2 {
+    left: 12rem;
+}
+.need-fill {
+    color: #fc4548;
+}
+.normal-menu-list .normal-menu-title {
+    width: 6rem;
+}
+.withdraw-btn{
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    border-top: 1px solid #eee;
+}

@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="import" href="../../common/header.html?__inline">
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<title>寒战100天 - 不跑就出局</title>
+<style type="text/css">
+	.head-bg img{
+		display: block;
+	}
+	.head-bg .rank-list{
+		position: absolute;
+		color: #fff;
+		top: 1rem;
+		right: 1rem;
+		font-size: 1rem;
+		display: inline-block;
+		z-index: 2;
+	}
+	.head-bg .rank-list:active{
+		background: rgba(255,255,255,0.2);
+	}
+	.head-bg .rank-list i,.head-bg .rank-list .text{
+		color: #fff;
+		font-size: 1rem;
+		margin-right: 0.2rem;
+	}
+	.head-bg .time-info{
+		position: absolute;
+		bottom: 1rem;
+		display: block;
+		width: 100%;
+		text-align: center;
+		color: #fff;
+		font-size: 0.7rem;
+	}
+	.body{
+		padding-bottom: 5rem;
+	}
+	.block{
+		background: #fff;
+		margin-bottom: 1rem;
+	}
+	.block .head{
+		padding: 1rem 0;
+	}
+	.block .head .tag{
+		height: 1rem;
+		width: 0.31rem;
+		background: #2b4090;
+		display: inline-block;
+		vertical-align: middle;
+	}
+	.block .head .title{
+		font-size: 1rem;
+		line-height: 1rem;
+		height: 1rem;
+		color: #333;
+		display: inline-block;
+		margin-left: 0.4rem;
+		vertical-align: middle;
+	}
+	.block .head .money{
+		font-size: 0.878rem;
+		line-height: 1.2rem;
+		padding-top: 0.1rem;
+		height: 1rem;
+		color: #2b4090;
+		display: inline-block;
+		float: right;
+		margin-right: 1rem;
+		vertical-align: middle;
+	}
+	.block .head > *{
+		vertical-align: middle;
+	}
+	.block-body{
+		padding: 0 1rem 1rem 1rem;
+	}
+	.block-body:after{
+		clear: both;
+		content: " ";
+	}
+	.block-body .item{
+		margin-right: 0.6rem;
+		margin-left: 0.6rem;
+	}
+	.block-body.head-block .item .text{
+		font-size: 2.2rem;
+		float: left;
+		color: #333;
+	}
+	.block-body .item .info{
+		float: left;
+		font-size: 0.86rem;
+		line-height: 1.7;
+		margin-left: 0.5rem;
+		color: #333;
+	}
+	.rules{
+		position: absolute;
+		text-align: center;
+		font-size: 0.86rem;
+		color: #2b4090;
+		right: 1rem;
+		top: 1rem;
+	}
+	.rules i{
+		color: #2b4090;
+		margin-right: 0.2rem;
+	}
+	.model.block-body{
+		padding: 0rem 0.5rem;
+	}
+	.model.block-body:last-child{
+		padding-bottom: 1rem;
+	}
+	.model.block-body .item{
+		border: 1px solid #f0f0f0;
+		border-radius: 5px;
+		padding: 0.8rem;
+		margin-bottom: 1.2rem;
+	}
+	.model.block-body .item .left-item{
+		width: 8.5rem;
+	}
+	.model.block-body .item .left-item .team-name{
+		font-size: 0.8rem;
+		border: 1px solid #ccc;
+		border-radius: 0.5rem;
+		margin-top: -0.6rem;
+		background: #fff;
+		padding: 0.2rem;
+	}
+	.model.block-body .item .img{
+		background: #ccc;
+		width: 5.5rem;
+		height: 5.5rem;
+		border-radius: 50%;
+		margin: 0 auto;
+	}
+	.model.block-body .item .right-item{
+		text-align: left;
+		padding-left: 1.2rem;
+	}
+	.model.block-body .item .right-item .text{
+		font-size: 0.8rem;
+		line-height: 2.2;
+	}
+	.model.block-body .item .right-item .join-btn{
+		height: 1.8rem;
+		line-height: 1.8rem;
+		font-size: 0.9rem;
+		background: #2b4090;
+		width: 8em;
+		margin: 0;
+		margin-top: 0.3rem;
+		float: right;
+	}
+	.model.block-body .item .right-item .number{
+		position: absolute;
+		right: 0;
+		font-size: 1.3rem;
+		top: -0.6rem;
+		z-index: 2;
+	}
+	.model.block-body .item .right-item .number span{
+		font-size: 0.86rem;
+		margin-left: 0.1rem;
+	}
+	.model.block-body .item .right-item .more{
+		position: absolute;
+		right: 0;
+		font-size: 0.8rem;
+		top: 1.75rem;
+		z-index: 2;
+		color: #2b4090;
+	}
+	.footer{
+		position: fixed;
+		width: 100%;
+		bottom: 0;
+		text-align: center;
+		padding: 1rem;
+		background: #efeff4;
+		border-top: 1px solid #eee;
+		z-index: 69;
+	}
+	.footer .btn{
+		display: inline-block;
+		height: 3.25rem;
+		width: 80%;
+		background: #2b4090;
+		line-height: 3.25rem;
+		color: #fff;
+		border-radius: 5px;
+	}
+	.footer .btn:active{
+		display: inline-block;
+		height: 3.25rem;
+		background: #510a77;
+		line-height: 3.25rem;
+		color: #fff;
+		width: 80%;
+		border-radius: 5px;
+	}
+	.footer .class-btn-group{
+		padding-top: 1rem;
+	}
+	.rules-page{
+		background: rgba(255,255,255,1);
+		position: fixed;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		padding: 0;
+		z-index: 50;
+	}
+	.rules-page .rule-head img{
+		width: 100%;
+		z-index: 1;
+	}
+	.rules-page .icon-guanbi1{
+		position: fixed;
+		right: 1.5rem;
+		top: 1rem;
+		font-size: 1.2rem;
+		color: #fff;
+		font-weight: bolder;
+		z-index: 2;
+	}
+	.rule-body{
+		margin-top: 0.5rem;
+		overflow: auto;
+		padding: 1rem;
+		padding-bottom: 20rem;
+		height: 100%;
+		text-align: center;
+	}
+	.rule-body .title{
+		color: #2b4090;
+	}
+	.rule-body .text{
+		margin-top: 0.5rem;
+		margin-bottom: 1rem;
+		font-size: 0.86rem;
+		color: #333;
+	}
+	.rule-body .qun-code{
+		width: 15rem;
+	}
+	
+	.bottom-pop .pay-line{
+		padding: 0.1rem 0.5rem;
+		font-size: 0.86rem;
+		color: #969696;
+	}
+	.bottom-pop .pay-line .money{
+		font-size: 1.15rem;
+	}
+	.bottom-pop .pay-line i.choose-account-pay{
+		color: #969696;
+		font-size: 0.9rem;
+	}
+	.bottom-pop .pay-line i.choose-account-pay:before { 
+		content: "\e603"; 
+	}
+	.bottom-pop .pay-line i.choose-account-pay.active:before { 
+		color: #11cd6e;
+		content: "\e604"; 
+	}
+	.bottom-pop .btn .iconfont{
+		color: #fff;
+		font-size: 1.15rem;
+		margin-right: 0.2rem;
+	}
+	.block p.text.explain{
+		font-size: 0.7rem;
+		color: #969696;
+		text-align: center;
+		padding-bottom: 1rem;
+	}
+	.hundred3-text-img{
+		position: absolute;
+		bottom: -1rem;
+		width: 100%;
+	}
+
+	/* 弹窗 以后考虑抽出*/
+	.pop .pop-out-content{
+		z-index: 99;
+		position: fixed;
+		background: #fff;
+		top: 45%;
+		left: 50%;
+		width: 20rem;
+		-webkit-transform: translate(-50%,-50%);
+      	-ms-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+        padding: 1rem;
+        border-radius: 0.3rem;
+	}
+	.pop .pop-out-mask{
+		z-index: 98;
+		position: fixed;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		top: 0;
+		background: rgba(0, 0, 0, 0.6);
+	}
+	.pop .pop-out-content .pop-head{
+		padding: 0.5rem;
+	}
+	.pop .pop-out-content .pop-head .title{
+		border: 1px solid #ccc;
+		padding: 0.2rem 0.5rem;
+		font-size: 0.8rem;
+		border-radius: 0.8rem;
+	}
+	.pop .pop-out-content .pop-head .icon-guanbi1{
+		position: fixed;
+		right: 1.5rem;
+		top: 1rem;
+		font-size: 1.2rem;
+		color: #333;
+		font-weight: bolder;
+	}
+	.pop .pop-out-content .pop-body{
+		padding: 1rem;
+	}
+	.pop .pop-out-content .pop-body .img{
+		width: 5rem;
+		height: 5rem;
+		border-radius: 50%;
+		background: #ccc;
+		margin: 0 auto;
+	}
+	.pop .pop-out-content .pop-body .title{
+		color: #2b4090;
+		font-size: 0.8rem;
+		margin-top: 1rem;
+		margin-bottom: 0.5rem;
+	}
+	.pop .pop-out-content .pop-body .name{
+		font-size: 0.9rem;
+	}
+	.pop .pop-out-content .pop-body .intro{
+		font-size: 0.86rem;
+		text-align: left;
+		line-height: 2;
+	}
+	.zanzhu{
+		padding: 1.5rem 1rem;
+	}
+	.zanzhu img{
+		width: 100%;
+	}
+	.zanzhu-title{
+		color: #2b4090;
+		text-align: center;
+	}
+	.zanzhu-more{
+		color: #2b4090;
+		text-align: center;
+	}
+</style>
+</head>
+
+<body id="act-index-v" v-cloak>
+	<div class="head-bg content">
+		<div class="rank-list" v-on:click="gotoRankList()">
+			<i class="iconfont icon-trophyfill"></i>
+			<span class="text">排行榜</span>
+			<i class="iconfont icon-xiangyou1"></i>
+		</div>
+		<img src="../../../static/images/activities/hundred3-bg.jpg" width="100%">
+		<!-- <a onclick="toRankIndex()" class="rank-list"><i class="iconfont icon-jiangbei"></i>排行榜</a> -->
+		<img class="hundred3-text-img" src="../../../static/images/activities/hundred3-text.jpg">
+		<span class="time-info">
+			报名截止：11.12&nbsp;&nbsp;23:59&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;比赛时间：11.12 ~ 2.26 / 3.18
+		</span>
+	</div>
+	<div class="body content">
+		<div class="block">
+			<div class="head">
+				<span class="tag"></span>
+				<span class="title">赛事进程</span>
+				<div class="rules" v-on:click="gotoRules()"><i class="iconfont icon-guanyuwomen"></i>赛事规则</div>
+			</div>
+			<div class="block-body head-block flex">
+				<div class="item flex-item">
+					<span class="text">1</span>
+					<span class="info">
+						挑选战队<br/>报名参赛
+					</span>
+				</div><div class="item flex-item">
+					<span class="text">2</span>
+					<span class="info">
+						微信公号<br/>百日打卡
+					</span>
+				</div><div class="item flex-item">
+					<span class="text">3</span>
+					<span class="info">
+						返契约金<br/>分配奖金
+					</span>
+				</div>
+			</div>
+			<p class="text explain">跑班和本活动可同时报名，春节可休息7天。</p>
+		</div>
+		<div class="block">
+			<div class="head" v-show="priority==100">
+				<span class="tag"></span>
+				<span class="title">100日终极战队</span>
+				<span class="money">契约金 ￥520.00</span>
+			</div>
+			<div class="block-body model" v-show="priority==100">
+				<div class="item flex" v-for="list in teamsGroup100">
+					<div class="left-item flex-item">
+						<div class="img" style="background: url({{list.avatar?list.avatar:errorImagesRO}}) no-repeat center;background-size: cover;"></div>
+						<div class="team-name">{{list.name}} 战队</div>
+					</div>
+					<div class="right-item flex-item">
+						<span class="text number">{{list.people}}<span>人</span></span>
+						<span class="text more" v-on:click="showPop(list.id,'100')">详情 &raquo;</span>
+						<p class="text">队长：{{list.monitor_name}}</p>
+						<p class="text">介绍：{{list.monitor_introduction}}</p>
+						<p class="text">宣言：{{list.description}}</p>
+						<div class="btn join-btn" v-on:click="payPop(list._id,list.money,list.required_cycle_duration)" v-show="!hasJoined && (list.participate_status=='normal')">加入战队</div>
+						<div class="btn join-btn" style="background: #ccc;" v-show="!hasJoined && (list.participate_status=='full')">战队已满</div>
+						<div class="btn join-btn" style="background: #ccc;" v-show="!hasJoined && (list.participate_status=='close')">报名截止</div>
+						<div class="btn join-btn" v-show="hasJoined && (user.team_id==list._id)">我的战队</div>
+						<div class="btn join-btn" style="background: #ccc;" v-show="hasJoined && (user.team_id!=list._id)">已报名</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="head">
+				<span class="tag"></span>
+				<span class="title">120日自由战队</span>
+				<span class="money">契约金 ￥666.00</span>
+			</div>
+			<div class="block-body model">
+				<div class="item flex" v-for="list in teamsGroup120">
+					<div class="left-item flex-item">
+						<div class="img" style="background: url({{list.avatar?list.avatar:errorImagesRO}}) no-repeat center;background-size: cover;"></div>
+						<div class="team-name">{{list.name}} 战队</div>
+					</div>
+					<div class="right-item flex-item">
+						<span class="text number">{{list.people}}<span>人</span></span>
+						<span class="text more" v-on:click="showPop(list.id,'120')">详情 &raquo;</span>
+						<p class="text">队长：{{list.monitor_name}}</p>
+						<p class="text">介绍：{{list.monitor_introduction}}</p>
+						<p class="text">宣言：{{list.description}}</p>
+						<div class="btn join-btn" v-on:click="payPop(list._id,list.money,list.required_cycle_duration)" v-show="!hasJoined && (list.participate_status=='normal')">加入战队</div>
+						<div class="btn join-btn" style="background: #ccc;" v-show="!hasJoined && (list.participate_status=='full')">战队已满</div>
+						<div class="btn join-btn" style="background: #ccc;" v-show="!hasJoined && (list.participate_status=='close')">报名截止</div>
+						<div class="btn join-btn" v-show="hasJoined && (user.team_id==list._id)">我的战队</div>
+						<div class="btn join-btn" style="background: #ccc;" v-show="hasJoined && (user.team_id!=list._id)">已报名</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="head" v-show="priority==120">
+				<span class="tag"></span>
+				<span class="title">100日终极战队</span>
+				<span class="money">契约金 ￥520.00</span>
+			</div>
+			<div class="block-body model" v-show="priority==120">
+				<div class="item flex" v-for="list in teamsGroup100">
+					<div class="left-item flex-item">
+						<div class="img" style="background: url({{list.avatar?list.avatar:errorImagesRO}}) no-repeat center;background-size: cover;"></div>
+						<div class="team-name">{{list.name}} 战队</div>
+					</div>
+					<div class="right-item flex-item">
+						<span class="text number">{{list.people}}<span>人</span></span>
+						<span class="text more" v-on:click="showPop(list.id,'100')">详情 &raquo;</span>
+						<p class="text">队长：{{list.monitor_name}}</p>
+						<p class="text">介绍：{{list.monitor_introduction}}</p>
+						<p class="text">宣言：{{list.description}}</p>
+						<div class="btn join-btn" v-on:click="payPop(list._id,list.money,list.required_cycle_duration)" v-show="!hasJoined && (list.participate_status=='normal')">加入战队</div>
+						<div class="btn join-btn" style="background: #ccc;" v-show="!hasJoined && (list.participate_status=='full')">战队已满</div>
+						<div class="btn join-btn" style="background: #ccc;" v-show="!hasJoined && (list.participate_status=='close')">报名截止</div>
+						<div class="btn join-btn" v-show="hasJoined && (user.team_id==list._id)">我的战队</div>
+						<div class="btn join-btn" style="background: #ccc;" v-show="hasJoined && (user.team_id!=list._id)">已报名</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="block">
+			<div class="zanzhu">
+				<div class="text zanzhu-title">赛事赞助</div>
+				<img v-on:click="gotoZanzhu()" src="../../../static/images/activities/hundred3-shop.jpg">
+				<div v-on:click="gotoZanzhu()" class="text zanzhu-more">赞助商介绍 &raquo;</div>
+			</div>
+		</div>
+	</div>
+	<!-- <div class="footer content">
+		<a class="btn" id="pay-money" v-on:click="payPop()">支付参赛契约金</a>
+	</div> -->
+
+	<!-- <div class="footer" style="background: #fff;">
+		<a class="btn" style="background: #c8c8c8;" id="pay-money">报名已结束，敬请关注下期赛事</a>
+	</div> -->
+
+	<div class="footer" style="padding: 0;background: #fff;" v-show="hasJoined">
+		<div class="class-btn-group flex">
+			<div class="flex-item">
+				<span class="btn" id="invite-firends" style="background: #2b4090;" v-on:click="sendInvite()">邀请好友参赛</span>
+			</div>
+			<div class="flex-item">
+				<span class="btn" id="show-code" v-on:click="showRules()" style="background: #2b4090;">我的战队群</span>
+			</div>
+		</div>
+	</div>
+
+	<div class="rules-page" v-show="isShowRules">
+		<div class="rule-head text-center">
+			<img src="../../../static/images/activities/hundred3-bgtext.jpg">
+		</div>
+		<i class="iconfont icon-guanbi1" v-on:click="closeRules()"></i>
+		<div class="rule-body">
+			<div class="title">报名成功，进战队群</div>
+			<p class="text">长按扫码进入战队微信群，若无法进群请加微信号(xt_1221)备注你的战队名，通过后手动拉你进群。</p>
+			<img class="qun-code" src="{{user.qrcode}}">
+		</div>
+	</div>
+
+	<div class="bottom-pop">
+		<div class="bottom-pop-body pay-step">
+			<div class="pop-content">
+				<div class="head">报名『寒战100天』</div>
+				<div class="body">
+					<p class="text pay-line text-left clear-fix">支付契约金<span class="money flr">￥{{price/100 | notNull}}</span></p>
+					<p class="text pay-line text-left clear-fix margin-b-1" v-on:click="useRoAccount()">RO账户抵扣<span class="flr">￥{{accountInfo.money/100}}可用 <i class="iconfont choose-account-pay active" id="use-ro-account"></i></span></p>
+					<a class="btn btn-middle btn-success" v-show="useWeipay" v-on:click="weiPay()"><i class="iconfont icon-umidd16"></i>微信支付￥{{truePrice/100}}</a>
+					<a class="btn btn-middle btn-success" v-show="!useWeipay" v-on:click="weiPay()"><i class="iconfont icon-umidd16"></i>账户支付</a>
+				</div>
+			</div>
+		</div>
+		<div class="bg" v-on:click="hidePop()"></div>
+	</div>
+
+	<div class="pop" v-show="isShowPop">
+		<div class="pop-out-content pop-out">
+			<div class="pop-head text-center">
+				<i class="iconfont icon-guanbi1" v-on:click="closePop()"></i>
+				<span class="title text">{{choosedTeamInfo.name}} 战队</span>
+			</div>
+			<div class="pop-body text-center">
+				<div class="img" style="background: url({{choosedTeamInfo.monitor_avatar?choosedTeamInfo.monitor_avatar:errorImagesRO}}) no-repeat center;background-size: cover;"></div>
+				<div class="title">队长</div>
+				<div class="name text">{{choosedTeamInfo.monitor_name}}</div>
+				<div class="title">主要成绩</div>
+				<div class="intro text">
+					{{{choosedTeamInfo.monitor_description | descriptionArr}}}
+				</div>
+			</div>
+		</div>
+		<div class="pop-out-mask" v-on:click="closePop()"></div>
+	</div>
+
+	<img class="errorImagesRO" src="../../../static/images/photo.png" style="display: none;" alt="">
+</body>
+
+</html>
+<link rel="import" href="../../common/footer.html?__inline">
+<script type="text/javascript" src="../../../static/js/activitys/hundred3/index.js"></script>

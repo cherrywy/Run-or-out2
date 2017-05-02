@@ -1,0 +1,150 @@
+.normal-menu-list .normal-menu-sub-title.name{
+	 border:none;
+    outline:medium;
+    background:#f4f4f4;
+    right: 1rem;
+    text-align: right;
+    background: transparent;
+}
+.normal-menu-title {
+  
+    margin-left: 1.5rem;
+}
+.join-class-head{
+
+	background:url("../images/create__banner.jpg") no-repeat center;
+    background-size:cover;
+	height: 7rem;
+	line-height: 2.8rem;
+}
+.join-class-head .bg{
+	position: absolute;
+	left:0;
+	top:0;
+	right:0;
+	bottom:0;
+	background: rgba(#1b1b20,0.8);
+}
+.flex-item.link .text{
+	color: #fff;
+	display: block;
+	font-size: 1.15rem;
+    margin-top: 0.5rem;
+}
+.join-class-head .tab{
+	position: absolute;
+    top: 2rem;
+    width: 25rem
+}
+.join-class-head .tab-pross{
+	position: absolute;
+    top: 5rem;
+    width: 25rem
+}
+.join-class-head .tab .flex-item .text{
+	color: #969696;
+	display: block;
+	font-size: 0.8rem;
+}
+.join-class-head .tab .flex-item.text{
+	font-weight: bold;
+	font-size: 1.2rem;
+}
+.join-class-head .tab .flex-item .text.active{
+	color: red;
+}
+.run-list {
+    height: 0.8rem;
+    width: 0.8rem;
+    background: #969696;
+    display: inline-block;
+    border-radius: 50%;
+    text-align: center;
+    color: #fff!important;
+    line-height: 1rem;
+    font-size: .8rem;
+    margin-left: .2rem;
+    box-shadow:0px 0px 8px #969696;
+}
+.run-list.active{
+	background: red;
+	box-shadow:0px 0px 8px red;
+}
+
+	.xiantiao {
+    border-bottom: 1px solid #969696;
+    width: 7rem;
+    height: 1rem;
+    left: 1.4rem;
+    top: -.6rem;
+}
+
+.xiantiao1 {
+    border-bottom: 1px solid #969696;
+    width: 7rem;
+    height: 1rem;
+    left: -1.2rem;
+    top: -.6rem;
+}
+.tab-pross1{
+		position: absolute;
+    top: 5rem;
+    width: 22rem
+}
+.create-guide{
+    background: transparent;
+    border-bottom: none;  
+    padding: 1rem 3rem;
+    line-height: 1.6;
+}
+#create-class-v .normal-menu-list {
+
+    background: #fff;
+}
+.join-class-head .guide {
+   top: -2rem;
+}
+.guide .flex {
+    margin-top: 1rem;
+}
+.guide .flex .active .text {
+    color: #fc4548;
+}
+.guide .flex .active .dot {
+    background: #fc4548 none repeat scroll 0 0;
+    box-shadow: 0 0 3px 3px rgba(252, 84, 56, 0.5);
+}
+.guide .flex .text {
+    color: #fff;
+    font-size: 0.75rem;
+}
+.guide .flex .dot {
+    background: #969696 none repeat scroll 0 0;
+    border-radius: 50%;
+    box-shadow: 0 0 3px 3px rgba(255, 255, 255, 0.3);
+    height: 0.6rem;
+    margin: 0 auto 0;
+    width: 0.6rem;
+}
+.guide .underline-1 {
+    border-bottom: 0.1rem solid #969696;
+    bottom: 0.2rem;
+    height: 0.1rem;
+    left: 20.5%;
+    position: absolute;
+    width: 25.5%;
+}
+.guide .underline-1.active {
+    border-bottom: 0.1rem solid #fc4548;
+}
+.guide .underline-2 {
+    border-bottom: 0.1rem solid #969696;
+    bottom: 0.2rem;
+    height: 0.1rem;
+    left: 54%;
+    position: absolute;
+    width: 25.5%;
+}
+.guide .underline-2.active {
+    border-bottom: 0.1rem solid #fc4548;
+}

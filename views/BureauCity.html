@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="import" href="./common/header.html?__inline">
+		<link rel="stylesheet" type="text/css" href="../static/css/BureauCity.scss">
+		<title>局市 - 不跑就出局</title>
+	</head>
+	<body id="bureau-city-v">
+		<!--
+			头部信息
+        -->
+		<div class="bureau-city-fixed">
+			<div class="bureau-city-head">
+				<div class="guide ticket {{headGuide==1?'active':''}}" id="ticket">
+					<i class=" iconfont icon-jinbi {{headGuide==1?'active':''}}"></i>
+					<span class="header-font header-font1 {{headGuide==1?'active':''}}">720局票</span>
+				</div>
+				<div class="guide Earn-ticket {{headGuide==2?'active':''}}" id="Earn-ticket">
+					<i class="iconfont icon-gouwuche {{headGuide==2?'active':''}}"></i>
+					<span class="header-font header-font2 {{headGuide==2?'active':''}}">赚局票</span>
+				</div>
+				<div class="guide ticket-Record {{headGuide==3?'active':''}}" id="ticket-Record">
+					<i class="iconfont icon-shuangxiang {{headGuide==3?'active':''}}"></i>
+					<span class="header-font header-font3 {{headGuide==3?'active':''}}">局票记录</span>
+				</div>
+			</div>
+		</div>
+		
+		
+        <div class="item-list-head">
+        </div>
+        <!--720局票-->
+        <div class="bureau-city-one" v-show="headGuide==1">
+        	<div class="item-list-head1">
+	        	<span>&nbsp;</span>&nbsp;&nbsp;
+	        	商品列表
+	        </div>
+	        <div class="item-list-content" >
+	        	<div class="item-list-item" v-for="list in itemList">
+	        		<div class="item-atavar">
+	        			<div class="head-img" style="background: url({{list.img_path | nullImg}}) no-repeat center;background-size: cover; height: 3.5rem;"></div>
+	        		</div>
+	        		<div class="item-name">
+	        			{{list.name}}
+	        		</div>
+	        		<div class="item-duration">
+	        			{{list.description}}
+	        		</div>
+	        		<div class="item-price">
+	        			<span>{{list.unit_price}}</span>
+	        			局票
+	        		</div>
+	        		
+	        	</div>
+	        </div>
+        </div>
+        <!--赚局票-->
+        <div class="bureau-city-second" v-show="headGuide==2">
+        	<div class="item-list-head1">
+	        	<span>&nbsp;</span>&nbsp;&nbsp;
+	        	赚票局
+	        </div>
+	        <div class="second-block">
+	        	 <div class="second-list" v-for="list in EranPoint">
+	        		<div class="second-list-left">
+	        			{{list.name}}
+	        		</div>
+	        		<div class="second-list-right">
+	        			<div class="list-right-div">
+	        				<div v-if="list.button_text=='已完成'" class="right-div-1-green">{{list.value}}</div>
+	        				<div v-if="list.button_text!='已完成'" class="right-div-1">{{list.value}}</div>
+	        				
+	        				<div v-if="list.button_text=='已完成'" class="right-div-2-green">{{list.button_text}}</div>
+	        				<div v-if="list.button_text!='已完成'" class="right-div-2">{{list.button_text}}</div>
+	        				
+	        			</div>
+	        		</div>
+	        	 </div>
+	        </div>
+	       
+        </div>
+        <!--局票记录-->
+        <div class="bureau-city-three" v-show="headGuide==3">
+        	<div class="item-list-head1">
+	        	<span>&nbsp;</span>&nbsp;&nbsp;
+	        	局票记录
+	        </div>
+	        <div class="bureau-city-three-list" v-for="list in pointTally">
+	        	 <div class="record-list" >
+		        	<div class="list-name">
+		        		<p class="list-name-name {{list.type}}"></p>
+		        		<p class="list-name-time">{{list.timestamp | timestamp}}</p>
+		        	</div>
+		        	<div class="list-number">
+		        		<p class="list-number-number" v-if="list.type=='exchange'" style="color: #fc4548;">-{{list.increment}}</p>
+		        		<p class="list-number-number" v-if="list.type!='exchange'" style="color: #11cd6e;">+{{list.increment}}</p>
+		        		<p class="list-number-last">局票剩余{{list.balance}}</p>
+		        	</div>
+		        </div>
+	        </div>
+        </div>
+	</body>
+</html>
+<link rel="import" href="./common/footer.html?__inline">
+<script type="text/javascript" src="../static/js/BureauCity.js"></script>

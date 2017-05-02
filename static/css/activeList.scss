@@ -1,0 +1,77 @@
+.activities{
+	padding: 1rem 0.5rem;
+}
+
+.activities .list{
+	background: #fff;
+	margin-bottom: 1rem;
+	display: block;
+}
+
+.activities .list .img{
+	background: #ccc;
+	height: 7rem;
+}
+.activities .list .tag{
+	position: absolute;
+	width: 4.5rem;
+	height: 1.6rem;
+	line-height: 1.6rem;
+	font-size: 0.9rem;
+	background: #fc4548;
+	color: #fff;
+	right: 0;
+	top: 1rem;
+	z-index: 2;
+	text-align: right;
+	padding-right: 0.8rem;
+	border-radius: 0.2rem 0 0 0.2rem;
+}
+.activities .list .tag.running{
+	background: #11cd6e;
+}
+.activities .list .tag.finished{
+	background: #ccc;
+}
+
+.activities .list .info{
+	padding: 0.5rem 0.8rem;
+}
+.activities .list .info .title{
+	font-size: 1.1rem;
+}
+.activities .list .info .text{
+	font-size: 0.86rem;
+	color: #969696;
+	margin-top: 0.1rem;
+}
+.activities .list .info .join{
+	font-size: 0.86rem;
+	color: #969696;
+	position: absolute;
+	right: 0.8rem;
+	top: 0.5rem;
+}
+.activities .list .info .join .iconfont{
+	font-size: 0.9rem;
+	color: #969696;
+	margin-right: 0.2rem;
+}
+.join-class-head {
+	height: 2.8rem;
+	line-height: 2.8rem;
+	background: #fc4548;
+}
+.join-class-head .tab {
+	position: absolute;
+	bottom: 0;
+	width: 12rem;
+}
+.join-class-head .tab .flex-item .text {
+	color: #fff;
+	display: block;
+}
+.join-class-head .tab .flex-item.active .text {
+	font-weight: bold;
+	font-size: 1.2rem;
+}

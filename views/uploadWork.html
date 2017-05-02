@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="import" href="./common/header.html?__inline">
+<link href="../static/css/mobiscroll.css" rel="stylesheet" />
+<link href="../static/css/mobiscroll_date.css" rel="stylesheet"/>
+<script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<title>网页打卡 </title>
+<style type="text/css">
+	img{
+		width: 3rem;
+		height: 3rem;
+		position: absolute;
+		top: 6rem;
+		left: 1rem;
+		border-radius: 50%;
+		border: 1px solid #fff;
+		z-index: 10;
+	}
+	.upload-img-bg{
+		position: absolute;
+	    width: 100%;
+	    height: 13rem;
+	    top: 0;
+	    left: 0;
+	    background: url('../static/images/photo.png') no-repeat center;
+	    background-size: cover;
+	    z-index: 9;
+	}
+	.item-btn{
+	    position: fixed;
+	    bottom: 0;
+	    background-color: #fafafa;
+	    height: 4.3rem;
+	    width: 100%;
+	}
+	.item-btn .btn{
+	    margin-top: 0.82rem;
+	} 
+</style>
+</head>
+
+<body style="padding-bottom: 3.5rem;">
+	<div style="position: absolute;right: 1rem;top: 1rem;color: #fff;z-index: 99;font-size: 0.86rem;" onclick="showDeal()"><i class="iconfont icon-bangzhu" style="color: #fff;"></i>打卡疑问解答</div>
+	<img style="display: none;" src="" onclick="previewImg()">
+	<div class="upload-work-head" onclick="chooseImg()">
+		<a charset="upload-img">
+			<div></div>
+			<p>点击上传图片</p>
+		</a>
+		<div class="upload-img-bg hide"></div>
+		<p class="work-run-day">今天是你在RO坚持的 <span style="color: #fff;" id="total_day">--</span> 天，加油！</p>
+	</div>
+	<div class="upload-form">
+		<i class="iconfont icon-3"></i>
+		<span>跑步距离</span>
+		<input type="text" placeholder="如 3.5" id="distance">
+		<span>公里</span>
+	</div>
+	<div class="upload-form">
+		<i class="iconfont icon-shijianzhongbiao2" style="font-size: 1.3rem;"></i>
+		<span>跑步用时</span>
+		<input type="text" id="choose-time" placeholder="请点击选择" readonly>
+		<input type="text" value="00:15" style="opacity: 0;position: absolute;left: 8rem;top: 1rem;" name="choose-time-hide" id="choose-time-hide" readonly>
+		<span>分钟</span>
+	</div>
+	<div class="item-btn">
+		<div class="btn"  onclick="submitSignIn()">打卡</div>
+	</div>
+
+	<!-- 问题 start -->
+	<div class="create-slide" id="deal">
+		<p class="deal-head">你可能想知道下列问题</p>
+		<div class="deal-body" style="overflow: auto;height: 100%;padding-bottom: 10rem;">
+			<p class="p1">
+			    <span class="s1"></span>
+			</p>
+			<p class="p1">
+			    <span class="s1">1</span>、怎样的跑步截图才是合格的<span class="s1"><br/>&nbsp;• </span>打卡图片需有清晰的日期、公里数、时间等基本信息<span class="s1"><br/>&nbsp;• </span>配速不能低于<span class="s1">15</span>分钟每公里，公里数不低于班级要求
+			</p>
+			<p class="p1">
+			    <span class="s1">&nbsp;• </span>通过<span class="s1">”</span>微信运动<span class="s1">“</span>或只显示步数的计数，无效<span class="s1" style="padding-top: 1rem;"><br/>
+			    2</span>、怎样知道作业是否提交成功<span class="s1"><br/>&nbsp;• </span>当你提交打卡后，公众号向你推送了当天文章和排名卡片，即代表你已成功打卡<span class="s1" style="padding-top: 1rem;"><br/>
+			    3</span>、跑步机和手环记录的怎么办<span class="s1"><br/>&nbsp;• </span>跑步机跑步需要将跑步机屏幕数据拍照上传，并对拍照图片添加日期水印<span class="s1"><br/>&nbsp;• </span>手环连接<span class="s1">app</span>，截图符合规定即可<span class="s1" style="padding-top: 1rem;"><br/>4</span>、本页面无法上传提交<span class="s1"><br/>&nbsp;• </span>可选择另一种打卡方式，直接向公众号发送图片，按照文字引导完成打卡
+			</p>
+			<p class="p1">
+			    <br/>
+			</p>
+		</div>
+		<div class="create-btn confirm-deal" onclick="hideDeal()" style="bottom: 1rem;">返回</div>
+	</div>
+	<!-- 问题 end -->
+</body>
+
+</html>
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/1.11.1-rc1/jquery.min.js"></script>
+<script src="../static/js/mobiscroll_date.js"></script> 
+<script src="../static/js/mobiscroll.js"></script> 
+<link rel="import" href="./common/footer.html?__inline">
+<script type="text/javascript" src="../static/js/uploadWork.js"></script>

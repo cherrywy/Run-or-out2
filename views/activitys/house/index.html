@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="import" href="../../common/header.html?__inline">
+<script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<title>一键约跑 - 不跑就出局&房多多</title>
+<style type="text/css">
+	body{
+		background: #000;
+	}
+	.content{
+		padding-bottom: 5rem;
+	}
+	.fixed-footer{
+		background: rgba(0,0,0,0.9);
+		border-top: 1px solid #ffe878;
+	}
+	.fixed-footer{
+		padding: 0 0.5rem;
+	}
+	.fixed-footer .btn{
+		background: transparent;
+		color: #ffe878;
+		border: 1px solid #ffe878;
+	}
+	.fixed-footer .btn:active{
+		background: #d0bd62;
+	}
+	.head .head-logo{
+		position: absolute;
+		top: 0;
+		width: 100%;
+		z-index: 2;
+	}
+	.head .back-img{
+		width: 100%;
+		top:0;
+	}
+	.head .text{
+		position: absolute;
+		bottom: 2.5rem;
+		color: #ffe878;
+		width: 100%;
+		text-align: center;
+		font-size: 0.86rem;
+	}
+	.block{
+		text-align: center;
+		padding: 1rem 0.5rem;
+		margin-bottom: 2rem;
+	}
+	.block .title{
+		background: #ffe878;
+		padding: 0.2rem 1.5rem;
+		font-size: 1.05rem;
+	}
+	.block .item-content{
+		margin-top: 1.8rem;
+		text-align: left;
+	}
+	.block .item-content .flex-item{
+		text-align: left;
+	}
+	.block .item-content .item .number{
+		font-size: 2.8rem;
+		color: #ffe878;
+		font-weight: lighter;
+	}
+	.block .item-content .item .info{
+		position: absolute;
+		left: 0;
+		top: 0;
+		line-height: 1.8;
+		font-size: 0.9rem;
+		padding-left: 2rem;
+	}
+	.block .item-content .list-body .rules{
+		display: block;
+		color: #ffe878;
+		font-size: 0.9rem;
+		margin-top: 0.5rem;
+	}
+	.block .item-content .item .info p{
+		color: #ffe878;
+		white-space:nowrap;
+	}
+	.block .item-content .text{
+		text-align: left;
+		padding: 0 1rem;
+		color: #ffe878;
+		font-size: 0.86rem;
+		line-height: 1.6;
+		margin-bottom: 0.5rem;
+	}
+
+	.block .item-content .list-body .item{
+		height: 6rem;
+		line-height: 6rem;
+		padding: 0 0.5rem;
+	}
+	.block .item-content .list-body .item .iconfont{
+		color: #ffe878;
+		width: 4rem;
+		font-size: 2.2rem;
+		text-align: left;
+		line-height: 2.2;
+	}
+	.block .item-content .list-body .item .intro{
+		line-height: 1.2;
+	}
+	.block .item-content .list-body .item .intro .first-title{
+		color: #ffe878;
+		display: block;
+		margin-bottom: 0.5rem;
+	}
+	.block .item-content .list-body .item .intro .sub-title{
+		color: #ffe878;
+		font-size: 0.86rem;
+	}
+	.block .item-content .list-body .item .iconfont.icon-jingpinnanxie01{
+		position: absolute;
+		left: 0.8rem;
+		top: 2.8rem;
+	}
+	.bottom-pop .bottom-pop-body .pop-content .head{
+		margin-bottom: 0.5rem;
+	}
+	.bottom-pop .bottom-pop-body .pop-content .body{
+		padding: 1rem 2rem;
+	}
+	.bottom-pop .btn {
+		margin-top: 1.5rem;
+		margin-bottom: 1rem;
+	}
+	.bottom-pop .pay-line{
+		color: #969696;
+	}
+	.bottom-pop .pay-line .money{
+		font-size: 1.2rem;
+	}
+	.bottom-pop .btn .iconfont{
+		color: #fff;
+		font-size: 1.15rem;
+		margin-right: 0.4rem;
+	}
+	.bottom-pop .bottom-pop-body .pop-content{
+		background: rgba(255, 255, 255, 1);
+		border-radius: 0.3rem;
+	}
+	.friend-links{
+		border-top: 1px solid #ffe878;
+		padding: 1rem;
+	}
+	.friend-links-body .friend-link{
+		display: block;
+		padding: 1rem 0;
+	}
+	.friend-links-body .friend-link:active{
+		background: #d0bd62;
+	}
+	.friend-links-body .friend-link.fangduoduo img{
+		width: 5rem;
+	}
+	.friend-links-body .friend-link.ro img{
+		width: 8rem;
+		margin-top: 0.5rem;
+	}
+	.friend-links-body .friend-link .text{
+		color: #ffe878;
+		font-size: 0.86rem;
+		margin-top: 0.3rem;
+	}
+	.friend-links-body .friend-link.ro .text{
+		margin-top: 0.7rem;
+	}
+	.right-angle{
+		position: absolute;
+		top: 1rem;
+		width: 100%;
+		z-index: 1;
+	}
+	.left-angle{
+		position: absolute;
+		top: 20rem;
+		width: 100%;
+		z-index: 1;
+	}
+</style>
+</head>
+
+<body id="house-index" v-cloak>
+
+	<div class="content">
+
+		<div class="head">
+			<img class="head-logo" src="../../../static/images/house/head-logo.jpg" alt="">
+			<img class="back-img" src="../../../static/images/house/head.jpg" alt="">
+			<div class="text">9.26日晚截止报名&nbsp;&nbsp;&nbsp;&nbsp;9.26~10.30正式开赛</div>
+		</div>
+
+		<div class="body">
+			<img src="../../../static/images/house/right-angle.jpg" alt="" class="right-angle">
+			<img src="../../../static/images/house/left-angle.jpg" alt="" class="left-angle">
+			<div class="block">
+				<span class="title">赛事流程</span>
+				<div class="item-content flex">
+					<div class="flex-item item">
+						<span class="number">1</span>
+						<div class="info">
+							<p>报名参赛</p>
+							<p>支付契约金</p>
+						</div>
+					</div>
+					<div class="flex-item item">
+						<span class="number">2</span>
+						<div class="info">
+							<p>跑步打卡</p>
+							<p>20天/2KM</p>
+						</div>
+					</div>
+					<div class="flex-item item">
+						<span class="number">3</span>
+						<div class="info">
+							<p>返契约金</p>
+							<p>赢奖金礼品</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="block">
+				<span class="title">赛事规则</span>
+				<div class="item-content">
+					<p class="text">a. 报名参加活动，支付报名契约金100元；</p>
+					<p class="text">b. 活动35天内打卡20天，每次2KM即视为完赛。少打多少天扣多少契约金，纳入大赛奖金池；</p>
+					<p class="text">c. 大赛结束返还契约金，完赛跑友均分大赛奖金池；</p>
+				</div>
+			</div>
+
+			<div class="block">
+				<span class="title">赛事奖励</span>
+				<div class="item-content">
+					<div class="list-body">
+						<div class="item">
+							<i class="iconfont icon-jinbi fll"></i>
+							<div class="intro vertical-middle">
+								<span class="first-title">契约金奖励</span>
+								<span class="sub-title">未坚持跑友契约金扣除纳入奖金池，坚持跑友均分这笔奖金</span>
+							</div>
+						</div>
+						<div class="item">
+							<i class="iconfont icon-qian2 fll"></i>
+							<div class="intro vertical-middle">
+								<span class="first-title">2000元追加奖金</span>
+								<span class="sub-title">发起方房多多额外投入2000元作为赛事奖金投入大赛奖金池</span>
+							</div>
+						</div>
+						<div class="item">
+							<i class="iconfont icon-iphone fll"></i>
+							<i class="iconfont icon-jingpinnanxie01 fll"></i>
+							<div class="intro vertical-middle">
+								<span class="first-title">iPhone7/Adidas跑鞋抽奖</span>
+								<span class="sub-title">完赛跑友可参与抽奖，奖品是iPhone7 Plus一部、Adidas跑步鞋两双</span>
+							</div>
+						</div>
+						<a href="http://mp.weixin.qq.com/s?__biz=MzIwNjM2NzQ1Nw==&mid=100001222&idx=1&sn=c9e451ee2de2faf4d4dabdbf26f16ba1&chksm=1723fa482054735e48101a022c8a04b3f163d4c4d993ea65c50576ee447ffc24fbc528b12120&scene=0#wechat_redirect" class="link rules text-center">完整规则及奖励说明 &gt;</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="block friend-links">
+				<div class="friend-links-body flex">
+					<div class="flex-item">
+						<a href="http://mp.weixin.qq.com/s?__biz=MzI2MjA2NjUyMg==&mid=2666259283&idx=2&sn=f07648fd871f5693a075123b2bb29a64&chksm=f14f9b66c6381270ad7c4c5d01cc77545f75066775aaa89c5bff1b6f0a50172b094a1f11acfa&scene=1&srcid=0920W3Eey0keDBM7iVC4d8hn&from=groupmessage&isappinstalled=0#wechat_redirect" class="friend-link link fangduoduo">
+							<img src="../../../static/images/house/fangduoduo.png" alt="">
+							<p class="text">了解房多多 &gt;</p>
+						</a>
+					</div>
+					<div class="flex-item">
+						<a href="/page/team/participation" class="friend-link link ro">
+							<img src="../../../static/images/house/ro.png" alt="">
+							<p class="text">加入不跑就出局 &gt;</p>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="fixed-footer flex">
+			<a class="flex-item tab link" v-if="!user||!user.participate">
+				<span class="btn">报名已结束，下次再来哦</span>
+			</a>
+			<a class="flex-item tab link" v-if="user.participate">
+				<span class="btn" v-on:click="invite()">邀请好友参赛</span>
+			</a>
+			<a href="/page/activity/fangduoduo/success" class="flex-item tab link" v-if="user.participate">
+				<span class="btn">进参赛群</span>
+			</a>
+			<!-- <a class="flex-item tab link">
+				<span class="btn">立即报名</span>
+			</a> -->
+		</div>
+
+	</div>
+
+	<div class="bottom-pop">
+		<div class="bottom-pop-body pay-step">
+			<div class="pop-content">
+				<div class="head">报名『不跑就出局-一键约跑』</div>
+				<div class="body">
+					<p class="text pay-line text-left clear-fix">支付契约金<span class="money flr">￥{{price/100 | notNull}}</span></p>
+					<a class="btn btn-middle btn-success" v-on:click="weiPay()"><i class="iconfont icon-umidd16"></i>微信支付</a>
+				</div>
+			</div>
+		</div>
+		<div class="bg" v-on:click="hidePop()"></div>
+	</div>
+
+</body>
+
+</html>
+<link rel="import" href="../../common/footer.html?__inline">
+<script type="text/javascript" src="../../../static/js/activitys/house/index.js"></script>

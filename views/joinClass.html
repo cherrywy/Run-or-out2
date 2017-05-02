@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="import" href="./common/header.html?__inline">
+		<link rel="stylesheet" type="text/css" href="../static/css/joinClass.scss">
+		<title>加入跑班</title>
+		<style type="text/css">
+		#join-class-v{
+			background: #fff;
+			width:1000px;
+			margin:0 auto;
+		}
+		.join-class-fixed {
+		position: absolute;
+		/*    z-index: 10;*/
+		background: #efeff4;
+		width: 60%;
+		left: 40%;
+		}
+		.search-item{
+			border:none;
+		}
+		.join-tags-list .tags-body .tag1 {
+		text-align: center;
+		margin-left: 22%;
+		margin-right: 1%;
+		height: 2.5rem;
+		line-height: 2.5rem;
+		background: #fff;
+		color: #969696;
+		font-size: .86rem;
+		margin-bottom: .4rem;
+		border-radius: .2rem;
+		}
+		.join-tags-list{
+			float: left;
+			width: 20%;
+		}
+		.class-body{
+			float: right;
+			width: 80%;
+			border: 1px solid #f4f4f4;
+			padding-top:0.5rem;
+		}
+		#emotion-word{
+			width:17rem;
+			height:5rem;
+		}
+		ul,li{
+		margin: 0px;
+		padding: 0px;
+		}
+		li{
+		list-style: none
+		}
+		.page-bar li:first-child>a {
+		margin-left: 2rem;
+		}
+		.page-bar a{
+		border: 1px solid #ddd;
+		text-decoration: none;
+		position: relative;
+		float: left;
+		padding: 6px 12px;
+		margin-left: -1px;
+		line-height: 1.42857143;
+		color: #337ab7;
+		cursor: pointer
+		}
+		.page-bar a:hover{
+		background-color: #eee;
+		}
+		.page-bar .active a{
+		color: #fff;
+		cursor: default;
+		background-color: #337ab7;
+		border-color: #337ab7;
+		}
+		.page-bar i{
+		font-style:normal;
+		color: #d44950;
+		margin: 0px 4px;
+		font-size: 12px;
+		}
+	.join-tags-list .tags-body .active-look{
+		background: #11cd6e;
+		color:#fff;
+		}
+	 .head-img  {
+	          	    width: 3rem;
+				    height: 3rem;
+				    background: #ccc;
+				    border-radius: 50%;
+				    display: inline-block;
+				    margin-right: 2rem;
+	          }
+	    .text-line {
+		    overflow: hidden;
+		    text-overflow: ellipsis;
+		    -webkit-line-clamp: 2;
+		    -webkit-box-orient: vertical;
+		    float: left;
+		    margin-right: 1rem;
+		}
+		.fangkuai-red{
+			    background: red;
+			    color: #fff;
+			    width: 4rem;
+			    height: 1.2rem;
+			    line-height: 1.2rem;
+			    border-radius: 0.2rem;
+			    float: right;
+		}
+		.fangkuai-green{
+			    background: green;
+			    color: #fff;
+			    width: 4rem;
+			    height: 1.2rem;
+			    line-height: 1.2rem;
+			    border-radius: 0.2rem;
+			    float: right;
+		}
+		//滚动条样式
+		.search-drop.show::-webkit-scrollbar {
+                width:2px;
+                -webkit-overflow-scrolling: touch;
+            }
+		.search-drop.show::-webkit-scrollbar-thumb {
+                background:rgba(#29b6f6,0.21);
+            }
+		.search-drop.show {
+		    height: 16rem;
+		    overflow-y:auto;
+		}
+		</style>
+	</head>
+	<body id="join-class-v" v-cloak >
+		<div class="join-class-fixed">
+			<div style="background: #fff;z-index: 10;">
+				<div class="search-item search-item-first flex">
+					<div class="drop flex-item"><span class="{{distance!=null&&distance!=''?'color-red':''}}">{{distance!=null&&distance!=""?(distance+"KM"):"班级状态"}}</span><i class="iconfont icon-xiangxia2 {{distance!=null&&distance!=''?'color-red':''}}"></i></div>
+					<div class="drop flex-item"><span class="{{day!=null&&day!=''?'color-red':''}}">{{day!=null&&day!=""?(day+"天"):"班级名"}}</span><i class="iconfont icon-xiangxia2 {{day!=null&&day!=''?'color-red':''}}"></i></div>
+					<div class="drop flex-item"><span class="{{min!=null&&min!=''?'color-red':''}}">{{min!=null&&min!=""?(max!=null&&max!=""?(min+"~"+max):"100以上"):"班级周期"}}</span><i class="iconfont icon-xiangxia2 {{min!=null&&min!=''?'color-red':''}}"></i></div>
+				</div>
+			</div>
+			<!-- 展开项 start -->
+			<div class="search-drop search-drop-1">
+				<div class="item active" data-value=""><div class="item-1">任意</div></div>
+				<div class="item " data-value="2"><div class="item-1">2KM</div></div>
+				<div class="item" data-value="3"><div class="item-1">3KM</div></div>
+				<div class="item" data-value="5"><div class="item-1">5KM</div></div>
+				<div class="item" data-value="8"><div class="item-1">8KM</div></div>
+				<div class="item" data-value="10"><div class="item-1">10KM</div></div>
+			</div>
+			<div class="search-drop search-drop-2">
+				<div class="item active" data-value=""><div class="item-2">任意</div></div>
+				<div class="item" data-value="2"><div class="item-2">2天</div></div>
+				<div class="item" data-value="3"><div class="item-2">3天</div></div>
+				<div class="item" data-value="4"><div class="item-2">4天</div></div>
+				<div class="item" data-value="5"><div class="item-2">5天</div></div>
+				<div class="item" data-value="6"><div class="item-2">6天</div></div>
+				<div class="item" data-value="7"><div class="item-2">7天</div></div>
+			</div>
+			<div class="search-drop search-drop-3">
+				<div class="item active" data-value-max="" data-value-min=""><div class="item-3">任意(元)</div></div>
+				<div class="item" data-value-max="15" data-value-min="1"><div class="item-3">1~15</div></div>
+				<div class="item" data-value-max="50" data-value-min="16"><div class="item-3">16~50</div></div>
+				<div class="item" data-value-max="100" data-value-min="51"><div class="item-3">51~100</div></div>
+				<div class="item" data-value-max="" data-value-min="101"><div class="item-3">100以上</div></div>
+			</div>
+			<!-- 展开项 end  -->
+		</div>
+		<div class="drop-bg" style="display: none;"></div>
+		<div style="position: absolute;top: 3.5rem;width: 100%;" >
+			<div class="join-tags-list">
+				<div class="tags-body">
+					<p class="tag1  type {{type=='0'?'active-look':''}}"  v-on:click="showTab(0)"> 待审核 128</p>
+					<p class="tag1  type {{type=='1'?'active-look':''}}"  v-on:click="showTab(1)"> 不通过 36</p>
+					<p class="tag1  type {{type=='2'?'active-look':''}}"  v-on:click="showTab(2)"> 通过 36</p>
+					<p class="tag1  type {{type=='3'?'active-look':''}}"  v-on:click="showTab(3)">未提交 25</p>
+					
+				</div>
+			</div>
+			<!-- 未找到 start -->
+			<div class="class-not-find join-class-block" v-if="noMore">
+				<h4>抱歉按上面条件无匹配的班级，建议你</h4>
+				<p>a、修改上方条件重新筛选班级，如修改所在地、取消标签筛选或更换班级条件；</p>
+				<p>b、创建一个班级你来当班长，设定合适的班级要求邀请好友加入。点击下方按钮一键创建；</p>
+				<span style="margin-top: 1.5rem;" class="btn" onclick="gotoCreateClass()">一键创建班级</span>
+			</div>
+			<!-- 未找到 end -->
+			<div class="class-body unlook" v-show="body[type].className=='unlook'">
+				<div class="page-bar">
+					<ul>
+						<li v-if="showFirst"><a v-on:click="cur--">上一页</a></li>
+						<li v-for="index in indexs"  v-bind:class="{ 'active': cur == index}">
+							<a v-on:click="btnClick(index)">{{ index }}</a>
+						</li>
+						<li v-if="showLast"><a v-on:click="cur++">下一页</a></li>
+						<li><a>共<i>{{all}}</i>页</a></li>
+					</ul>
+				</div>
+				<div class="class-info-v2" style="float:right">
+					<span class="head-img" style="background: red"></span>
+					<div class="text title text-line">
+						<p>头像</p>
+						<p>头像</p>
+					</div>
+
+				</div>
+				<div class="Content-detail" >
+					
+					<div class="right">
+						<div class="header">
+							瘦前打卡
+						</div>
+
+						<div class="content">
+							<div class="content-div">
+								<a href="#!"  v-for="gameName in gameNames" v-on:click="selected(gameName)" :class="{active: activeName == gameName}">{{gameName}}</a>
+							</div>
+							<div class="content-div">
+								<i class="iconfont icon-icon66"></i><br />
+								点击上传<br />
+								上秤照<br />
+							</div>
+							<div class="content-div-ope">
+								<div class="opInputDiv">
+									<span class="opInput">输入</span>
+									<span class="opInput">48KG</span>
+								</div>
+								<div class="opInputDiv">
+									<div class="opInput" style="float:left;">选择</div>
+									<span class="opInput1" style="margin-right: 9rem;">不通过</span>
+									<span class="opInput1" >通过</span>
+								</div>
+								<form action="" method="post">
+									<textarea  name="emotion-word" id="emotion-word" ></textarea>
+								</form>
+								<!--按钮-->
+								<div class="opBtn">
+									<div class="btn">提交</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="header">
+							瘦后打卡
+						</div>
+						<div class="content">
+							<div class="content-div">
+								<i class="iconfont icon-icon66"></i><br />
+								点击上传<br />
+								全身照<br />
+							</div>
+							<div class="content-div">
+								<i class="iconfont icon-icon66"></i><br />
+								点击上传<br />
+								上秤照<br />
+							</div>
+							<div class="content-div-ope">
+								<div class="opInputDiv">
+									<span class="opInput">输入</span>
+									<span class="opInput">48KG</span>
+									<span class="opInput">目标48KG</span>
+								</div>
+								<div class="opInputDiv">
+									<div class="opInput" style="float:left;">选择</div>
+									<span class="opInput1" style="margin-right: 9rem;">不通过</span>
+									<span class="opInput1" >通过</span>
+								</div>
+								<form action="" method="post">
+									<textarea  name="emotion-word" id="emotion-word" ></textarea>
+								</form>
+								<!--按钮-->
+								<div class="opBtn">
+									<div class="btn">提交</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="class-body unpass" v-show="body[type].className=='unpass'">
+				<div class="page-bar">
+					<ul>
+						<li v-if="showFirst"><a v-on:click="cur--">上一页</a></li>
+						<li v-for="index in indexs"  v-bind:class="{ 'active': cur == index}">
+							<a v-on:click="btnClick(index)">{{ index }}</a>
+						</li>
+						<li v-if="showLast"><a v-on:click="cur++">下一页</a></li>
+						<li><a>共<i>{{all}}</i>页</a></li>
+					</ul>
+				</div>
+				<div class="class-info-v2" style="float:right">
+					<span class="head-img" style="background: red"></span>
+					<div class="text title text-line">
+						<p>头像</p>
+						<p>头像</p>
+					</div>
+
+				</div>
+				<div class="Content-detail" >
+					
+					<div class="right">
+						<div class="header">
+							瘦前打卡
+						</div>
+						<div class="content">
+							<div class="content-div">
+							     <div class="fangkuai-red">不通过</div>
+								<i class="iconfont icon-icon66"></i><br />
+								点击上传<br />
+								全身照<br />
+							</div>
+							<div class="content-div">
+								<i class="iconfont icon-icon66"></i><br />
+								点击上传<br />
+								上秤照<br />
+							</div>
+							<div class="content-div-ope">
+								<div class="opInputDiv">
+									<span class="opInput">输入</span>
+									<span class="opInput">48KG</span>
+								</div>
+								<div class="opInputDiv">
+									<div class="opInput" style="float:left;">选择</div>
+									<span class="opInput1" style="margin-right: 9rem;">不通过</span>
+									<span class="opInput1" >通过</span>
+								</div>
+								<form action="" method="post">
+									<textarea  name="emotion-word" id="emotion-word" ></textarea>
+								</form>
+								<!--按钮-->
+								<div class="opBtn">
+									<div class="btn">提交</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="header">
+							瘦后打卡
+						</div>
+						<div class="content">
+							<div class="content-div">
+								<i class="iconfont icon-icon66"></i><br />
+								点击上传<br />
+								全身照<br />
+							</div>
+							<div class="content-div">
+								<i class="iconfont icon-icon66"></i><br />
+								点击上传<br />
+								上秤照<br />
+							</div>
+							<div class="content-div-ope">
+								<div class="opInputDiv">
+									<span class="opInput">输入</span>
+									<span class="opInput">48KG</span>
+									<span class="opInput">目标48KG</span>
+								</div>
+								<div class="opInputDiv">
+									<div class="opInput" style="float:left;">选择</div>
+									<span class="opInput1" style="margin-right: 9rem;">不通过</span>
+									<span class="opInput1" >通过</span>
+								</div>
+								<form action="" method="post">
+									<textarea  name="emotion-word" id="emotion-word" ></textarea>
+								</form>
+								<!--按钮-->
+								<div class="opBtn">
+									<div class="btn">提交</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="class-body pass" v-show="body[type].className=='pass'">
+				<div class="page-bar">
+					<ul>
+						<li v-if="showFirst"><a v-on:click="cur--">上一页</a></li>
+						<li v-for="index in indexs"  v-bind:class="{ 'active': cur == index}">
+							<a v-on:click="btnClick(index)">{{ index }}</a>
+						</li>
+						<li v-if="showLast"><a v-on:click="cur++">下一页</a></li>
+						<li><a>共<i>{{all}}</i>页</a></li>
+					</ul>
+				</div>
+				<div class="class-info-v2" style="float:right">
+					<div class="img" style="background: red"></div>
+					<span class="text title text-two-line">网页</span>
+					<p class="text title text-two-line">网页</p>
+				</div>
+				<div class="Content-detail" >
+					
+					<div class="right">
+						<div class="header">
+							瘦前打卡
+						</div>
+						<div class="content">
+							<div class="content-div">
+							    <div class="fangkuai-green">通过</div>
+								<i class="iconfont icon-icon66"></i><br />
+								点击上传<br />
+								全身照<br />
+							</div>
+							<div class="content-div">
+							   
+								<i class="iconfont icon-icon66"></i><br />
+								点击上传<br />
+								上秤照<br />
+							</div>
+							<div class="content-div-ope">
+								<div class="opInputDiv">
+									<span class="opInput">输入</span>
+									<span class="opInput">48KG</span>
+								</div>
+								<div class="opInputDiv">
+									<span class="opInput">选择</span>
+									<span class="opInput1">通过</span>
+									<span class="opInput1">不通过</span>
+								</div>
+								<form action="" method="post">
+									<textarea  name="emotion-word" id="emotion-word" ></textarea>
+								</form>
+								<!--按钮-->
+								<div class="opBtn">
+									<div class="btn">提交</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="header">
+							瘦后打卡
+						</div>
+						<div class="content">
+							<div class="content-div">
+								<i class="iconfont icon-icon66"></i><br />
+								点击上传<br />
+								全身照<br />
+							</div>
+							<div class="content-div">
+								<i class="iconfont icon-icon66"></i><br />
+								点击上传<br />
+								上秤照<br />
+							</div>
+							<div class="content-div-ope">
+								<div class="opInputDiv">
+									<span class="opInput">输入</span>
+									<span class="opInput">48KG</span>
+								</div>
+								<div class="opInputDiv">
+									<span class="opInput">选择</span>
+									<span class="opInput1">通过</span>
+									<span class="opInput1">不通过</span>
+								</div>
+								<form action="" method="post">
+									<textarea  name="emotion-word" id="emotion-word" ></textarea>
+								</form>
+								<!--按钮-->
+								<div class="opBtn">
+									<div class="btn">提交</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="class-body uncomimmt" v-show="body[type].className=='uncomimmt'">
+				<div class="page-bar">
+					<ul>
+						<li v-if="showFirst"><a v-on:click="cur--">上一页</a></li>
+						<li v-for="index in indexs"  v-bind:class="{ 'active': cur == index}">
+							<a v-on:click="btnClick(index)">{{ index }}</a>
+						</li>
+						<li v-if="showLast"><a v-on:click="cur++">下一页</a></li>
+						<li><a>共<i>{{all}}</i>页</a></li>
+					</ul>
+				</div>
+				
+				<div class="Content-detail" >
+					
+					<div class="class-info-v2" style="float:right">
+					<div class="img" style="background: red"></div>
+					<span class="text title text-two-line">网页</span>
+					<p class="text title text-two-line">网页</p>
+				</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
+<link rel="import" href="./common/footer.html?__inline">
+<script type="text/javascript" src="../static/js/joinClass.js"></script>
+<script type="text/html" src="https://github.com/vuejs/awesome-vue#libraries--plugins"></script>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="import" href="../common/header.html?__inline">
+<link rel="stylesheet" type="text/css" href="../static/css/activeList.scss">
+<title>活动列表</title>
+<style type="text/css">
+</style>
+</head>
+
+<body id="activity-list-v" class="activity-list" v-cloak>
+<!--	<div class="join-class-head text-center" style="z-index: 10;">
+		<div class="tab flex vertical-center">
+			<div class="flex-item link" onclick="joinClass()"><span class="text">跑班</span></div>
+			<div class="flex-item link active"><span class="text">活动</span></div>
+			<div class="flex-item link" onclick="gotoCreateClass()"><span class="text">创建</span></div>
+		</div>
+	</div>-->
+
+	<div class="activities">
+		<a href="{{list.url}}" class="list" v-for="list in activities">
+			<div class="tag" v-if="list.status=='报名中'">{{list.status}}</div>
+			<div class="tag running" v-if="list.status=='进行中'">{{list.status}}</div>
+			<div class="tag finished" v-if="list.status=='已结束'">{{list.status}}</div>
+			<div class="img" style="background: url({{list.pic}}) no-repeat center;background-size: cover;"></div>
+			<div class="info">
+				<div class="title">{{list.name}}</div>
+				<div class="text">{{list.description}}</div>
+				<div class="join"><i class="iconfont icon-group"></i>{{list.people}}人</div>
+			</div>
+		</a>
+	</div>
+</body>
+
+</html>
+<link rel="import" href="../common/footer.html?__inline">
+<script type="text/javascript" src="../../static/js/activitys/actList.js"></script>

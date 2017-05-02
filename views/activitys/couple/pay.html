@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" />
+<meta content="telephone=no" name="format-detection"/>
+<meta content="email=no" name="format-detection"/>
+<link rel="stylesheet" type="text/css" href="../../../../public/css/style.css">
+<title>情侣跑 - 不跑就出局</title>
+<style type="text/css">
+	.color-pink{
+		color: #ff4081;
+	}
+	.head{
+		background: url('../../../../public/images/couple-bg.jpg') no-repeat center;
+		background-size: cover;
+		height: 15rem;
+	}
+	.body .title{
+		padding: 2rem;
+	}
+	.body .pay-block{
+		padding: 0 2rem;
+	}
+	.body .pay-block .pay-line{
+		margin-bottom: 1rem;
+	}
+	.body .pay-block .pay-line .text{
+		color: #969696;
+	}
+	.body .pay-block .pay-line .money{
+		font-size: 1.15rem;
+	}
+	.body .btn{
+		width: 15rem;
+		background: #11cd6e;
+		height: 2.5rem;
+		line-height: 2.5rem;
+		text-align: center;
+		margin: 0 auto;
+		margin-top: 1.5rem;
+		margin-bottom: 0.5rem;
+		border-radius: 0.2rem;
+	}
+	.body .btn:active{
+		background: #13af60;
+	}
+	.body .btn .iconfont{
+		color: #fff;
+		font-size: 1.55rem;
+		vertical-align: middle;
+	}
+	.body .btn span{
+		vertical-align: top;
+		font-size: 1.05rem;
+		color: #fff;
+	}
+	.body .info{
+		color: #b8b8b8;
+		font-size: 0.86rem;
+		text-align: center;
+	}
+	.choose-acount .choose-account-pay:before{
+		color: #11cd6e;
+		content: "\e603";
+	}
+	.choose-acount.active .choose-account-pay:before{
+		content: "\e604";
+	}
+	.choose-acount:active{
+		background: rgba(0,0,0,0.1);
+	}
+</style>
+</head>
+
+<body>
+	<div class="head"></div>
+	<div class="body">
+		<div class="title text-center">
+			参加『七夕情侣跑』
+		</div>
+		<div class="pay-block">
+			<div class="pay-line">
+				<span class="text">支付契约金</span>
+				<span class="money flr">￥52.00</span>
+			</div>
+			<div class="pay-line choose-acount active">
+				<span class="text">RO账户抵扣</span>
+				<span class="text flr">￥52.00可用 <i class="iconfont choose-account-pay"></i></span>
+			</div>
+		</div>
+		<div class="btn">
+			<i class="iconfont icon-umidd16"></i>
+			<span>微信支付</span>
+		</div>
+		<p class="info">进入下一步即代表同意用户协议</p>
+	</div>
+</body>
+
+</html>
+<script type="text/javascript" src="../../../../public/js/zepto.min.js"></script>
+<script type="text/javascript" src="../../../../public/js/vue.min.js"></script>
+<script type="text/javascript">
+$(function(){
+	$(".choose-acount").on("click",function(){
+		$(this).toggleClass('active');
+		if ($(this).attr("class").indexOf("active") != -1) {
+			// if (accountMoney > totalMoney) {
+			// 	discountMoney = totalMoney;
+			// } else {
+			// 	discountMoney = accountMoney;
+			// }
+		} else {
+			// discountMoney = 0;
+		}
+	})
+})
+</script>

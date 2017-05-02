@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="import" href="./common/header.html?__inline">
+<link rel="stylesheet" type="text/css" href="../static/css/settingTime.scss">
+<title>自动续班 </title>
+
+<style>
+  .tanchuang{
+    width: 15rem;
+    height: 8rem;
+    position: fixed;
+    left: 20%;
+    top: 36%;
+    margin: 0 auto;
+    background: #000000;
+    border-radius: 0.5rem;
+    z-index: 1000;
+    display: none;
+    line-height: 8rem;
+    text-align: center;
+    font-size:1rem;
+    opacity: 0.5;
+    color: #FFFFFF;
+    -webkit-opacity: 0.5;
+		
+	}
+	.auto-alert .title{
+		height: 2rem;
+		line-height: 2rem;
+	}
+	..auto-alert .title .wenzi{
+		color: #969696;
+	}
+	.icon-iconfontdian1{
+			color: #FF0000;
+		}
+	
+</style>
+
+</head>
+
+<body id="v-continued-class">
+	<div class="content">
+		<div class="header"></div>
+		<div class="body">
+			<div class="menu-block margin-t-1">
+				<div class="menu-list no-icon">
+					<!-- <i class="iconfont icon-shuaxin vertical-middle color-blue"></i> -->
+					<label class="name vertical-middle"><span class="text">自动续班</span></label>
+					<span class="right-icon">
+						<input type="checkbox" class="dz-switch" id="check-work-alert">
+					</span>
+				</div>
+			</div>
+			<p class="text auto-alert">
+				<div class="title" style="height: 2rem; line-height: 2rem;">
+						<i class="iconfont icon-iconfontdian1"></i>
+						<span class="wenzi" style="color: #969696;">功能说明</span>
+				</div>
+				<div class="desDIV" style="height: 5rem;padding-left: 1em;padding-right: 1rem;letter-spacing:1px;line-height: 1.5;">
+						<P  class="desTxt1" style="font-size: 0.78rem; color: #969696;">
+									1.开启后，若RO账户余额充足，将在每周结束当晚自动续班，在此之前可随时关闭功能，合理安排跑步计划。
+						</p>
+						<p class="desTxt1" style="font-size: 0.78rem; color: #969696;margin-top: 1rem;letter-spacing:1px;line-height: 1.5;">
+									2.自动续报班级为最后结束班级，如[RO1班]此时在跑且续报了[魅力跑班]，自动续班将续报[魅力跑班]。
+						</p>
+				</div>
+				
+			</p>
+			 <div id="tanchuang" class="tanchuang">
+		      	自动续班已开启
+		     </div>
+		     <div id="tanchuang1" class="tanchuang">
+		      	自动续班已关闭
+		     </div>
+			<!--<div class="normal-menu-body manager-class-item" v-show="showTime">
+				<div class="normal-menu-list" id="choose-time">
+					<span class="normal-menu-title">提醒时间 <span class="color-red">*</span></span>
+					<span class="normal-menu-sub-title sub-value">{{alertTime | reverseTime}}</span>
+					<i class="iconfont icon-webxuanzexiangmuicon01-copy color-red"></i>
+					<input type="text" value="{{alertTime | reverseTime}}" style="opacity: 0;position: absolute;left: 8rem;top: 1rem;" name="choose-time-hide" id="choose-time-hide" readonly>
+				</div>
+			</div>-->
+		</div>
+		<div class="footer"></div>
+	</div>
+</body>
+
+</html>
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/1.11.1-rc1/jquery.min.js"></script>
+<link rel="import" href="./common/footer.html?__inline">
+<script type="text/javascript" src="../static/js/continuedClass.js"></script>
+

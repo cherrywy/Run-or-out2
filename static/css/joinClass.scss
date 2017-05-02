@@ -1,0 +1,401 @@
+.Content-detail{
+            display: -webkit-box;
+            display: box;
+            width: 100%;
+            margin-left: 2rem;
+           .left{
+                width: 0.35rem;
+            };
+            .right{
+                 -webkit-box-flex: 1;
+                 box-flex: 1;
+                 padding-right: 0.2rem;
+                 .header{
+                     height: 1.5rem;
+                     line-height: 0.8rem;
+                     font-size: 16px;
+                     color:#969696;
+                 };
+                 .content{
+                     display: flex;
+                     
+                     height: 15rem;
+                     .content-div{
+                         width:10rem;
+                         background-color: #eeeeee;
+                         text-align: center;
+                         padding-top: 0.1rem;
+                         color: #FFFFFF;
+                         margin-right: 5rem;
+                         font-size: 10px;
+                        margin-bottom: 1.5rem;
+                         i{
+                             font-size: 1rem;
+                             color: #FFFFFF;
+                             opacity: 0.5;
+                             -webkit-opacity: 0.5;
+                         }
+                     };
+                     .content-div-ope{
+                          width: 50%;
+                         .opInputDiv{
+                             width: 26rem;
+                             height: 2rem;
+                             margin-bottom:0.5rem;
+                             .opInput{
+                                 // width: 100%;
+                                 height: 0.5rem;
+                                 margin-right: 3rem;
+                                 margin-left: 1rem;
+                                  
+    
+                             };
+                              .opInput1{
+                                width: 4rem;
+                                height: 2rem;
+                                text-align: center;
+                                line-height: 2rem;
+                                border: 1px solid #c8c8c8;
+                                margin-right: 2rem;
+                                color:#969696;
+                                    float: right;
+                                display: inline-block;
+                             
+                                
+                             };
+                             
+                         };
+                         .opBtn{
+                             width: 100%;
+                             .btn{
+                            margin-top: 1rem;
+                            width: 8rem;
+                            background: #11cd6e;
+                           
+                            color: #fff;
+                            height: 2rem;
+                            line-height: 2rem;
+                             }
+                         }
+                     }
+                 };
+                 
+            }
+        }
+
+
+
+*{
+    font-family: "微软雅黑";
+}
+.search-drop .item {
+    padding: 0.8rem 0;
+    width: 100%;
+    border-bottom: 1px solid #f4f4f4;
+}
+.search-drop .item > div {
+    color: #969696;
+    font-size: 0.86rem;
+    text-align: center;
+}
+.search-drop .item.active > div {
+    color: #fc4548;
+}
+.search-drop .item.active > div > span {
+    color: #fc4548;
+}
+.search-drop .item-1 {
+    width: 30%;
+}
+.search-drop .item-2 {
+    width: 50%;
+    margin-left: 24%;
+}
+.search-drop .item-3 {
+    width: 71%;
+    margin-left: 48%;
+}
+.search-drop .item-4 {
+    width: 25%;
+    margin-left: 72%;
+}
+.search-drop-1, .search-drop-2, .search-drop-3, .search-drop-4 {
+    margin-top: 0rem;
+    z-index: 11;
+}
+.join-class-fixed {
+    position: fixed;
+    z-index: 10;
+    background: #efeff4;
+    width: 100%;
+}
+.join-class-head {
+    height: 3.07rem;
+    z-index: 10;
+    display: flex;
+    background: #1b1b20;
+}
+.search-province {
+    width: 85%;
+    line-height: 3.07rem;
+    margin-left: 1rem;
+    color: #969696;
+}
+.search-province .iconfont {
+    display: inline-block;
+    color: #969696;
+    font-size: 0.86rem;
+}
+.huodong{
+    width: 15%;
+    padding-right:1rem ;
+    padding-top: 0.28rem;
+}
+.huodong img{
+    height: 2.5rem;
+    opacity: 0.7;
+    -webkit-opacity: 0.7;
+}
+#class-province .ziti{
+    font-size: 0.86rem;
+    color: #969696;
+}
+#class-province {
+    width: 3rem;
+    background: transparent;
+    border: none;
+    font-size: 0.86rem;
+    color: #969696;
+    display: inline-block;
+}
+.icon-xiangxia2{
+    color: #969696;
+}
+// .join-tags-list{
+//     padding-top: 6.5rem;
+// }
+.join-tags-list .text{
+    margin-left: 0.8rem;
+    color: #c8c8c8;
+    padding-bottom: 0.2rem;
+    font-size: 0.8rem;
+}
+.join-tags-list .tags-body{
+    margin-left: 0.5rem;
+    margin-right: 0.7rem;
+}
+.join-tags-list .tags-body .tag {
+    display: inline-block;
+    text-align: center;
+    margin-left: 1%;
+    margin-right: 1%;
+    width: 18%;
+    height: 1.5rem;
+    line-height: 1.5rem;
+    background: #fff;
+    color: #969696;
+    font-size: 0.86rem;
+    margin-bottom: 0.4rem;
+    border-radius: 0.2rem;
+}
+.join-tags-list .tags-body .tag.active{
+    background: #fc4548;
+    color: #fff;
+}
+.join-class-title{
+    height: 3.2rem;
+    line-height: 3.2rem;
+    width: 100%;
+    background-color: #FFFFFF;
+    margin-top: 0.5rem;
+    margin-bottom: -0.2rem;
+}
+.join-class-title .title{
+    background-color: red;
+}
+.join-class-title .ziti{
+    color: #3c3c3c;
+    padding: 0;
+    font-size: 0.86rem;
+}
+.join-class-list{
+    display: -webkit-box;
+    display: box;
+    width: 100%;
+    margin-top: 0;
+    min-height: 4.5rem;
+    background-color: #FFFFFF;
+}
+.list-content{
+    -webkit-box-flex: 1;
+    box-flex: 1;
+    padding-left: 0.8rem;
+}
+.list-content .content-name{
+    color: #3c3c3c;
+}
+.list-people{
+    text-align: right;
+}
+.rules {
+    margin-top: 0.2rem;
+    font-size: 0.86rem;
+    line-height: 1.2;
+    height: auto;
+    display: block;
+}
+.rules .rule {
+    background: #C8C8C8;
+    opacity: 0.8;
+    color: #ffffff;
+    padding: 0.1rem 0rem;
+    margin-right: 0.05rem;
+    display: inline-block;
+    border-radius: 0.1rem;
+    width: 2.3rem;
+    text-align: center;
+}
+.rules-out p {
+    margin-bottom: 0.5rem;
+    color: #969696;
+}
+.rules-out p .rule {
+    margin-right: 0.8rem;
+}
+.iconfont {
+    color: #fc4548;
+    margin-right: 0.3rem;
+    font-size: 1.2rem;
+}
+.iconfont {
+    color: #f56218;
+    vertical-align: middle;
+}
+.rules .iconfont {
+    font-size: 0.86rem;
+    opacity: 0.5;
+    color: #6B6B6B;
+    margin-left: 0.8rem;
+    padding-top: 0.4rem;
+    position: absolute;
+    left: 10.5rem;
+    top: -0.3rem;
+}
+
+.list-description{
+    width: 100%;
+    text-align: right;
+    display: -webkit-box;
+    display: box;
+    line-height: 1rem;
+    background-color: #FFFFFF;
+    
+}
+.class-delline{
+    padding-bottom: 0.8rem;
+    color: #C8C8C8;
+    padding-left: 4.8rem;
+    font-size: 0.8rem;
+    border-bottom: 0.1rem #F0F0F0 solid;
+   -webkit-box-flex: 1;
+    box-flex: 1;
+}
+.class-delline:last-child{
+    color: #c8c8c8;
+    font-size: 0.8rem;
+    text-align: left;
+    -webkit-box-flex: 1;
+    box-flex: 1;
+}
+.kongbai{
+    width: 1rem;
+}
+.join-class-list #join-number{
+    right: 0;
+    color:#000000;
+    top:0rem;
+    font-size:1rem;
+}
+#join-number span{
+    font-size:0.86rem;
+}
+.tags-info{
+    color: #969696;
+    font-size: 0.86rem;
+    margin-top: 0.3rem;
+}
+.fengexian{
+    left:2rem;
+    width: 100%;
+    color: #ffffff;
+    height: 0.05rem;
+}
+.creat-class{
+    height: 3rem;
+    width: 7rem;
+    position: fixed;
+    bottom: 3.5rem;
+    right: 0rem;
+    border-radius: 1.5rem 0 0 1.5rem;
+    background-color: #fc4548;
+    text-align: center;
+    color: #FFFFFF;
+    line-height: 3rem;
+}
+.icon-gth{
+    color: red;
+}
+.xiangyou{
+    color: #dcdcdc;
+    margin-right:0;
+    margin-top: 1.5rem;
+}
+.icon-xiangyou1{
+    font-size: 1.1rem;
+    color: #dcdcdc;
+}
+.whiteicon{
+    color: #C8C8C8;
+    font-size: 1.8rem;
+}
+.join-class-a:last-child .class-delline{
+    border-bottom: none;
+}
+.list-avatar{
+   width: 4rem; 
+}
+.list-avatar .head-img{
+    width: 3.75rem;
+    height: 3.95rem;
+    position: absolute;
+    top: 0rem; 
+    left: 0rem; 
+    border-radius: 0.8rem;
+}
+.name-line{
+    max-width: 10rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+    overflow: hidden;
+}
+.loading{
+    height: 3rem;
+    line-height: 3rem;
+    color: #969696;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    align-items: center;
+}
+.loading-over{
+    height: 4rem;
+    line-height: 4rem;
+    display: flex;
+    display: -webkit-flex;
+    justify-content: center;
+    align-items: center;
+}
+.loading-over img{
+    width: 40%;
+}

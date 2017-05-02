@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="import" href="./common/header.html?__inline">
+<title>紧急联系平台</title>
+</head>
+
+<body id="v-demo" class="response-body" v-cloak>
+	<div class="content">
+		<div class="header"></div>
+		<div class="body"></div>
+		<div class="footer"></div>
+	</div>
+	<div class="flex">
+		<select class="province flex-item" name="" id="province" v-model="province">
+			<option value="">请选择省份</option>
+			<option v-for="list in provinceList" value="{{list.value}}">{{list.name}}</option>
+		</select>
+		<select class="city flex-item" name="" id="city" v-model="city">
+			<option value="">请选择市</option>
+			<option v-for="list in cityList" value="{{list.value}}">{{list.name}}</option>
+		</select>
+		<select class="area flex-item" name="" id="area" v-model="area">
+			<option value="">请选择区/县</option>
+			<option v-for="list in areaList" value="{{list.value}}">{{list.name}}</option>
+		</select>
+	</div>
+</body>
+
+</html>
+<link rel="import" href="./common/footer.html?__inline">
+<script type="text/javascript" src="../static/js/demo.js"></script>

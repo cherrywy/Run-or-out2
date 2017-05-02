@@ -1,0 +1,69 @@
+.shop-index{
+    padding-bottom: 5rem;
+}
+.shop-index .fixed-head{
+    height: 5rem;
+    background: #fff;
+    padding: 1rem;
+    width: 100%;
+    top: 0;
+    position: fixed;
+    z-index: 2;
+}
+.shop-index .fixed-head .tab{
+    background: #f9f9f9;
+    height: 3rem;
+    line-height: 2.2rem;
+    border-radius: 0.2rem;
+}
+.shop-index .fixed-head .tab .flex-item{
+    padding: 0.4rem;
+}
+.shop-index .fixed-head .tab .flex-item .text{
+    display: block;
+    border-radius: 0.2rem;
+    -webkit-transition: .2s;
+    -ms-transition: .2s;
+    transition: .2s;
+}
+.shop-index .fixed-head .tab .flex-item.active .text{
+    background: #fc4548;
+    color: #fff;
+}
+
+.shop-index .good-list{
+    background: #fff;
+    margin-top: 1rem;
+}
+.shop-index .good-list .item{
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    border-right: 1px solid #eee; 
+}
+.shop-index .good-list .item .img{
+    width: 4rem;
+    height: 5rem;
+    background: #ccc;
+    margin: 0 auto;
+}
+.shop-index .good-list .item .name{
+    margin-top: 1.2rem;
+}
+.shop-index .good-list .item .info{
+    font-size: 0.86rem;
+    color: #969696;
+    font-weight: lighter;
+    line-height: 1.5;
+    margin-top: 0.3rem;
+}
+.shop-index .good-list .item .money{
+    margin: 0.8rem auto;
+}
+.shop-index .good-list .item .storage{
+    font-size: 0.86rem;
+    color: #969696;
+    font-weight: lighter;
+}
+.shop-index .no-item{
+    width: 100%;
+}

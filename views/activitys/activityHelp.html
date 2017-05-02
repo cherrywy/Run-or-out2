@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="import" href="../common/header.html?__inline">
+<title>百日跑报名成功 | 不跑就出局</title>
+<style type="text/css">
+	.head{
+		height: 4.5rem;
+		background: #22ad38;
+		text-align: left;
+		line-height: 4.5rem;
+		box-sizing: border-box;
+		padding: 0 1.5rem;
+	}
+	.head *{
+		color: #fff;
+		vertical-align: middle;
+		font-size: 1.5rem;
+	}
+	.head .icon-gou{
+		font-weight: bold;
+		font-size: 2rem;
+		margin-right: 0.5rem;
+	}
+	.head .icon-guanbi1{
+		font-weight: bold;
+		position: absolute;
+		right: 1.5rem;
+		font-size: 2rem;
+	}
+	.head .icon-guanbi1:active{
+		background: rgba(0,0,0,0.1);
+	}
+	.body{
+		text-align: center;
+		padding: 1rem 1.5rem;
+	}
+	.body h3{
+		color: #32b16c;
+		line-height: 1.6;
+		font-size: 1.5rem;
+		font-weight: normal;
+	}
+	.body p{
+		color: #32b16c;
+		line-height: 1.6;
+		font-size: 1.05rem;
+		margin-bottom: 1rem;
+	}
+	.body img{
+		width: 12.5rem;
+	}
+</style>
+</head>
+
+<body>
+	<div class="head">
+		<i class="iconfont icon-gou"></i>
+		<span>报名成功</span>
+		<i onclick="gotoIndex()" class="iconfont icon-guanbi1"></i>
+	</div>
+	<div class="body">
+		<h3>最后一步</h3>
+		<p>请添加下方大赛运营成员为好友，验证信息备注“百日挑战赛”，运营成员会拉您进赛事沟通群。</p>
+		<img src="https://www.runorout.cn/images/helper-code.jpg">
+	</div>
+</body>
+
+</html>
+<link rel="import" href="../common/footer.html?__inline">
+<script type="text/javascript">
+	function gotoIndex() {
+		var timestamp=new Date().getTime();
+		window.location.href = "/page/activity?time=" + timestamp;
+	}
+</script>

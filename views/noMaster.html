@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="import" href="./common/header.html?__inline">
+<title>审核打卡</title>
+</head>
+
+<body>
+	
+</body>
+
+</html>
+<link rel="import" href="./common/footer.html?__inline">
+<script type="text/javascript">
+	var Alert = require('../static/modules/alert.js');
+	Alert.show({
+	    content: "审核权限目前仅开放给坚持21天的跑友，继续坚持哦!",
+	    sureBtnText: '我知道了',
+	    sure: function(){
+	    	WeixinJSBridge.call('closeWindow');
+	    }
+	});
+</script>

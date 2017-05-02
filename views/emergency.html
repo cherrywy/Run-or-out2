@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="import" href="./common/header.html?__inline">
+<link rel="stylesheet" type="text/css" href="../static/css/emergency.scss">
+<title>问题咨询</title>
+</head>
+
+<body id="v-response" class="response-body" v-cloak>
+	<div class="head">
+		<div class="flex">
+			<div class="flex-item {{headGuide==1?'active':''}}">
+				常见问题
+			</div>
+			<div class="flex-item {{headGuide==2?'active':''}}">
+				快速导航
+			</div>
+		</div>
+	</div>
+
+	<div class="emergency-body" v-show="headGuide==1">
+		<a data-href="#join" href="#join" class="block" onclick="MtaH5.clickStat('entry')">
+			<div class="left">
+				<div class="vertical-middle text-center">
+					<i class="iconfont icon-zhengque color-red"></i>
+					<p>报名</p>
+				</div>
+			</div>
+			<div class="right">
+				<p class="text">怎样才能暂停跑步?</p>
+				<p class="text">能否同时报多个跑班？</p>
+				<p class="text">想跟认识的跑，私密班怎么建？</p>
+			</div>
+			<i class="iconfont icon-gengduo"></i>
+		</a>
+
+		<a data-href="#uploadwork" href="#uploadwork" class="block" onclick="MtaH5.clickStat('punch')">
+			<div class="left">
+				<div class="vertical-middle text-center">
+					<i class="iconfont icon-rili color-blue"></i>
+					<p>打卡</p>
+				</div>
+			</div>
+			<div class="right">
+				<p class="text">怎么打卡?</p>
+				<p class="text">跑步机怎么打卡?</p>
+				<p class="text">每天可以打多少次卡？</p>
+			</div>
+			<i class="iconfont icon-gengduo"></i>
+		</a>
+
+		<a data-href="#money" href="#money" class="block" onclick="MtaH5.clickStat('contractGold')">
+			<div class="left">
+				<div class="vertical-middle text-center">
+					<i class="iconfont icon-jinbisolid color-orange"></i>
+					<p>契约金</p>
+				</div>
+			</div>
+			<div class="right">
+				<p class="text">交多少契约金?</p>
+				<p class="text">插班生可以分奖金吗？</p>
+				<p class="text">契约金什么时候返还？</p>
+			</div>
+			<i class="iconfont icon-gengduo"></i>
+		</a>
+
+		<a href="#human" class="block human-service" onclick="MtaH5.clickStat('customer')">
+			<div class="left">
+				<div class="vertical-middle text-center">
+					<i class="iconfont icon-weixin color-green"></i>
+					<p>人工客服</p>
+				</div>
+			</div>
+			<div class="right">
+				<div class="goto-qun color-green">
+					点击进微信群&nbsp;&nbsp;&nbsp;<i class="iconfont icon-jiahao1 color-green"></i>
+				</div>
+				<img src="../static/images/moyan.png" alt="" id="moyanhaha">
+			</div>
+		</a>
+	</div>
+	<div class="emergency-body" v-show="headGuide==2">
+		<div class="content content-wish">
+			<div class="item">
+				<span class="text">不跑就出局平台规则</span>
+				<a href="https://mp.weixin.qq.com/s/QakDt5GtvRaA3x8RML9nvg" class="link-btn" onclick="MtaH5.clickStat('emergency_viewRules')">查看</a>
+			</div>
+			<div class="item">
+				<span class="text">精选跑步干货</span>
+				<a href="http://mp.weixin.qq.com/mp/homepage?__biz=MzIwNjM2NzQ1Nw==&hid=2&sn=051086b26300b865603cbf2c52887f5e#wechat_redirect" class="link-btn" onclick="MtaH5.clickStat('emergency_readSelect')">阅读</a>
+			</div>
+			<div class="item">
+				<span class="text">不跑就出局平台故事</span>
+				<a href="https://mp.weixin.qq.com/s/8HYD_gw-tdLf3lpqWio4aQ" class="link-btn" onclick="MtaH5.clickStat('emergency_aboutUs')">关于我们</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="slide-left {{pageGuide?'show':''}}">
+		<div class="content" v-show="pageGuide=='join'">
+			<div class="content-head bgcolor-red">
+				报名问题<i class="iconfont icon-zhengque color-fff vertical-middle"></i>
+			</div>
+			<div class="item">
+				<p class="text question">1. 怎样才能暂停跑步？</p>
+				<p class="text answer {{questionIndex==0?'show':''}}">答：当身体出现损伤短时间内无法跑步时，需出示证明申请暂停。其他原因例如女生例假，天气原因等，都是可以克服的因素，不予暂停。</p>
+				<i class="show-more iconfont icon-xiangxia2"></i>
+			</div>
+			<div class="item">
+				<p class="text question">2. 能否同时报多个跑班？</p>
+				<p class="text answer {{questionIndex==1?'show':''}}">答：不能。一个人只能报名一个班级，平台推出的活动与班级不冲突，可以兼报。</p>
+				<i class="show-more iconfont icon-xiangxia2"></i>
+			</div>
+			<div class="item">
+				<p class="text question">3. 想跟认识的跑，私密班级怎么建？</p>
+				<p class="text answer {{questionIndex==2?'show':''}}">答：班级创建后，进入【个人中心】的【管理班级】将私密按钮打开，班级就会变成私密班级。</p>
+				<i class="show-more iconfont icon-xiangxia2"></i>
+			</div>
+			<div class="item">
+				<p class="text question">4. 创建的班级如何撤销或删除？</p>
+				<p class="text answer">答：48小时无人自动转变成私密班级，从班级列表下线，外人无法看到与加入。</p>
+				<i class="show-more iconfont icon-xiangxia2"></i>
+			</div>
+			<div class="item">
+				<p class="text question">5. 可以创建两个班级吗？</p>
+				<p class="text answer">答：不可以。如果对原来班级的设置不满意，可以联系运营组成员修改属性。</p>
+				<i class="show-more iconfont icon-xiangxia2"></i>
+			</div>
+		</div>
+
+		<div class="content" v-show="pageGuide=='uploadwork'">
+			<div class="content-head bgcolor-blue">
+				打卡问题<i class="iconfont icon-rili color-fff vertical-middle"></i>
+			</div>
+			<div class="item">
+				<p class="text question">1. 怎么打卡？</p>
+				<p class="text answer {{questionIndex==0?'show':''}}">答：室外跑步，用跑步APP记录，跑完截图(图上要有日期、距离、长度)，在公众号中点击打卡按钮进行提交。推荐跑步App"咕咚"，<a style="color: #03a9f4;" href="http://a.app.qq.com/o/simple.jsp?pkgname=com.codoon.gps&g_f=992971">点此下载</a></p>
+				<i class="show-more iconfont icon-xiangxia2"></i>
+			</div>
+			
+			<div class="item">
+				<p class="text question">2. 跑步机怎么打卡？</p>
+				<p class="text answer {{questionIndex==0?'show':''}}">答：用计数软件的室内模式，或者用水印相机将跑步机数据拍照。</p>
+				<i class="show-more iconfont icon-xiangxia2"></i>
+			</div>
+			<div class="item">
+				<p class="text question">3. 每天可以打多少次卡？</p>
+				<p class="text answer {{questionIndex==1?'show':''}}">答：打卡次数没有限制，系统默认当天提交的最后一次打卡为有效打卡。被连续三次审核不通过，视为有作弊嫌疑，今日将不能再上传作业。</p>
+				<i class="show-more iconfont icon-xiangxia2"></i>
+			</div>
+			<div class="item">
+				<p class="text question">4. 打卡很久没被审核通过怎么办？</p>
+				<p class="text answer {{questionIndex==2?'show':''}}">答：每日打卡都由同班同学相互审查，点击公众号【我】-【查作业】可以检查同班同学当日打卡图片。打卡之后可以提醒同班同学尽快审核你的打卡，如果当日打卡未被审核，则默认通过。</p>
+				<i class="show-more iconfont icon-xiangxia2"></i>
+			</div>
+			<div class="item">
+				<p class="text question">5. 打卡公里数可累计吗？</p>
+				<p class="text answer">答：不可以。跑步单次完成，打卡提交一张截图</p>
+				<i class="show-more iconfont icon-xiangxia2"></i>
+			</div>
+			<div class="item">
+				<p class="text question">6. 打卡被判不合格怎么办？</p>
+				<p class="text answer">答：若今日打卡被判无效，及时了解不合格原因做出修正再次打卡；被连续三次审核不通过，视为有作弊嫌疑，今日将不能再上传作业。</p>
+				<i class="show-more iconfont icon-xiangxia2"></i>
+			</div>
+			<div class="item">
+				<p class="text question">7. 跑步速度要求？</p>
+				<p class="text answer">答：每天跑步不得低于班级规定公里数，配速每公里不得慢于15分钟，不得快于2.2分钟。</p>
+				<i class="show-more iconfont icon-xiangxia2"></i>
+			</div>
+			<div class="item">
+				<p class="text question">8. 天气不好怎么办？</p>
+				<p class="text answer">答：室内运动。使用跑步软件（如悦跑圈）的室内模式，在室内或跑步机上进行跑步，可以将数据记录下来。</p>
+				<i class="show-more iconfont icon-xiangxia2"></i>
+			</div>
+			<div class="item">
+				<p class="text question">9. 女生特殊时期怎么办？</p>
+				<p class="text answer">答：女生特殊时期可以快走完成，不建议请假，打卡配速每公里不得超过15分钟，不得快于2.2分钟。</p>
+				<i class="show-more iconfont icon-xiangxia2"></i>
+			</div>
+		</div>
+
+		<div class="content" v-show="pageGuide=='money'">
+			<div class="content-head bgcolor-red">
+				契约金问题<i class="iconfont icon-jinbisolid color-fff vertical-middle"></i>
+			</div>
+			<div class="item">
+				<p class="text question">1. 契约金怎么扣？</p>
+				<p class="text answer {{questionIndex==0?'show':''}}">答：按照班级规定跑步天数，几天不跑扣几天的契约金，剩余的契约金会返还给你</p>
+				<i class="show-more iconfont icon-xiangxia2"></i>
+			</div>
+			<div class="item">
+				<p class="text question">2. 插班生可以分奖金吗？</p>
+				<p class="text answer {{questionIndex==1?'show':''}}">答：只要完成跑步，没有缺跑，插班生根据跑步天数的比例来分配奖金。</p>
+				<i class="show-more iconfont icon-xiangxia2"></i>
+			</div>
+			<div class="item">
+				<p class="text question">3. 契约金什么时候返还？</p>
+				<p class="text answer {{questionIndex==2?'show':''}}">答：在跑步周期结束后进行统一结算，次日将所有契约金及奖金返还到【不跑就出局】RO账户。</p>
+				<i class="show-more iconfont icon-xiangxia2"></i>
+			</div>
+			<div class="item">
+				<p class="text question">4. 平台会收手续费吗？</p>
+				<p class="text answer">答：不收。同时，平台会替大家承担腾讯微信对于每一笔契约金的0.6%的手续费。</p>
+				<i class="show-more iconfont icon-xiangxia2"></i>
+			</div>
+			<div class="item">
+				<p class="text question">5. 怎么提现？</p>
+				<p class="text answer">答：进入【个人中心】中的【RO账户】，点击提现，公众号会给你发红包，一定记得领取红包。</p>
+				<i class="show-more iconfont icon-xiangxia2"></i>
+			</div>
+			<div class="item">
+				<p class="text question">6. 班级所有人出局，钱去哪里？</p>
+				<p class="text answer">答：按照规则，缺跑天数的契约金将会被扣除，由于班级内没有其他人平分这笔钱，这笔钱会被平台收入用作活动经费。</p>
+				<i class="show-more iconfont icon-xiangxia2"></i>
+			</div>
+			<div class="item">
+				<p class="text question">7. 账户有风险，怎么解决？</p>
+				<p class="text answer">答：腾讯将你列为风险用户，请尝试绑定银行卡或联系腾讯客服解决</p>
+				<i class="show-more iconfont icon-xiangxia2"></i>
+			</div>
+		</div>
+
+		<div class="content" v-show="pageGuide=='human'">
+			<div class="fullpage-pop">
+				<div class="fullpage-pop-head">
+					<span class="title"><i class="iconfont icon-weixin"></i> 人工客服</span>
+					<p class="text">工作日9：00-21：00 实时在线，其它时间回复可能有延迟，敬请谅解</p>
+					<div class="bg"></div>
+				</div>
+				<div class="fullpage-pop-body text-center">
+					<img width="80%;" alt="若二维码不显示，请与Run妹联系" src="../static/images/qun-code.jpg?v=0922">
+					<i class="iconfont icon-guanbi1" v-on:click="hideCode()"></i>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>
+<link rel="import" href="./common/footer.html?__inline">
+<script type="text/javascript" src="../static/js/emergency.js"></script>

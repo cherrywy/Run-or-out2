@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="import" href="../../common/header.html?__inline">
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<title>寒战100天 - 不跑就出局</title>
+<style type="text/css">
+	body{
+		background: #2b4090;
+	}
+	.header{
+		height: 5rem;
+		background: url('../../../static/images/activities/hundred3-bg.jpg') no-repeat top;
+		background-size: 100%;
+		padding: 0.5rem;
+		position: fixed;
+		width: 100%;z-index: 2;
+	}
+	.header .back{
+		color: #fff;
+		font-size: 0.86rem;
+	}
+	.header .back .iconfont{
+		color: #fff;
+		font-size: 0.86rem;
+	}
+	.header .title{
+		text-align: center;
+		color: #fff;
+		font-size: 2.4rem;
+		font-weight: bold;
+		margin-top: 0.5rem;
+	}
+	.header .tab{
+		position: absolute;
+		bottom: 0rem;
+		width: 100%;
+		height: 3rem;
+		line-height: 3rem;
+		left: 0;
+	}
+	.header .tab .text{
+		color: #fff;
+		display: inline-block;
+		height: 3rem;
+	}
+	.header .tab .active .text{
+		border-bottom: 3px solid #fff;
+	}
+	.body{
+		padding: 1rem;
+		padding-top: 6rem;
+	}
+	.body .wansailv{
+		color: #fff;
+		font-size: 0.86rem;
+		text-align: right;
+		margin-bottom: 1rem;
+	}
+	.body .wansailv .iconfont{
+		color: #fff;
+		font-size: 0.9rem;
+	}
+	.body .item-list .item{
+		background: #fff;
+		border-radius: 3px;
+		padding: 0.6rem 0.8rem;
+		margin-bottom: 1rem;
+	}
+	.body .item-list .item.user{
+		margin-bottom: 0.5rem;
+	}
+	.body .item-list .item .number{
+		display: inline-block;
+		font-size: 1.5rem;
+		font-style: italic;
+		vertical-align: middle;
+		width: 1rem;
+	}
+	.body .item-list .item .img{
+		background: #ccc;
+		width: 3.5rem;
+		height: 3.5rem;
+		border-radius: 50%;
+		display: inline-block;
+		vertical-align: middle;
+		margin-left: 0.7rem;
+	}
+	.body .item-list .item .info{
+		display: inline-block;
+		vertical-align: middle;
+		margin-left: 0.8rem;
+	}
+	.body .item-list .item .info .text{
+		display: block;
+		line-height: 1.8;
+	}
+	.body .item-list .item .info .text.sub{
+		font-size: 0.8rem;
+		color: #969696;
+		font-weight: lighter;
+	}
+	.body .item-list .item .percentage{
+		position: absolute;
+		right: 1.2rem;
+		font-size: 1.05rem;
+		color: #2b4090;
+	}
+	.body .item-list .item .img.user{
+		width: 2.8rem;
+		height: 2.8rem;
+		margin-left: 0.3rem;
+	}
+	.body .item-list .item .number.user{
+		font-size: 1.2rem;
+		text-align: center;
+		width: 2rem;
+		margin-left: -0.5rem;
+	}
+	.body .item-list .item .info.user{
+		margin-left: 0.4rem;
+	}
+	.body .item-list .item .info.user .text{
+		display: block;
+		line-height: 1.6;
+		width: 6em;
+	}
+	.body .item-list .item .info.user .text.sub{
+		color: #969696;
+		font-size: 0.8rem;
+		font-weight: lighter;
+	}
+	.body .item-list .item .kilo.user{
+		display: inline-block;
+		vertical-align: middle;
+		margin-left: 0.8rem;
+	}
+	.body .item-list .item .kilo.user .text{
+		display: block;
+		line-height: 1.6;
+		text-align: center;
+	}
+	.body .item-list .item .kilo.user .text.sub{
+		color: #969696;
+		font-size: 0.8rem;
+		font-weight: lighter;
+	}
+	.body .item-list .item .percentage.user{
+		right: 0.8rem;
+		font-size: 0.9rem;
+		color: #2b4090;
+	}
+	.body .my-class{
+		height: 4.5rem;
+		overflow-x: auto;
+		position: fixed;
+		width: 100%;
+		z-index: 2;
+		top: 5rem;
+		background: #2b4090;
+		left: 0;
+		padding: 0rem;
+		padding-top: 1rem;
+		white-space: nowrap;
+	}
+	.body .my-class .tab{
+		display: inline-block;
+		color: #fff;
+		font-size: 0.86rem;
+		height: 2.5rem;
+		line-height: 2.5rem;
+		margin-right: 0.5rem;
+		padding: 0 0.8rem;
+		border-radius: 5px;
+	}
+	.body .my-class .tab-body{
+		margin-left: 1rem;
+		margin-right: 1.5rem;
+		overflow-x: auto;
+	}
+	.body .my-class .tab.active{
+		background: rgba(255,255,255,0.2);
+	}
+	.body .my-class .icon-xiangyou1{
+		position: absolute;
+		right: 0.3rem;
+		color: #fff;
+		top: 1.8rem;
+		font-size: 0.86rem;
+	}
+</style>
+</head>
+
+<body id="act-rank-v" v-cloak>
+	<div class="header content">
+		<span class="text back" v-on:click="gotoIndex()"><i class="iconfont icon-xiangzuo1"></i> 活动主页</span>
+		<div class="flex tab">
+			<div class="flex-item {{type=='100'?'active':''}}" data-type="100">
+				<span class="text">100天战队</span>
+			</div>
+			<div class="flex-item {{type=='120'?'active':''}}" data-type="120">
+				<span class="text">120天战队</span>
+			</div>
+			<div class="flex-item {{type=='mine'?'active':''}}" data-type="mine">
+				<span class="text">我的战队</span>
+			</div>
+		</div>
+	</div>
+	<div class="body content">
+		<p class="text wansailv" v-show="type=='100'||type=='120'">按完赛率排序 <i class="iconfont icon-bangzhu" v-on:click="wansailv()"></i></p>
+		<div class="block" v-show="type=='100'">
+			<div class="item-list">
+				<div class="item" v-for="list in groupList">
+					<div class="number">{{$index+1}}</div>
+					<div class="img" style="background: url({{list.avatar}}) no-repeat center;background-size: cover;"></div>
+					<div class="info">
+						<span class="text">{{list.name}}</span>
+						<span class="text sub">{{list.people}}人 · {{list.total_distance}}公里</span>
+					</div>
+					<div class="percentage vertical-middle">{{list.completion_rate}}%</div>
+				</div>
+				<!-- <div class="item">
+					<div class="number">5</div>
+					<div class="img"></div>
+					<div class="info">
+						<span class="text">魅力战队</span>
+						<span class="text sub">100人 · 7688公里</span>
+					</div>
+					<div class="percentage vertical-middle">97.55%</div>
+				</div> -->
+			</div>
+		</div>
+
+		<div class="block" v-show="type=='120'">
+			<div class="item-list">
+				<div class="item" v-for="list in groupList">
+					<div class="number">{{$index+1}}</div>
+					<div class="img" style="background: url({{list.avatar}}) no-repeat center;background-size: cover;"></div>
+					<div class="info">
+						<span class="text">{{list.name}}</span>
+						<span class="text sub">{{list.people}}人 · {{list.total_distance}}公里</span>
+					</div>
+					<div class="percentage vertical-middle">{{list.completion_rate}}%</div>
+				</div>
+			</div>
+		</div>
+	
+		<div class="my-class" v-show="type=='mine'">
+			<div class="tab-body">
+				<div class="tab {{list.id==myTeamId?'active':''}}" v-for="list in myTeamList" v-on:click="chooseMyTeam(list.id)">{{list.name}}</div>
+			</div>
+			<i class="iconfont icon-xiangyou1"></i>
+		</div>
+
+		<div class="block" v-show="type=='mine'" style="padding-top: 3.5rem;">
+			<div class="item-list">
+				
+				<div class="item" v-show="user">
+					<div class="number user"></div>
+					<div class="img user" style="background: url({{user.avatar}}) no-repeat center;background-size: cover;"></div>
+					<div class="info user">
+						<span class="text one-line">{{user.nickname}}</span>
+						<span class="text sub">第{{user.rank}}名</span>
+					</div>
+					<div class="kilo user">
+						<span class="text" style="color: {{user.sign_in?'#2eb450':'#969696'}};">{{parseInt(user.distance)}}KM</span>
+						<span class="text sub">{{user.run_day}}/{{user.duration}}</span>
+					</div>
+					<div class="percentage user vertical-middle">{{(user.run_day/user.duration)*100}}%</div>
+				</div>
+
+				<div class="item user" v-for="list in myTeamRankList">
+					<div class="number user">{{$index+1}}</div>
+					<div class="img user" style="background: url({{list.avatar}}) no-repeat center;background-size: cover;"></div>
+					<div class="info user">
+						<span class="text one-line">{{list.nickname}}</span>
+					</div>
+					<div class="kilo user">
+						<span class="text" style="color: {{list.sign_in?'#2eb450':'#969696'}};">{{parseInt(list.distance)}}KM</span>
+						<span class="text sub">{{list.run_day}}/{{list.duration}}</span>
+					</div>
+					<div class="percentage user vertical-middle">{{((list.run_day/list.duration)*100).toFixed(0)}}%</div>
+				</div>
+				
+				<!-- <div class="item user">
+					<div class="number user">100</div>
+					<div class="img user"></div>
+					<div class="info user">
+						<span class="text one-line">呆呆在跑步4发的</span>
+					</div>
+					<div class="kilo user">
+						<span class="text">1879KM</span>
+						<span class="text sub">98/100</span>
+					</div>
+					<div class="percentage user vertical-middle">97%</div>
+				</div> -->
+				
+			</div>
+		</div>
+	</div>
+	<div class="footer content">	
+	</div>
+	<img class="errorImagesRO" src="../../../static/images/photo.png" style="display: none;" alt="">
+</body>
+
+</html>
+<link rel="import" href="../../common/footer.html?__inline">
+<script type="text/javascript" src="../../../static/js/activitys/hundred3/rankList.js"></script>

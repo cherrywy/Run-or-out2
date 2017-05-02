@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="import" href="../common/header.html?__inline">
+<link rel="stylesheet" type="text/css" href="../../static/css/point/point.scss">
+<title>赚局票 - 不跑就出局</title>
+</head>
+
+<body id="v-shop-points" class="shop-points" v-cloak>
+
+	<div class="content">
+
+		<div class="head">
+			<div class="img vertical-middle" style="background: url({{userData.avatar?userData.avatar+'-120':'../../static/images/photo.png'}}) no-repeat center;background-size: cover;"></div>
+			<div class="points vertical-middle">
+				<span class="number">{{userData.total_point}}</span>
+				局票
+			</div>
+		</div>
+
+		<div class="body">
+			<div class="menu-list-body">
+				<a class="item link" href="/page/point/point_tally">
+					<span class="text fll">赚局票</span>
+					<i class="flr iconfont icon-xiangyou1"></i>
+					<span class="text flr">局票记录</span>
+				</a>
+			</div>
+
+			<div class="line-list-body">
+				<a class="item link" v-for="list in pointTask.active_point_task">
+					<span class="text fll one-line">{{list.name}} <i v-on:click="showHelp()" v-if="list.help" class="iconfont icon-guanyuwomen color-96"></i></span>
+					<span class="text flr btn btn-success btn-small vertical-middle" v-on:click="doPointTask(list.button_type,list.url)">{{list.button_text}}</span>
+					<span class="text flr point color-green">{{list.value}}</span>
+				</a>
+			</div>
+
+			<div class="line-list-body">
+				<a class="item link" v-for="list in pointTask.finished_point_task">
+					<span class="text fll one-line">{{list.name}} <i v-on:click="showHelp()" v-if="list.help" class="iconfont icon-guanyuwomen color-96"></i></span>
+					<span class="text flr success color-green">已获得</span>
+					<span class="text flr point color-green">{{list.value}}</span>
+				</a>
+			</div>
+		</div>
+		
+		<div class="fixed-footer flex">
+			<a class="flex-item tab active link"><i class="iconfont icon-geren"></i>我的局票</a>
+			<a class="flex-item tab link" href="/page/shop"><i class="iconfont icon-gouwuche"></i>局市</a>
+		</div>
+
+	</div>
+
+	<div class="pop-out" v-show="help">
+		<div class="pop-body">
+			<div class="pop-head flex">
+				<span class="text flex-item">报名周数</span>
+				<span class="text flex-item">获得局票</span>
+				<span class="text flex-item">报名周数</span>
+				<span class="text flex-item">获得局票</span>
+			</div>
+			<div class="pop-content flex">
+				<span class="text flex-item">1周</span>
+				<span class="text flex-item color-red">1</span>
+				<span class="text flex-item">7周</span>
+				<span class="text flex-item color-red">28</span>
+			</div>
+			<div class="pop-content flex">
+				<span class="text flex-item">2周</span>
+				<span class="text flex-item color-red">3</span>
+				<span class="text flex-item">8周</span>
+				<span class="text flex-item color-red">36</span>
+			</div>
+			<div class="pop-content flex">
+				<span class="text flex-item">3周</span>
+				<span class="text flex-item color-red">6</span>
+				<span class="text flex-item">9周</span>
+				<span class="text flex-item color-red">45</span>
+			</div>
+			<div class="pop-content flex">
+				<span class="text flex-item">4周</span>
+				<span class="text flex-item color-red">10</span>
+				<span class="text flex-item">10周</span>
+				<span class="text flex-item color-red">55</span>
+			</div>
+			<div class="pop-content flex">
+				<span class="text flex-item">5周</span>
+				<span class="text flex-item color-red">15</span>
+				<span class="text flex-item">11周</span>
+				<span class="text flex-item color-red">65</span>
+			</div>
+			<div class="pop-content flex">
+				<span class="text flex-item">6周</span>
+				<span class="text flex-item color-red">21</span>
+				<span class="text flex-item">n周</span>
+				<span class="text flex-item color-red">55+(n-10)10</span>
+			</div>
+			<div class="pop-footer text-right">
+				<span class="text">*报名周数以七日为一周，非周一至周日自然周</span>
+			</div>
+		</div>
+		<div class="pop-mask" v-on:click="hidePop()"></div>
+	</div>
+	
+</body>
+
+</html>
+<link rel="import" href="../common/footer.html?__inline">
+<script type="text/javascript" src="../../static/js/point/point.js"></script>

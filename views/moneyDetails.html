@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="import" href="./common/header.html?__inline">
+<title>账户明细</title>
+</head>
+
+<body id="money-details-v" v-cloak style="padding-bottom: 1rem;">
+	<div class="money-month-block" v-for="list in moneyTimeBlock">
+		<p>{{list.month.split("-")[0]+"."+list.month.split("-")[1]}}</p>
+		<div class="money-detail-list" v-for="money in list.moneyList">
+			<div>
+				<span>{{money.type}}</span>
+				<span v-if="money.pay_type" class="pay-type">{{money.pay_type==1?"微信支付":"RO账户支付"}}</span>
+				<span v-if="money.team_name" class="class-name">{{money.team_name}}</span>
+			</div>
+			<span class="time">{{money.timestamp | toDate}}</span>
+			<span class="money">{{money.type | moneyType2}}{{money.increment/100 | toMoney}}</span>
+		</div>
+	</div>
+	<div class="text-center font-30 color-96" v-if="!hasMore" style="margin-top: 0.86rem;">没有更多数据了</div>
+
+</body>
+
+</html>
+<link rel="import" href="./common/footer.html?__inline">
+<script type="text/javascript" src="../static/js/moneyDetails.js"></script>

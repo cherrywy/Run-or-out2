@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="import" href="./common/header.html?__inline">
+<script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<link rel="stylesheet" type="text/css" href="../static/css/settingTime.scss">
+<title>私密班级 </title>
+
+<style>
+  .tanchuang{
+    width: 15rem;
+    height: 8rem;
+    position: fixed;
+    left: 20%;
+    top: 36%;
+    margin: 0 auto;
+    background: #000000;
+    border-radius: 0.5rem;
+    z-index: 1000;
+    display: none;
+    line-height: 8rem;
+    text-align: center;
+    font-size:1rem;
+    opacity: 0.5;
+    color: #FFFFFF;
+    -webkit-opacity: 0.5;
+		
+	}
+	.auto-alert .title{
+		height: 2rem;
+		line-height: 2rem;
+	}
+	..auto-alert .title .wenzi{
+		color: #969696;
+	}
+	.icon-iconfontdian1{
+			color: #FF0000;
+		}
+	
+</style>
+
+</head>
+
+<body id="v-continued-class">
+	<div class="content">
+		<div class="header"></div>
+		<div class="body">
+			<div class="menu-block margin-t-1">
+				<div class="menu-list no-icon">
+					<label class="name vertical-middle"><span class="text">私密班级</span></label>
+					<span class="right-icon">
+						<input type="checkbox" class="dz-switch" id="private-class">
+					</span>
+				</div>
+			</div>
+			<p class="text auto-alert">
+				<div class="title" style="height: 2rem; line-height: 2rem;">
+						<i class="iconfont icon-iconfontdian1"></i>
+						<span class="wenzi" style="color: #969696;">功能说明</span>
+				</div>
+				<div class="desDIV" style="height: 5rem;padding-left: 1em;padding-right: 1rem;letter-spacing:1px;line-height: 1.5;">
+						<P  class="desTxt1" style="font-size: 0.78rem; color: #969696;">
+									1.开启后你的班级将不会出现在班级列表中，避免不认识的跑友加入你的班级，适合私人组建的班级打开。
+						</p>
+						<p class="desTxt1" style="font-size: 0.78rem; color: #969696;margin-top: 1rem;letter-spacing:1px;line-height: 1.5;">
+									2.开启后请通过分享班级主页或个人邀请卡邀请好友加入。
+						</p>
+						<p class="desTxt1" style="font-size: 0.78rem; color: #969696;margin-top: 1rem;letter-spacing:1px;line-height: 1.5;">
+									3.你可通过关闭此功能来解除班级的私密状态。
+						</p>
+				</div>
+				
+			</p>
+			 <div id="tanchuang" class="tanchuang">
+		      	私密班级已开启
+		     </div>
+		     <div id="tanchuang1" class="tanchuang">
+		      	私密班级已关闭
+		     </div>
+		</div>
+		<div class="footer"></div>
+	</div>
+</body>
+
+</html>
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/1.11.1-rc1/jquery.min.js"></script>
+<link rel="import" href="./common/footer.html?__inline">
+<script type="text/javascript" src="../static/js/manageClass.js"></script>
+

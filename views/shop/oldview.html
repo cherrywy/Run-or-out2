@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="import" href="../common/header.html?__inline">
+<link rel="stylesheet" type="text/css" href="../../static/css/shop/index.scss">
+<title>局市 - 不跑就出局</title>
+</head>
+
+<body id="v-shop-index" class="shop-index" v-cloak>
+
+	<div class="content">
+
+		<!-- <div class="fixed-head">
+			<div class="tab flex">
+				<span class="flex-item {{tab==1?'active':''}}"><span v-on:click="changeTab(1)" class="text">卡</span></span>
+				<span class="flex-item {{tab==2?'active':''}}"><span v-on:click="changeTab(2)" class="text">兑换最多</span></span>
+				<span class="flex-item {{tab==3?'active':''}}"><span v-on:click="changeTab(3)" class="text">积分最少</span></span>
+			</div>
+		</div> -->
+
+		<div class="body">
+			<img v-show="!itemList" class="no-item" src="../../static/images/shop/no-item.jpg" alt="">
+			<div class="good-list flex flex-start">
+				<a v-for="list in itemList" class="item flex-item-2 link" href="/page/shop/item?itemId={{list.item_id}}">
+					<div class="img" style="background: url({{list.pic}}) no-repeat center; background-size: cover;"></div>
+					<div class="text name one-line">{{list.name}}</div>
+					<div class="text info two-line">{{list.introduction}}</div>
+					<div class="text money color-red one-line">{{list.price}}</div>
+					<div class="text storage one-line">{{list.freight}} | {{list.stock}}</div>
+				</a>
+			</div>
+		</div>
+
+		<div class="fixed-footer flex">
+			<a class="flex-item tab link" href="/page/point"><i class="iconfont icon-geren"></i>我的局票</a>
+			<a class="flex-item tab active link"><i class="iconfont icon-gouwuche"></i>局市</a>
+		</div>
+
+	</div>
+	
+</body>
+
+</html>
+<link rel="import" href="../common/footer.html?__inline">
+<script type="text/javascript" src="../../static/js/shop/index.js"></script>

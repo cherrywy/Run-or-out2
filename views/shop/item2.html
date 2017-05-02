@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../../static/css/owl.theme.css">
+<link rel="import" href="../common/header.html?__inline">
+<link rel="stylesheet" type="text/css" href="../../static/css/shop/item.scss">
+<title>商品详情</title>
+<style>
+	#tanchuang{
+    width: 15rem;
+    height: 8rem;
+    position: fixed;
+    left: 20%;
+    top: 36%;
+    margin: 0 auto;
+    background: #000000;
+    z-index: 1000;
+    display: none;
+    line-height: 8rem;
+    text-align: center;
+    font-size:2rem;
+    opacity: 0.5;
+    color: #FFFFFF;
+    -webkit-opacity: 0.5;
+		
+	}
+	
+</style>
+</head>
+
+<body id="v-shop-item" class="shop-item" v-cloak>
+      <div id="tanchuang">
+      	购买成功
+      	</div>
+	<div class="content">
+		<div class="pay-out" v-show="paySuccess">
+			<div class="tiaoxingma">
+				<i class="iconfont icon-tiaoxingma"></i>
+			</div>
+				<div class="validity-date">{{itemDetail.list[0].maturity | dateCut}}前有效</div>
+				<div class="item-message">
+					<!--有问题-->
+					<div class="name">{{itemDetail.name}}1张</div>
+					<div class="duihuanma">兑换码：<!--{{itemDetail.list[0].content}}-->
+						<span v-for="changeList in itemDetail.list" class="changeList">
+							<span>{{changeList.content}}</span>
+						</span>
+					</div>
+				</div>
+		</div>
+
+		<div class="body">
+			<div class="item-info line-list-body">
+				<a class="item">
+					<span class="text fll vertical-middle info one-line">{{itemDetail.name}}<br>
+						<span class="sub-info">{{itemDetail.title}}</span>
+					</span>
+					<span class="text flr vertical-middle info one-line text-right">
+						<span class="color-red first-info">{{itemDetail.unit_price}}{{itemDetail.currency_type | priceInfo}}
+					</span><br>
+					<span class="sub-info">免运费 | 
+						<span style="color: #969696;">剩余{{itemDetail.quantity}}张</span>
+					</span>
+				</a>
+			</div>
+			<div id="owl-demo" class="item-photo owl-carousel owl-theme" style="display: block;">
+				<div class="item">
+					<img class="img" src="../../static/images/shop/huamijuan.jpg" style="width: 100%;">
+				</div>
+			</div>
+
+			<div class="item-intro">
+				<div class="block flex">
+					<i class="iconfont icon-gouwuche flex-item"></i>
+					<div class="info flex-item">
+						<span class="title">商品介绍</span>
+						<span class="text">
+							记录过去美好的时光，重遇曾经的那个自己，将你的微信朋友圈制作成书，专属独家记忆。<br/>
+							本商品由【心书网络】提供，凭不跑就出局兑换码免费兑换体验装一本，兑换每人仅限1张。<br/>
+							兑换码在{{itemDetail.maturity | dateCut}}前有效<br/>
+						</span>
+					</div>
+				</div>
+
+				<div class="block flex">
+					<i class="iconfont icon-guize flex-item"></i>
+					<div class="info flex-item">
+						<span>使用规则</span>
+						<span class="text">
+						1.在本页面点击【兑换】按钮，获得该商品专属兑换码<br/>
+						2.微信搜索关注【心书网络】微信公众号并进入公众号<br/>
+						3.点击【我的】－【书架】进入，选择【新建一本书】<br/>
+						4.排版编辑完成后点击【购买】，选择20页体验装并输入兑换码，即可免费购买<br/>
+						5.书籍运送可能产生物流运费，购买时需向【心书网络】交纳<br/>
+							<div style="margin-top: 1rem;">
+								<img src="../../static/images/shop/xinshu2_2_1.jpg" style="width: 100%;">
+							</div>
+						</span>
+					</div>
+				</div>
+				<div class="block flex">
+					<i class="iconfont icon-guanyuwomen flex-item"></i>
+					<div class="info flex-item">
+						<span>兑换说明</span>
+						<span class="text">
+							<i class="iconfont icon-iconfontdian1"></i>本商品由【心书网络】提供，商品制作与发货物流等问题均可联系【心书网络】<br/>
+							<i class="iconfont icon-iconfontdian1"></i>商品一经兑换，一律不退不换，请用户兑换前仔细阅读使用规则<br/>
+							<i class="iconfont icon-iconfontdian1"></i>本次兑换仅限【心书网络】书籍20页体验装，其他种类定制书不可兑换<br/>
+							<i class="iconfont icon-iconfontdian1"></i>每个用户仅限兑换一次，书籍运送可能产生物流运费，购买时需向【心书网络】交纳<br/>
+							<i class="iconfont icon-iconfontdian1"></i>商品兑换编码情妥善保管，如因个人原因泄漏被他人使用，本平台概不负责<br/>
+							<i class="iconfont icon-iconfontdian1"></i>凡使用不正当手段进行兑换，一经发现，本平台有权终止该次兑换<br/>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="footer">
+			<img src="../../static/images/logo-black.png" alt="RO不跑就出局">
+		</div>
+		<div class="item-btn" v-show="!paySuccess">
+			<div v-if="itemDetail.quantity!=0" class="btn" v-on:click="change()">立即兑换</div>
+			<div v-if="itemDetail.quantity == 0" class="btn finish">商品已兑完</div>
+		</div>
+
+		<!-- 完善地址 start -->
+		<div class="slide-left {{pageGuide=='address'?'show':''}}">
+			<div class="form">
+				<div class="form-line flex">
+					<label class="label flex-item">收件人</label>
+					<input type="text flex-item" maxlength="10" class="form-ele" placeholder="请填写收件人姓名" v-model="username">
+				</div>
+				<div class="form-line flex">
+					<label class="label flex-item">联系电话</label>
+					<input type="text flex-item" maxlength="11" class="form-ele" placeholder="11位数字" v-model="mobile">
+				</div>
+				<div class="form-line flex">
+					<label class="label flex-item">详细地址</label>
+					<input type="text flex-item" maxlength="25" class="form-ele" placeholder="省 市 区 街道门牌" v-model="address">
+				</div>
+			</div>
+			<div class="btn" v-on:click="saveAddress()">保存</div>
+		</div>
+		<!-- 完善地址 end -->
+
+	</div>
+
+	<div class="pop-out" v-show="buyPop">
+		<div class="pop-mask" v-on:click="hidePop()"></div>
+	</div>	
+</body>
+
+</html>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="../../static/js/owl.carousel.js"></script>
+<link rel="import" href="../common/footer.html?__inline">
+<script type="text/javascript" src="../../static/js/shop/item.js"></script>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="import" href="./common/header.html?__inline">
+<script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<link rel="stylesheet" type="text/css" href="../static/css/userAccount.scss">
+<title>RO账户</title>
+<style type="text/css">
+	
+</style>
+</head>
+
+<body id="user-account-v" v-cloak>
+	<div class="account-body text-center">
+		<a href="/page/money_tally" class="account-detail" onclick="MtaH5.clickStat('AccountInfo')">账户明细</a>
+		<img src="../static/images/user-account.png" alt="">
+		<div class="text">
+			RO账户余额
+		</div>
+		<div class="account-money">￥{{info.user_account.money/100}}</div>
+		<div class="account-input">
+			<input id="money" v-model="money" type="text" placeholder="输入金额">
+		</div>
+		<div class="btn {{money?'':'disabled'}}" id="AccountTixian">提现</div>
+		<p class="withdraw-text">
+			1. RO账户余额可提现到微信零钱，每笔提现限额1~200元，每天最多可申请提现10次（微信限制）。
+		</p>
+		<p class="withdraw-text">
+			2. 余额可直接用于抵扣报名费，此功能在支付页默认勾选，报名前无需每次先提现后报名。
+		</p>
+	</div>
+
+	<div class="success-pop" style="display: none;" id="success-pop">
+		<div class="success-pop-body vertical-center">
+			<div class="title">提现成功</div>
+			<div class="text">不跑就出局平台已将提现金额通过红包方式发送给你，请尽快前往领取。</div>
+			<div class="img-text">
+				<span>红包<br>类型1</span>
+				<img src="../static/images/hongbao-1.png" alt="">
+			</div>
+			<div class="img-text">
+				<span>红包<br>类型2</span>
+				<img src="../static/images/hongbao-2.jpg" alt="">
+			</div>
+			<div class="btn" v-on:click="gotoWechat()">去微信领红包</div>
+		</div>
+		<div class="bg"></div>
+	</div>
+
+</body>
+
+</html>
+<link rel="import" href="./common/footer.html?__inline">
+<script type="text/javascript" src="../static/js/userAccount.js"></script>

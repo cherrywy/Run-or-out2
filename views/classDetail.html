@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="import" href="./common/header.html?__inline">
+		<link rel="stylesheet" type="text/css" href="../static/css/classDetail.scss">
+		<script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+		<title>班级主页</title>
+	</head>
+	<body id="class-details-v" class="class-detail" v-cloak>
+		<div id="shareit">
+			<div class="share-head">
+				<!-- <div class="arrow-left">
+											<span  class="iconfont icon-xjiffangzi1"></span>
+				</div> -->
+				<div id="share-text" class="text">
+					<p class="text-red">分享班级主页 </p>
+					<p class="text-write">适合分享给已关注微信号好友。 </p>
+				</div>
+				<img class="arrow" src="../static/images/share-change.png">
+				<span class="line-text">或</span><div class="line"></div>
+			</div>
+			<div class="share-bottom">
+				<!-- <div class="arrow-left">
+											<span  class="iconfont icon-ren"></span>
+				</div> -->
+				<div id="share-text" class="text" style="width:60%;">
+					<p class="text-red">分享邀请卡邀请 </p>
+					<p class="text-write">适合分享给未关注微信号的好友，可转发好友或分享朋友圈。 </p>
+				</div>
+				
+				<a class="btn-link" v-on:click="showInvite()">点击下载邀请卡</a>
+				<a class="btn-close">关闭</a>
+			</div>
+		</div>
+		
+		<div class="content">
+			<div class="block">
+				<div class="body">
+					<div class="class-info-v2">
+						<div class="img" style="background: url({{classInfo.avatar?classInfo.avatar+'-120':'/images/photo.png'}}) no-repeat center;background-size: cover;"></div>
+						<div class="info">
+							<span class="text title text-two-line">{{classInfo.name | notNull}}</span>
+							<span class="text rules" v-show="rulesHide">
+								<span class="rule">{{classInfo.distance | notNull}}km</span>
+								<span class="rule">{{classInfo.duration | notNull}}天</span>
+								<span class="rule" v-if="classInfo.money.toString().length<=4">{{(classInfo.money)/100 | notNull}}元</span>
+								<span class="rule" v-if="classInfo.money.toString().length==5" style="width: 2.6rem;">{{(classInfo.money)/100 | notNull}}元</span>
+								<span class="rule" v-if="classInfo.money.toString().length==6" style="width: 3rem;">{{(classInfo.money)/100 | notNull}}元</span>
+								<span class="rule" v-if="classInfo.money.toString().length>6" style="width: 3rem;">{{(classInfo.money)/100 | notNull}}元</span>
+								<span class="rule">{{classInfo.cycle | notNull}}周</span>
+								<i class="iconfont icon-xiangxia2" v-on:click="showRules(true)"></i>
+							</span>
+							
+							<span class="text rules rules-out" v-show="!rulesHide">
+								<p><span class="rule">{{classInfo.distance | notNull}}km</span>每次跑不低于{{classInfo.distance | notNull}}公里</p>
+								<p><span class="rule">{{classInfo.duration | notNull}}天</span>每周跑{{classInfo.duration | notNull}}天</p>
+								<p v-if="classInfo.money.toString().length<=4"><span class="rule">{{(classInfo.money)/100 | notNull}}元</span>每天契约金{{(classInfo.money)/100 | notNull}}元</p>
+								<p v-if="classInfo.money.toString().length==5"><span class="rule" style="width: 2.6rem;">{{(classInfo.money)/100 | notNull}}元</span>每天契约金{{(classInfo.money)/100 | notNull}}元</p>
+								<p v-if="classInfo.money.toString().length==6"><span class="rule" style="width: 3rem;">{{(classInfo.money)/100 | notNull}}元</span>每天契约金{{(classInfo.money)/100 | notNull}}元</p>
+								<p  v-if="classInfo.money.toString().length>6"><span class="rule" style="width: 3rem;">{{(classInfo.money)/100 | notNull}}元</span>每天契约金{{(classInfo.money)/100 | notNull}}元</p>
+								<p><span class="rule">{{classInfo.cycle | notNull}}周</span>最少报班{{classInfo.cycle | notNull}}周</p>
+								<i class="iconfont icon-xiangshang2" v-on:click="showRules(false)"></i>
+							</span>
+							
+							<span class="text link dress" v-if="classInfo.province"><i class="iconfont icon-dingwei"></i>{{classInfo.province | notNull}}</span>
+						</div>
+						
+						<span class="text money" ><i class="iconfont icon-fenxiang1" v-on:click="shareCalss()"></i></span>
+						
+					</div>
+				</div>
+				<div class="footer run-progress">
+					<div class="flex">
+						<div class="flex-item">
+							<span class="text text-left" id="icon-peolple"><i class="iconfont icon-3"></i></span>
+							<span class="text" id="progerss-people">
+								<span v-for="list in finishedDay" class="progress {{list.finished?'active':''}}">{{list.date | cutDateToDay}}</span>
+							</span>
+							<span class="text progress-date text-left">
+								<!-- <span class="left-0" style="left: 0.2rem;">{{classInfo.team_cycle.start_date | yearCut}}</span> -->
+								<span class="">班级周历，{{dayType=='unstart'?'可报名本周':'可插班加入'}}</span>
+								<!-- <span class="right-0" style="right: 0.1rem;">{{classInfo.team_cycle.start_date | finishDate | yearCut}}</span> -->
+							</span>
+						</div>
+						<div class="flex-item">
+							<div class="position" v-if="classInfo.user.this_participation" v-on:click="showCode()" style="font-size: 0.86rem;">
+								<i class="iconfont icon-weixin"><span class="text">班级群</span></i>
+								<span class="text" style="margin-top: 0.35rem;">点击显示</span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="block near">
+				<div class="body">
+					<div class="flex">
+						<div class="flex-item" v-show="classInfo.participation_user.length!=0">
+							<div class="join-people">
+								<div v-if="$index<6" v-for="list in classInfo.participation_user" style="background: url({{list?list:'/images/photo.png'}}) no-repeat center;background-size: cover;" class="list"></div>
+							</div>
+						</div>
+						<div class="flex-item link" style="{{!classInfo.participation_user||classInfo.participation_user.length==0?'height: 3rem;':''}};padding: 0.5rem 0;">
+							<div class="join-info vertical-middle" v-on:click="gotoWall()">
+								<span class="text">{{classInfo.participation_user?classInfo.participation_user.length:'0'}} 人已报名</span>
+								<span class="text sub-text">{{classInfo.team_cycle.finish_date | waitDay}}天后分{{classInfo.total_contrast/100}} 元</span>
+								<i class="iconfont icon-xiangyou1 vertical-middle"></i>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="footer">
+					<div class="flex" v-if="classInfo.user.this_participation">
+						<span class="flex-item" v-if="classInfo.can_continue">
+							<a class="btn" v-on:click="joinClass('continue')">续报本班</a>
+						</span>
+						<span class="flex-item" v-if="!classInfo.can_continue">
+							<a class="btn" style="background:#c8c8c8">已续本班</a>
+						</span>
+					</div>
+					<div class="flex" v-if="classInfo.user.participate&&!classInfo.user.this_participation">
+						<span class="flex-item" v-if="!classInfo.can_continue">
+							<a class="btn" style="background:#c8c8c8">已续别班</a>
+						</span>
+						<span class="flex-item" v-if="classInfo.can_continue">
+							<a class="btn" v-on:click="joinClass('continue')">续报本班</a>
+						</span>
+					</div>
+					<div class="flex" v-if="!classInfo.user.participate">
+						<span class="flex-item">
+							<a class="btn" v-on:click="joinClass('normal')">加入班级</a>
+						</span>
+					</div>
+				</div>
+			</div>
+			<!-- 排行榜 -->
+			<div class="block margin-b-1">
+				<div class="head">
+					<span class="text">本周排名</span>
+				</div>
+				<div class="body rank-list-body classbody"  v-show="rankList.length==0&&rankList==null" style="padding: 1rem 0.5rem 0rem;text-align:center;height:15rem;">
+					<i class="iconfont icon-liebiao-copy"></i>
+					<p class="unshow">班级还未开始暂无排名</p>
+				</div>
+				<div class="body rank-list-body classbody" v-show="rankList.length!=0&&rankList!=null" style="padding: 1rem 0.5rem 0rem;">
+					
+					<div class="rank-list-item" v-for="list in rankList">
+						<span class="rank-index vertical-middle">{{list.rank}}</span>
+						<div class="head-img vertical-middle" style="background: url({{list.avatar | nullImg}}) no-repeat center;background-size: cover;">
+						</div>
+						<span class="user-info">{{list.name |nullName}}</span>
+						<span class="rank-number vertical-middle" id="favor-number">
+							<span class="distance-list progress-run-tags" v-if="rankList.length!=0">
+								<span style="background: {{tags | backgroundColor}}" v-for="tags in list.sign_in" class="run-list">{{tags!=0?tags.toFixed(0):""}}
+								</span>
+							</span>
+						</span>
+						
+						<div class="text-center favor-info vertical-middle" v-bind:class="list.thumb_up?'favorited':''">
+							<i class="iconfont icon-dianzan1"></i>
+							<span class="favor-number" id="favor-numberbj" v-on:click="favor($index)">{{list.thumb_up_count}}
+							</span><br>
+						</div>
+					</div>
+					<div class="rank-list-item head-img-group" v-if='rankListImg.length!=0'>
+						<!-- <div class="head-img vertical-middle" v-for="list in rankListImg"  id="head-img-group" style="background: url({{list.avatar | nullImg}}) no-repeat center;background-size: cover;">
+						</div> -->
+						<div class="right"  v-on:click="gotoRankList()">
+							<span class="text rank-list-more">查看全班排名<i class="iconfont icon-xiangyou1"></i></span>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="block">
+			<div class="head">
+				<span class="text">跑班信息</span>
+			</div>
+			
+			<div class="body text-center class-monitor-info">
+				<div class="class-head-img" style="background: url({{classInfo.monitor.avatar?classInfo.monitor.avatar:'/images/photo.png'}}) no-repeat center;background-size: cover;"></div>
+				<span class="text title">{{classInfo.monitor.name?classInfo.monitor.name:"暂无"}}</span>
+				<span class="text sub-title">{{classInfo.monitor.introduction?classInfo.monitor.introduction:"这个班长很懒~暂时没有介绍"}}</span>
+				<div class="tags">
+					<label>标签</label>
+					<span class="tag" v-if="!classInfo.tags">未添加</span>
+					<span class="tag" v-for="list in classInfo.tags.split(',')">{{list}}</span>
+				</div>
+				<p class="text class-intro">
+					{{classInfo.description?classInfo.description:"这个班长很懒~暂时没有留下信息哦"}}
+				</p>
+			</div>
+		</div>
+		<!-- 	契约玩法规则 -->
+		<div class="block margin-b-1">
+			<div class="head">
+				<span class="text">契约玩法规则</span>
+			</div>
+			<div class="body" style="padding: 1rem 0rem 0.5rem;">
+				<div class="text rules-intro">
+					<div class="rule-ss">
+						<span class="iconfont icon-group1"></span>
+						<span class="text">
+							<p>支付契约金，加入跑班</p>
+							<p  class="title">挑选一个适合班级，支付契约金加入班级。</p>
+						</span>
+					</div>
+					<div class="rule-ss">
+						<span class="iconfont icon-trophyfill"></span>
+						<span class="text">
+							<p >跑步打卡，完成目标</p>
+							<p class="title">用跑步App记录跑步数据，截图提交到不跑就出局微信号，完成班级本周跑步目标。</p>
+						</span>
+					</div>
+					<div class="rule-ss">
+						<span class="iconfont icon-jinbi"></span>
+						<span class="text">
+							<p>返契约金，赢得奖金</p>
+							<p class="title">一周后,跑友如未完成计划，则扣除“未完成天数”契约金纳入班级奖金池。班级完成目标跑友返还全部契约金外，将平分班级奖金池。</p>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="block margin-b-1">
+			<div class="head1" v-on:click="gotoCreateClass()">
+				<span class="text">创建一个跑班</span>
+				<i class="iconfont icon-xiangyou1"></i>
+			</div>
+			<div class="head1" v-on:click="gotoIntroUs()">
+				<span class="text">不跑就出局平台介绍</span>
+				<i class="iconfont icon-xiangyou1"></i>
+			</div>
+			
+		</div>
+		<div class="footer">
+			<img src="../static/images/logo-black.png" alt="RO不跑就出局">
+		</div>
+	</div>
+	<!-- <div class="bottom-pay-pop"> <div class="bottom-pay-pop-content" v-show="payStep==1"> <div class="pay-header"> <div class="class-img" style="background: url({{classInfo.avatar?classInfo.avatar+'-120':'/images/photo.png'}}) no-repeat center;background-size: cover;"></div> <span class="text title">支付契约金</span> <span class="money">￥90.00</span> <div class="guide"> <div class="flex"> <div class="flex-item active"> <span class="text">支付契约金</span> <div class="dot"></div> </div> <div class="flex-item"> <span class="text">跑步打卡</span> <div class="dot"></div> </div> <div class="flex-item"> <span class="text">返现赢奖金</span> <div class="dot"></div> </div> </div> <div class="underline-1"></div> <div class="underline-2"></div> </div> </div> <div class="pay-body"> <div class="pay-line clear-fix"> <label class="label">开跑日期 <i class="iconfont icon-bangzhu" v-on:click="startRunAlert()"></i></label> <select class="select-date"> <option value="1">今天</option> </select> <i class="iconfont icon-webxuanzexiangmuicon01-copy"></i> </div> <div class="pay-line clear-fix"> <label class="label">选择周期</label> <div class="choose-week"> <span class="minus-week {{week<=minWeek?'disabled':''}}" v-on:click="changeWeek(-1)">-</span>{{week}}周<span v-on:click="changeWeek(1)" class="add-week">+</span> <p class="text limit-week"> 班长设置最少报{{classInfo.required_cycle}}周 </p> </div> </div> <div class="pay-line clear-fix"> <label class="label">联系电话</label> <input type="text" class="tel" placeholder="输入11位数字"> </div> </div> <div class="pay-footer pay-body"> <div class="pay-line clear-fix"> <label class="label">支付方式</label> <span class="pay-type"><i class="iconfont icon-umidd16"></i>微信支付</span> </div> <div class="pay-line clear-fix"> <label class="label">余额抵扣</label> <span class="pay-account" v-on:click="useRoAccount()"><i class="iconfont choose-account-pay" id="use-ro-account"></i>可抵58.2元</span> </div> <div class="btn" v-on:click="pay()">还需支付37.81元</div> <p class="text user-deal">报名即表示同意 <a class="link" href="https://mp.weixin.qq.com/s?__biz=MzIwNjM2NzQ1Nw==&mid=100001183&idx=1&sn=f3e7e30b4032a112ba87e935453fe03e&scene=1&srcid=0912omTAKLPr9Fu5vW5oQZC3&key=7b81aac53bd2393d052cdd0f7b2f72c9d79cf609959fe6295eba1bce532d8f8756db38b9efac86bbbfa4431fc09f7691&ascene=0&uin=NzA4NzQ5NQ%3D%3D&devicetype=iMac+MacBookPro10%2C2+OSX+OSX+10.11.3+build(15D21)&version=11020012&pass_ticket=tjX6zymucruZjpFkOty6JT6oFzUklNkcKjJdGl5jnWs%3D">用户协议</a></p> </div> </div> <div class="bottom-pay-pop-content" v-show="payStep==2"> <div class="pay-header"> <i class="iconfont icon-gouxuan1 success-icon"></i> <span class="text title">报名成功</span> <div class="guide"> <div class="flex"> <div class="flex-item active"> <span class="text">支付契约金</span> <div class="dot"></div> </div> <div class="flex-item active"> <span class="text">跑步打卡</span> <div class="dot"></div> </div> <div class="flex-item"> <span class="text">返现赢奖金</span> <div class="dot"></div> </div> </div> <div class="underline-1 active"></div> <div class="underline-2"></div> </div> </div> <div class="pay-body pay-step-two"> <div class="title"> 跑步打卡计划 </div> <div class="plan-table"> <table> <tbody> <tr> <td>1周</td> <td>11月20日~11月27日</td> <td>本周跑<span class="color-red">3次</span></td> </tr> <tr> <td>1周</td> <td>11月20日~11月27日</td> <td>本周跑<span class="color-red">3次</span></td> </tr> </tbody> </table> </div> <p class="text"> 提醒：每周跑步打卡计划可随时在公众号底部菜单【我】-【个人中心】-【我的跑班】查看。 </p> </div> <div class="pay-footer pay-body pay-step-two"> <div class="btn">下一步，进班群</div> </div> </div> <div class="bg" v-on:click="hidePay()"></div> </div> -->
+	<div class="bottom-pop">
+		<div class="bottom-pop-body {{payStep==2?'pay-step':''}}">
+			<div class="pop-content" v-show="payStep==1&&!isContinue">
+				<div class="head">
+					开跑日期选择
+				</div>
+				<div class="body" v-show="dayType=='first'">
+					今天是跑班本周({{classInfo.team_cycle.start_date | yearCut}}~{{classInfo.team_cycle.start_date | finishDate | yearCut}})开始的第一天，你希望？
+					<p class="text first-limit-week">
+						班长设置最少报{{classInfo.required_cycle}}周
+					</p>
+					<div class="flex choose-day">
+						<span class="flex-item choose-radios" choose-type="today" choose-day="{{classInfo.team_cycle.start_date}}">
+							<span class="choose-radio"></span><span>今天</span>
+						</span>
+						<span class="flex-item choose-radios" choose-type="tomorrow" choose-day="{{classInfo.team_cycle.start_date | nextDate}}">
+							<span class="choose-radio"></span><span>明天</span>
+						</span>
+					</div>
+				</div>
+				<div class="body" v-show="dayType=='cut'">
+					本周({{classInfo.team_cycle.start_date | yearCut}}~{{classInfo.team_cycle.start_date | finishDate | yearCut}})跑班已开始，你可选择插班今明开跑并续报下周，或加入本班下周({{classInfo.team_cycle.finish_date | yearCut}}~{{classInfo.team_cycle.finish_date | finishDate | yearCut}})，你希望？
+					<p class="text first-limit-week">
+						班长设置最少报{{classInfo.required_cycle}}周
+					</p>
+					<div class="flex choose-day">
+						<span class="flex-item choose-radios" choose-type="today" choose-day="{{classInfo.cut_date}}">
+							<span class="choose-radio"></span><span>今天</span>
+						</span>
+						<span class="flex-item choose-radios" choose-type="tomorrow" choose-day="{{classInfo.cut_date | nextDate}}">
+							<span class="choose-radio"></span><span>明天</span>
+						</span>
+						<span class="flex-item choose-radios" choose-type="nextWeek" choose-day="{{classInfo.start_date}}">
+							<span class="choose-radio"></span><span>下周</span>
+						</span>
+					</div>
+				</div>
+				<div class="body" v-show="dayType=='last'">
+					今天是跑班本周({{classInfo.team_cycle.start_date | yearCut}}~{{classInfo.team_cycle.start_date | finishDate | yearCut}})的最后一天，你希望？
+					<p class="text first-limit-week">
+						班长设置最少报{{classInfo.required_cycle}}周
+					</p>
+					<div class="flex choose-day">
+						<span class="flex-item choose-radios" choose-type="today" choose-day="{{classInfo.cut_date}}">
+							<span class="choose-radio"></span><span>今天</span>
+						</span>
+						<span class="flex-item choose-radios" choose-type="tomorrow" choose-day="{{classInfo.team_cycle.finish_date}}">
+							<span class="choose-radio"></span><span>下周</span>
+						</span>
+					</div>
+				</div>
+				<div class="footer flex" v-show="chooseStartDay">
+					<span class="flex-item" v-if="(dayType=='first'&&chooseType=='today')||(dayType=='last'&&chooseType=='tomorrow')||(dayType=='cut'&&chooseType=='nextWeek')">
+						<p class="text" >{{classInfo.required_cycle}}周契约金{{moneyInfo.price/100}}元</p>
+						<p class="text">{{moneyInfo.start_date | yearCut}}~{{moneyInfo.finish_date | preDate | yearCut}}</p>
+					</span>
+					<span class="flex-item" v-else>
+						<p class="text" >插班并续{{classInfo.required_cycle<=2?'1':(classInfo.required_cycle-1)}}周,契约金{{moneyInfo.price/100}}元</p>
+						<p class="text">{{moneyInfo.start_date | yearCut}}~{{classInfo.team_cycle.start_date | finishDate | yearCut}}；{{classInfo.team_cycle.start_date | finishDate | nextDate | yearCut}}~{{moneyInfo.finish_date | preDate | yearCut}}</p>
+					</span>
+				</div>
+			</div>
+			<div class="pop-content" v-show="payStep==1&&isContinue">
+				<div class="head">
+					开跑日期选择
+				</div>
+				<div class="body">
+					你的跑步计划{{classInfo.last_date | waitDay}}天后({{classInfo.last_date | yearCutChinese}})结束，本班最近的完整周为({{classInfo.start_date | yearCut}}~{{classInfo.start_date | finishDate | yearCut}})，结束后你希望？
+					<p class="text first-limit-week">
+						班长设置最少报{{classInfo.required_cycle}}周
+					</p>
+					<div class="flex choose-day">
+						<span class="flex-item choose-radios" choose-type="cutAndJoin" choose-day="{{classInfo.cut_date}}">
+							<span class="choose-radio"></span><span>插班加入</span>
+						</span>
+						<span class="flex-item choose-radios" choose-type="nextWeek" choose-day="{{classInfo.start_date}}">
+							<span class="choose-radio"></span><span>续报完整周</span>
+						</span>
+					</div>
+				</div>
+				<div class="footer flex" v-show="chooseStartDay&&chooseType=='cutAndJoin'">
+					<span class="flex-item">
+						<p class="text">插班并续{{classInfo.required_cycle<=2?'1':(classInfo.required_cycle-1)}}周,契约金{{moneyInfo.price/100}}元</p>
+						<p class="text">{{moneyInfo.start_date | yearCut}}~{{classInfo.whole_start_date | finishDate | yearCut}}；{{classInfo.whole_start_date | finishDate | nextDate | yearCut}}~{{moneyInfo.finish_date | preDate | yearCut}}</p>
+					</span>
+				</div>
+				<div class="footer flex" v-show="chooseStartDay&&chooseType=='nextWeek'">
+					<span class="flex-item">
+						<p class="text">{{classInfo.required_cycle}}周契约金{{moneyInfo.price/100}}元</p>
+						<p class="text">{{moneyInfo.start_date | yearCut}}~{{moneyInfo.finish_date | preDate | yearCut}}</p>
+					</span>
+				</div>
+			</div>
+			<div class="pop-content" v-show="payStep==2">
+				<div class="head">参加『{{moneyInfo.team_name}}：{{moneyInfo.start_date | yearCut}}~{{planeFinishDay | preDate | yearCut}}跑步计划』</div>
+				<div class="body">
+					<div class="choose-week">
+						<span class="minus-week {{week<=minWeek?'disabled':''}}" v-on:click="changeWeek(-1)">-</span>报名<span id="week">{{week}}</span>周<span v-on:click="changeWeek(1)" class="add-week">+</span>
+						<p class="text limit-week">
+							班长设置最少报{{classInfo.required_cycle}}周
+						</p>
+					</div>
+					<p class="text pay-line text-left clear-fix">支付契约金<span class="money flr">￥{{totalMoney/100}}</span></p>
+					<p class="text pay-line text-left clear-fix margin-b-1" v-on:click="useRoAccount()">RO账户抵扣<span class="flr">￥{{accountInfo.money/100}}可用 <i class="iconfont choose-account-pay active" id="use-ro-account"></i></span></p>
+					<a v-show="useWeipay" class="btn btn-middle btn-success" v-on:click="weiPay()"><i class="iconfont icon-umidd16"></i>微信支付</a>
+					<a v-show="!useWeipay" class="btn btn-middle btn-success" v-on:click="weiPay()">确定支付</a>
+					<p class="text pay-info">
+						进入下一步即代表同意<a class="color-blue link" href="https://mp.weixin.qq.com/s?__biz=MzIwNjM2NzQ1Nw==&mid=100001183&idx=1&sn=f3e7e30b4032a112ba87e935453fe03e&scene=1&srcid=0912omTAKLPr9Fu5vW5oQZC3&key=7b81aac53bd2393d052cdd0f7b2f72c9d79cf609959fe6295eba1bce532d8f8756db38b9efac86bbbfa4431fc09f7691&ascene=0&uin=NzA4NzQ5NQ%3D%3D&devicetype=iMac+MacBookPro10%2C2+OSX+OSX+10.11.3+build(15D21)&version=11020012&pass_ticket=tjX6zymucruZjpFkOty6JT6oFzUklNkcKjJdGl5jnWs%3D">《用户协议》</a>
+					</p>
+				</div>
+			</div>
+			<div class="pop-btn cancel" v-on:click="hidePop()" v-show="payStep==1&&!chooseStartDay">
+				取消
+			</div>
+			<div class="pop-btn success" v-on:click="joinAndPay()" v-show="payStep==1&&chooseStartDay">
+				支付
+			</div>
+		</div>
+		<div class="bg" v-on:click="hidePop()"></div>
+	</div>
+	<!-- 二维码弹窗 start -->
+	<div class="fullpage-pop" style="display: none;">
+		<div class="fullpage-pop-head">
+			<span class="title"><i class="iconfont icon-weixin"></i> 跑班微信群</span>
+			<p class="text">识别下方二维码(可能为班长个人微信号，备注“班级名称”)进班群，如班群二维码过期请添加微信号(15201005778)手动拉你进班群。</p>
+			<div class="bg"></div>
+		</div>
+		<div class="fullpage-pop-body text-center">
+			<img width="80%;" alt="若二维码不显示，请与Run妹联系" v-bind:src="classInfo.qrcode">
+			<i class="iconfont icon-guanbi1" v-on:click="hideCode()"></i>
+		</div>
+	</div>
+	<!-- 二维码弹窗 end -->
+</body>
+</html>
+<link rel="import" href="./common/footer.html?__inline">
+<script type="text/javascript" src="../static/js/classDetail.js"></script>

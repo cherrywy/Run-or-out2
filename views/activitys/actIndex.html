@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="import" href="../common/header.html?__inline">
+<script src="https://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<title>百日跑活动 - 不跑就出局</title>
+<style type="text/css">
+	.head-bg img{
+		display: block;
+	}
+	.head-bg .rank-list{
+		position: absolute;
+		color: #fff;
+		top: 0.5rem;
+		right: 1rem;
+		font-size: 0.878rem;
+		display: inline-block;
+	}
+	.head-bg .rank-list:active{
+		background: rgba(255,255,255,0.2);
+	}
+	.head-bg .rank-list i{
+		color: #fff;
+		font-size: 0.86rem;
+		margin-right: 0.2rem;
+	}
+	.head-bg .time-info{
+		position: absolute;
+		bottom: 1rem;
+		display: block;
+		width: 100%;
+		text-align: center;
+		color: #fff;
+		font-size: 0.7rem;
+	}
+	.body{
+		padding-bottom: 5rem;
+	}
+	.block{
+		background: #fff;
+		margin-bottom: 1rem;
+	}
+	.block .head{
+		padding: 1rem 0;
+	}
+	.block .head .tag{
+		height: 1rem;
+		width: 0.31rem;
+		background: #601986;
+		display: inline-block;
+		vertical-align: middle;
+	}
+	.block .head .title{
+		font-size: 0.878rem;
+		line-height: 1rem;
+		height: 1rem;
+		color: #601986;
+		display: inline-block;
+		margin-left: 0.4rem;
+		vertical-align: middle;
+	}
+	.block .head > *{
+		vertical-align: middle;
+	}
+	.block-body{
+		padding: 0 1rem 1rem 1rem;
+	}
+	.block-body:after{
+		clear: both;
+		content: " ";
+	}
+	.block-body .item{
+		display: inline-block;
+		margin-right: 0.6rem;
+		margin-left: 0.6rem;
+	}
+	.block-body .item .text{
+		font-size: 2.2rem;
+		float: left;
+		color: #601986;
+	}
+	.block-body .item .info{
+		float: left;
+		font-size: 0.7rem;
+		line-height: 1.7;
+		margin-left: 0.5rem;
+		color: #601986;
+	}
+	.rules{
+		position: absolute;
+		text-align: center;
+		font-size: 0.86rem;
+		color: #601986;
+		right: 1rem;
+		top: 1rem;
+	}
+	.rules i{
+		color: #601986;
+		margin-right: 0.2rem;
+	}
+	.model.block-body{
+		padding: 1rem 0.5rem;
+	}
+	.model.block-body .item{
+		border: 1px solid #c8c8c8;
+		height: 7.2rem;
+		display: block;
+		border-radius: 5px;
+		padding: 0.5rem 0.8rem;
+		margin-bottom: 1.2rem;
+	}
+	.model.block-body .item .title{
+		font-size: 1rem;
+		margin-bottom: 0.3rem;
+		color: #434343;
+	}
+	.model.block-body .item .text{
+		font-size: 0.7rem;
+		float: none;
+		line-height: 1.6;
+		color: #969696;
+	}
+	.model.block-body .item .people{
+		position: absolute;
+		top: 0.5rem;
+		right: 0.8rem;
+		font-size: 1rem;
+		color: #434343;
+	}
+	.model.block-body .item .people span:last-child{
+		font-size: 0.7rem;
+		color: #434343;
+	}
+	.model.block-body .item .people span:first-child{
+		font-size: 1.05rem;
+		color: #434343;
+		vertical-align: bottom;
+		display: inline-block;
+	}
+	.model.block-body .item .money-title,.model.block-body .item .money{
+		color: #969696;
+	}
+	.model.block-body .item .money-title{
+		position: absolute;
+		bottom: 2.3rem;
+		font-size: 0.7rem;
+		right: 0.8rem;
+	}
+	.model.block-body .item .money{
+		position: absolute;
+		border-radius: 3px;
+		bottom: 0.8rem;
+		padding: 0.1rem 0.5rem;
+		font-size: 0.7rem;
+		right: 0.4rem;
+		color: #fff;
+		background: #969696;
+	}
+	.model.block-body .item.active *{
+		color: #601986!important;
+	}
+	.model.block-body .item.active{
+		border: 1px solid #601986;
+	}
+	.model.block-body .item.active .money{
+		color: #fff!important;
+		background: #601986;
+	}
+	.footer{
+		position: fixed;
+		width: 100%;
+		bottom: 0;
+		text-align: center;
+		padding: 1rem;
+		background: #efeff4;
+	}
+	.footer .btn{
+		display: inline-block;
+		height: 3.25rem;
+		background: #601986;
+		line-height: 3.25rem;
+		color: #fff;
+		width: 100%;
+		border-radius: 5px;
+	}
+	.footer .btn:active{
+		display: inline-block;
+		height: 3.25rem;
+		background: #510a77;
+		line-height: 3.25rem;
+		color: #fff;
+		width: 100%;
+		border-radius: 5px;
+	}
+	.rules-page{
+		background: rgba(255,255,255,1);
+		position: fixed;
+		top: 0;
+		left: 0;
+		bottom: 0;
+		right: 0;
+		padding: 2rem 1rem;
+	}
+	.rules-page .rule-head{
+		font-size: 1.05rem;
+		position: fixed;
+		left: 50%;
+		transform: translateX(-50%);
+		-webkit-transform: translateX(-50%);
+		color: #601986;
+		font-weight: bold;
+	}
+	.rule-body{
+		margin-top: 2rem;
+		height: 90%;
+		overflow: auto;
+	}
+	.rule-body p{
+		font-size: 0.86rem;
+		line-height: 1.6;
+		color: #601986;
+	}
+	.rule-body p img{
+		width: 100%;
+	}
+	.rule-body .title{
+		font-weight: bold;
+		text-align: center;
+		margin-top: 1rem;
+	}
+	.rule-body .sub-title{
+		font-weight: bold;
+		margin-top: 1rem;
+	}
+	.rule-body .item{
+		margin-top: 1rem;
+	}
+	.rule-body .sub-item{
+		padding-left: 1rem;
+	}
+	.icon-guanbi1{
+		position: fixed;
+		right: 1.5rem;
+		top: 1rem;
+		font-size: 1.8rem;
+		color: #601986;
+	}
+</style>
+</head>
+
+<body id="act-index-v" v-cloak>
+	<div class="head-bg">
+		<img src="https://www.runorout.cn/images/run-head.jpg" width="100%">
+		<!-- <a onclick="toRankIndex()" class="rank-list"><i class="iconfont icon-jiangbei"></i>排行榜</a> -->
+		<span class="time-info">
+			报名时间&nbsp;&nbsp;7.7 ~ 7.14&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;&nbsp;比赛时间&nbsp;&nbsp;7.15 ~ 10.22&nbsp;/&nbsp;11.11
+		</span>
+	</div>
+	<div class="body">
+		<div class="block">
+			<div class="head">
+				<span class="tag"></span>
+				<span class="title">赛事流程</span>
+				<div class="rules"><i class="iconfont icon-guanyuwomen"></i>赛事规则</div>
+			</div>
+			<div class="block-body">
+				<div class="item">
+					<span class="text">1</span>
+					<span class="info">
+						付契约金<br/>参加比赛
+					</span>
+				</div><div class="item">
+					<span class="text">2</span>
+					<span class="info">
+						在不跑就出局<br/>完成百日打卡
+					</span>
+				</div><div class="item">
+					<span class="text">3</span>
+					<span class="info">
+						返还契约金<br/>分配比赛奖金
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="block">
+			<div class="head">
+				<span class="tag"></span>
+				<span class="title">模式选择</span>
+			</div>
+			<div class="block-body model">
+				<div class="item" data-type="{{info.teams.loose_hundred_day.id}}">
+					<h3 class="title">120日自由挑战</h3>
+					<p class="text">&radic; 在120天内打卡100天</p>
+					<p class="text">&radic; 3公里/日，每公里15分钟内</p>
+					<p class="text">&radic; 完赛获奖证书及礼品一份（免费）</p>
+					<p class="text">&radic; 不跑扣钱，跑了分钱</p>
+					<span class="people"><span>{{info.teams.loose_hundred_day.people}}</span><span> 人</span></span>
+					<span class="money-title">契约金</span>
+					<span class="money">￥{{info.teams.loose_hundred_day.money | toMoney}}</span>
+				</div>
+				<div class="item" data-type="{{info.teams.hundred_day.id}}">
+					<h3 class="title">100日终极挑战</h3>
+					<p class="text">&radic; 需连续打卡100天</p>
+					<p class="text">&radic; 2公里/日，每公里15分钟内</p>
+					<p class="text">&radic; 完赛获奖证书及礼品一份（免费）</p>
+					<p class="text">&radic; 不跑扣钱，跑了分钱</p>
+					<span class="people"><span>{{info.teams.hundred_day.people}}</span><span> 人</span></span>
+					<span class="money-title">契约金</span>
+					<span class="money">￥{{info.teams.hundred_day.money | toMoney}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- <div class="footer" v-show="!info.user.participate">
+		<a class="btn" id="pay-money">支付参赛契约金</a>
+	</div> -->
+
+	<div class="footer" style="background: #fff;" v-show="!info.user.participate">
+		<a class="btn" style="background: #c8c8c8;" id="pay-money">报名已结束，敬请关注下期赛事</a>
+	</div>
+
+	<div class="footer" style="padding: 0;background: #fff;" v-show="info.user.participate">
+		<div class="class-btn-group text-center">
+			<span id="show-code" onclick="toHelper()" style="background: #22ad38;">报名成功点这里</span>
+			<span id="invite-firends" style="background: #601986;" v-on:click="sendInvite()">邀请好友参赛</span>
+		</div>
+	</div>
+
+	<div class="rules-page" style="display: none;">
+		<div class="rule-head text-center">
+			百日挑战赛事规则
+		</div>
+		<i class="iconfont icon-guanbi1"></i>
+		<div class="rule-body">
+			<p class="title">赛事设置</p>
+			<p>此次挑战赛分为120日与100日两个等级的挑战，可自由选择加入。</p>
+			<p class="sub-title">120日自由挑战（7.15-11.11）</p>
+			<p>挑战项目：在120天内，跑步打卡满100天</p>
+			<p>契约金：6.66元/天，百日契约金666元</p>
+			<p>最低单次里程：3公里/日，每公里15分钟内完成</p>
+			<p class="sub-title">100日终极挑战(7.15-10.22)</p>
+			<p>挑战项目：在100天内，每天坚持跑步打卡</p>
+			<p>契约金：5.20元/天，百日契约金520元</p>
+			<p>最低单次里程：2公里/日，每公里15分钟内完成</p>
+			<p class="title">挑战赛流程</p>
+			<p class="item" style="margin-top: 0;">1、在赛事活动页，缴纳报名契约金，完成报名后，添加小助手微信，备注“百日跑”，进入百日挑战群。</p>
+			<p class="item">2、扫码关注【不跑就出局】公众号进行打卡。</p>
+			<p><img src="http://mmbiz.qpic.cn/mmbiz/gS0Zha0OSNGSnJEOE6HVryre3SoM1CbffMiaqb9GjTTCHnV8ZjCfGCjJIXeBhBnz7QJKrhcic5pz3jA4Rcg7DQKg/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1"></p>
+			<p class="sub-item">&bull; 选择跑步软件（悦跑圈，咕咚等）进行跑步计数</p>
+			<p class="sub-item">&bull; 提交当日跑步截图，在公众号【跑步打卡】上传</p>
+			<p class="sub-item">&bull; 按照步骤输入公里和总时长，完成打卡操作</p>
+			<p class="sub-item">&bull; 打卡被审核通过后，即代表今日打卡完成</p>
+			<p class="item">3、当日完成，次日返还前日契约金；缺跑几天则扣除相应天数契约金，纳入大赛奖金池。所有打卡满100天的人可平分奖金池，同时获得神秘大礼。</p>
+			<p style="margin-top: 1rem;">报名时间：7月7日21:00——7月14日24:00</p>
+			<p>注：百日挑战赛与普通跑班，可同时报名</p>
+			<p class="title">奖品设置</p>
+			<p>完成挑战100天，可免费获得神秘大礼</p>
+			<p>注：请大家完善个人中心的地址电话等信息，便于收寄礼物</p>
+		</div>
+	</div>
+</body>
+
+</html>
+<link rel="import" href="../common/footer.html?__inline">
+<script type="text/javascript" src="../../static/js/activitys/actIndex.js"></script>

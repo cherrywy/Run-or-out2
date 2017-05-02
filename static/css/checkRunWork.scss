@@ -1,0 +1,389 @@
+.check-work-head {
+	height: 3.6rem;
+	padding: 0;
+	line-height: 3.5rem;
+	background: #1b1b20;
+}
+.check-head-item-list {
+	margin-left: 0.5rem;
+	padding: 0 0.3rem;
+}
+.check-head-item-list.active {
+	border-bottom: 3px solid #fc4548;
+}
+.check-head-item-list .text {
+	color: #969696;
+}
+.check-head-item-list.active .text {
+	color: #fc4548;
+}
+.check-head-item-list .tag {
+	display: inline-block;
+	width: 1.8rem;
+	height: 1rem;
+	color: #fff;
+	background: #969696;
+	margin-left: 0.3rem;
+	font-size: 0.8rem;
+	line-height: 1.1rem;
+	border-radius: 1rem;
+	text-align: center;
+}
+.check-head-item-list.active .tag {
+	background: #fc4548;
+	color: #fff;
+	
+}
+.check-work-head .rules-intro {
+	position: absolute;
+	right: 0;
+	top: 0;
+	color: #969696;
+}
+.check-work-head .rules-intro * {
+	color: #969696;
+	vertical-align: middle;
+}
+.check-work-head .rules-intro .iconfont {
+	margin-left: 0.1rem;
+}
+.check-work-body {
+	background: #fff;
+	height: 27rem;
+}
+.check-work-body .img {
+	text-align: center;
+	padding: 1rem;
+	padding-top: 2rem;
+	height: 100%;
+	background: #f6f6f6;
+	margin-left: 30%;
+}
+.check-work-body .img #work-img {
+	width: 100%;
+	height: 100%;
+}
+.check-work-body .img .no-work {
+	width: 90%;
+}
+.check-work-body .user-info {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	box-sizing: border-box;
+	padding: 1rem 0;
+}
+.check-work-body .user-info .head-img {
+	width: 2.6rem;
+	height: 2.6rem;
+	margin: 0 auto;
+	background: #ccc;
+	border-radius: 50%;
+}
+.check-work-body .user-info .name {
+	font-size: 0.8rem;
+	margin-top: 0.5rem;
+	height: 2.5rem;
+}
+.check-work-body .user-info .info-block {
+	margin-bottom: 0.8rem;
+}
+.check-work-body .user-info .info-block .label {
+	background: #11cd6e;
+	width: 4rem;
+	height: 1.2rem;
+	line-height: 1.3rem;
+	font-size: 0.8rem;
+	text-align: center;
+	margin: 0 auto;
+	border-radius: 0.2rem;
+	color: #fff;
+	margin-top: 0.3rem;
+}
+.check-work-body .user-info .info-block .content {
+	text-align: center;
+	font-size: 1.6rem;
+	color: #f56218;
+	margin-top: 0.3rem;
+}
+.check-work-body .user-info .info-block .content {
+	text-align: center;
+	font-size: 1.6rem;
+	color: #ff8666;
+	margin-top: 0.3rem;
+}
+.check-work-body .user-info .info-block .tips {
+	text-align: center;
+	font-size: 0.8rem;
+}
+.check-work-body .user-info .handle-btns {
+	border-top: 1px solid #eee;
+}
+.check-work-body .user-info .handle-btns .handle-btn {
+	text-align: center;
+	margin-top: 0.5rem;
+	padding: 0.5rem;
+}
+.check-work-body .user-info .handle-btns .handle-btn * {
+	color: #fc4548;
+	font-size: 1.3rem;
+	vertical-align: middle;
+}
+.check-work-body .user-info .handle-btns .handle-btn.disabled * {
+	color: #999;
+}
+.check-work-body .user-info .handle-btns .handle-btn .text {
+	margin-left: 0.2rem;
+	font-size: 1.1rem;
+}
+
+/* 按钮和弹窗 */
+.check-btn-list {
+	margin-top: 1rem;
+	width: 100%;
+	text-align: center;
+	position: static;
+}
+.check-btn-list > div {
+	width: 5rem;
+	height: 5rem;
+	background: rgba(255, 255, 255, 0.9);
+	display: inline-block;
+	border-radius: 50%;
+	box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.2);
+	color: #fc4548;
+	line-height: 5rem;
+	font-size: 1.1rem;
+	font-weight: 500;
+	-webkit-transition: .5s;
+	-ms-transition: .5s;
+	transition: .5s;
+}
+.check-btn-list > div.pass {
+	color: #fc4548;
+	background: rgba(255, 255, 255, 0.9);
+}
+.check-btn-list > div.pass:active {
+	background: rgba(255, 255, 255, 0.9);
+}
+.check-btn-list > div:active {
+	background: rgba(240, 240, 240, 0.9);
+}
+.check-pop .pop-out-message i {
+	font-size: 1.8rem;
+}
+.check-pop .pop-out-message .pop-out-head > span {
+	position: absolute;
+	right: 0;
+	font-size: 0.9rem;
+	color: #fc4548;
+}
+.check-pop .pop-out-message .pop-out-head > span i {
+	position: absolute;
+	left: -1.8rem;
+	font-size: 1.2rem;
+	color: #fc4548;
+}
+.check-pop .pop-out-body {
+	padding: 1rem 1.5rem;
+	text-align: left;
+	overflow: auto;
+	height: 22rem;
+}
+.check-pop .pop-out-body * {
+	font-size: 1rem;
+	color: #434343
+}
+.check-pop .pop-out-message {
+	height: 28rem;
+	width: 21.5rem;
+}
+#no-pass-pop .pop-out-body {
+	padding: 1rem 1rem;
+}
+#no-pass-pop .pop-out-body > p {
+	padding-left: 2rem;
+	line-height: 2.4rem;
+	height: 2.4rem;
+	color: #434343;
+	-webkit-transition: .5s;
+	-ms-transition: .5s;
+	transition: .5s;
+	white-space: nowrap;
+	font-size: 0.9rem;
+}
+#no-pass-pop .pop-out-body > p:active {
+	background: #eee;
+}
+#no-pass-pop .pop-out-body > p::before, #no-pass-pop .pop-out-body > div::before {
+	font-family: "iconfont" !important;
+	font-style: normal;
+	-webkit-font-smoothing: antialiased;
+	-webkit-text-stroke-width: 0.2px;
+	-moz-osx-font-smoothing: grayscale;
+	color: #eee;
+	content: "\e60c";
+	position: absolute;
+	left: 0;
+	top: -0.15rem;
+	font-size: 1.4rem;
+}
+#no-pass-pop .pop-out-body > p.active::before, #no-pass-pop .pop-out-body > div.active::before {
+	color: #fc4548;
+}
+#no-pass-pop .pop-out-body > div {
+	padding-left: 2rem;
+	line-height: 2.8rem;
+	height: 2.8rem;
+}
+#no-pass-pop .pop-out-body > div > textarea {
+	width: 9rem;
+	font-size: 1rem;
+	border: none;
+	height: 4rem;
+	resize: none;
+	vertical-align: top;
+	margin-top: 0.7rem;
+}
+#no-pass-pop .pop-out-body > span {
+	line-height: 2.8rem;
+	height: 2.8rem;
+	width: 100%;
+	background: #fc4548;
+	display: block;
+	margin: 0 auto;
+	margin-top: 3rem;
+	border-radius: 0.2rem;
+	text-align: center;
+	color: #fff;
+	font-size: 1.2rem;
+}
+.overflow-hidden {
+	overflow-x: hidden;
+	overflow-y: hidden;
+	overflow: hidden;
+}
+.pop-out-message {
+	top: 45%;
+}
+img {
+	pointer-events: none;
+}
+.info-pop {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: #fff;
+	z-index: 98;
+	overflow: auto;
+}
+.info-pop .info-pop-head {
+	height: 5.5rem;
+	background: url('https://www.runorout.cn/images/couple-bg.jpg') no-repeat top;
+	background-size: cover;
+	padding: 1.5rem;
+	text-align: center;
+}
+.info-pop .info-pop-head .bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.62);
+	z-index: 1;
+}
+.info-pop .info-pop-head .title {
+	color: #fc4548;
+	font-size: 1.6rem;
+	z-index: 2;
+	margin-top: 0.5rem;
+}
+.info-pop .info-pop-body {
+	padding: 1.5rem;
+}
+.info-pop .info-pop-body .info-pop-block {
+	text-align: left;
+	margin-bottom: 1rem;
+}
+.info-pop .info-pop-body .info-pop-block .title {
+	color: #fc4548;
+}
+.info-pop .info-pop-body .info-pop-block .text {
+	font-size: 0.86rem;
+	margin-top: 0.5rem;
+	line-height: 1.8;
+}
+.info-pop .info-pop-body .iconfont {
+	font-size: 1.6rem;
+	border: 1px solid #333;
+	border-radius: 50%;
+	padding: 0.2rem;
+	margin-top: 1rem;
+	display: inline-block;
+	line-height: 1;
+	z-index: 9;
+}
+.check-btn-list.disabled > div {
+	background: #c8c8c8;
+	color: #fff;
+}
+#close-rules {
+	position: absolute;
+	right: 1rem;
+	top: 1rem;
+	font-size: 1.4rem;
+	color: #fc4548;
+}
+.img-name {
+	position: absolute;
+	font-size: 1.6rem;
+	transform: translate(-50%, -50%) rotate(9deg);
+	-ms-transform: translate(-50%, -50%) rotate(9deg); /* Internet Explorer */
+	-moz-transform: translate(-50%, -50%) rotate(9deg); /* Firefox */
+	-webkit-transform: translate(-50%, -50%) rotate(9deg); /* Safari 和 Chrome */
+	-o-transform: translate(-50%, -50%) rotate(9deg); /* Opera */
+	top: 50%;
+	left: 50%;
+	font-weight: bold;
+	color: #ccc;
+	opacity: 0.3;
+	width: 100%;
+}
+.hide-img {
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	z-index: 5;
+}
+.check-btn-list > div:active {
+	background: #fc4548;
+	color: #fff;
+}
+.check-btn-list > div.pass:active {
+	background: #fc4548;
+	color: #fff;
+}
+.notice-no-pass{
+	background: rgba(252,69,72,0.2);
+	position: absolute;
+	width: 100%;
+	height: 2rem;
+	line-height: 2rem;
+	left: 0;
+	top: 0;
+	padding-left: 1rem;
+	text-align: left;
+	*{
+		vertical-align: middle;
+		color: #fc4548;
+	}
+	.text{
+		font-size: 0.86rem;
+	}
+}

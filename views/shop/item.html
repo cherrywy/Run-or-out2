@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="../../static/css/owl.theme.css">
+<link rel="stylesheet" type="text/css" href="../../static/css/owl.theme.css">
+<link rel="import" href="../common/header.html?__inline">
+<link rel="stylesheet" type="text/css" href="../../static/css/shop/item.scss">
+<title>商品详情</title>
+<style>
+	#tanchuang{
+    width: 15rem;
+    height: 8rem;
+    position: fixed;
+    left: 20%;
+    top: 36%;
+    margin: 0 auto;
+    background: #000000;
+    z-index: 1000;
+    display: none;
+    line-height: 8rem;
+    text-align: center;
+    font-size:2rem;
+    opacity: 0.5;
+    color: #FFFFFF;
+    -webkit-opacity: 0.5;
+		
+	}
+	
+</style>
+</head>
+
+<body id="v-shop-item" class="shop-item" v-cloak>
+      <div id="tanchuang">
+      	购买成功
+      	</div>
+	<div class="content">
+		<div class="head hide">
+			<i class="iconfont left-icon icon-3 vertical-middle"></i>
+			<a href="#address" class="address">
+				<p class="name">收件人: {{user.real_name}}</p>
+				<span class="phone">{{user.mobile}}</span>
+				<p class="text text-two-line">收货地址: {{user.address}}
+					<i class="iconfont right-icon icon-xiangyou2 vertical-middle"></i>
+				</p>				
+			</a>
+		</div>
+		
+		<div class="pay-out" v-show="paySuccess">
+			<div class="tiaoxingma">
+				<i class="iconfont icon-tiaoxingma"></i>
+			</div>
+				<div class="validity-date" v-show="isShowDate">{{itemDetail.list[0].maturity | dateCut}}前有效</div>
+				<div class="item-message">
+					<div class="name">{{itemDetail.name}}{{payNum}}张</div>
+					<div class="duihuanma">兑换码：
+						<span v-for="list in itemDetail.list">
+							{{list.content}};&nbsp;
+						</span>
+					</div>
+				</div>
+		</div>
+
+		<div class="body">
+			<div class="item-info line-list-body">
+				<a class="item">
+					<span class="text fll vertical-middle info one-line">{{itemDetail.name}}<br>
+						<span class="sub-info">{{itemDetail.title}}</span>
+					</span>
+					<span class="text flr vertical-middle info one-line text-right">
+						<span class="color-red first-info">{{itemDetail.unit_price}}{{itemDetail.currency_type | priceInfo}}
+					</span><br>
+					<span class="sub-info">免运费 | 
+						<span style="color: #969696;">剩余{{itemDetail.quantity}}张</span>
+					</span>
+				</a>
+			</div>
+			<div id="owl-demo" class="item-photo owl-carousel owl-theme" style="display: block;" v-show="img_path">
+				
+				<a class="head-img" style="display:block;background: url({{itemDetail.img_path}}) no-repeat center;background-size: cover; width: 100%; height: 12rem;"></a>
+			</div>
+
+			<div class="item-intro">
+				<div class="block flex">
+					<i class="iconfont icon-gouwuche flex-item"></i>
+					<div class="info flex-item">
+						<span class="title">商品介绍</span>
+						<span class="text">
+							{{{itemDetail.description}}}
+						</span>
+					</div>
+				</div>
+
+				<div class="block flex">
+					<i class="iconfont icon-guize flex-item"></i>
+					<div class="info flex-item">
+						<span>使用流程</span>
+						<span class="text">
+							{{{itemDetail.process}}}
+							<div style="margin-top: 1rem;" v-show="process_img">
+								<div class="head-img" style="background: url({{itemDetail.process_img}}) no-repeat center;background-size: 100%; width: 100%; height: 26rem;"></div>
+							</div>
+						</span>
+					</div>
+				</div>
+				<div class="block flex">
+					<i class="iconfont icon-guanyuwomen flex-item"></i>
+					<div class="info flex-item">
+						<span>兑换规则</span>
+						<span class="text">
+							{{{itemDetail.rule}}}
+							<div style="margin-top: 1rem;" v-show="rule_img">
+								<div class="head-img" style="background: url({{itemDetail.rule_img}}) no-repeat center;background-size: 100%; width: 100%; height: 26rem;"></div>
+							</div>
+						</span>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+
+		<div class="footer">
+			<img src="../../static/images/logo-black.png" alt="RO不跑就出局">
+		</div>
+		<div class="item-btn">
+			<div v-if="itemDetail.quantity!=0" class="btn" v-on:click="change()">立即兑换</div>
+			<div v-if="itemDetail.quantity == 0" class="btn finish">商品已兑完</div>
+		</div>
+
+		<!-- 完善地址 start -->
+		<div class="slide-left {{pageGuide=='address'?'show':''}}">
+			<div class="form">
+				<div class="form-line flex">
+					<label class="label flex-item">收件人</label>
+					<input type="text flex-item" maxlength="10" class="form-ele" placeholder="请填写收件人姓名" v-model="username">
+				</div>
+				<div class="form-line flex">
+					<label class="label flex-item">联系电话</label>
+					<input type="text flex-item" maxlength="11" class="form-ele" placeholder="11位数字" v-model="mobile">
+				</div>
+				<div class="form-line flex">
+					<label class="label flex-item">详细地址</label>
+					<input type="text flex-item" maxlength="25" class="form-ele" placeholder="省 市 区 街道门牌" v-model="address">
+				</div>
+			</div>
+			<div class="btn" v-on:click="saveAddress()">保存</div>
+		</div>
+		<!-- 完善地址 end -->
+
+	</div>
+
+	<div class="pop-out" v-show="buyPop">
+		<div class="pop-mask" v-on:click="hidePop()"></div>
+	</div>
+	
+	<!--BEGIN toast-->
+		<!--end toast-->
+	
+</body>
+
+</html>
+<script type="text/javascript" src="https://cdn.bootcss.com/jquery/2.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="../../static/js/owl.carousel.js"></script>
+<link rel="import" href="../common/footer.html?__inline">
+<script type="text/javascript" src="../../static/js/shop/item.js"></script>

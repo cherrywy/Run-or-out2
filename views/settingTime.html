@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="import" href="./common/header.html?__inline">
+<link href="../static/css/mobiscroll.css" rel="stylesheet" />
+<link href="../static/css/mobiscroll_date.css" rel="stylesheet"/>
+<link rel="stylesheet" type="text/css" href="../static/css/settingTime.scss">
+<title>提醒设置 </title>
+</head>
+
+<body id="v-setting-time" v-cloak>
+	<div class="content">
+		<div class="header"></div>
+		<div class="body">
+			<div class="menu-block margin-t-1">
+				<div class="menu-list no-icon">
+					<!-- <i class="iconfont icon-shuaxin vertical-middle color-blue"></i> -->
+					<label class="name vertical-middle"><span class="text">打卡提醒</span></label>
+					<span class="right-icon">
+						<input type="checkbox" class="dz-switch" id="check-work-alert">
+					</span>
+				</div>
+			</div>
+			<p class="text auto-alert">当加入跑班或活动且打卡目标未完成，公众号会提醒你打卡。</p>
+
+			<div class="normal-menu-body manager-class-item" v-show="showTime">
+				<div class="normal-menu-list" id="choose-time">
+					<span class="normal-menu-title">提醒时间 <span class="color-red">*</span></span>
+					<span class="normal-menu-sub-title sub-value">{{alertTime | reverseTime}}</span>
+					<i class="iconfont icon-webxuanzexiangmuicon01-copy color-red"></i>
+					<input type="text" value="{{alertTime | reverseTime}}" style="opacity: 0;position: absolute;left: 8rem;top: 1rem;" name="choose-time-hide" id="choose-time-hide" readonly>
+				</div>
+			</div>
+		</div>
+		<div class="footer"></div>
+	</div>
+</body>
+
+</html>
+<script type="text/javascript" src="//cdn.bootcss.com/jquery/1.11.1-rc1/jquery.min.js"></script>
+<script src="../static/js/mobiscroll_date.js"></script> 
+<script src="../static/js/mobiscroll.js"></script> 
+<link rel="import" href="./common/footer.html?__inline">
+<script type="text/javascript" src="../static/js/settingTime.js"></script>

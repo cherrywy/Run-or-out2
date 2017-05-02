@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="import" href="./common/header.html?__inline">
+<link rel="stylesheet" type="text/css" href="../static/css/userCenter.scss">
+<script src="//res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<title>个人中心 </title>
+<style type="text/css">
+	
+</style>
+</head>
+
+<body id="user-center-v" v-cloak>
+	<div class="user-center content">
+		<div class="head">
+			<div class="bg"></div>
+			<div class="img-body"><div class="img" style="background: url({{userInfo.avatar | nullImg}}) no-repeat center;background-size: cover;"></div></div>
+			<div class="name">
+				{{userInfo.nickname | notNull}}<br>
+				<div class="text" style="float: left;">RO编号<span class="number">{{userInfo.ro_number}}</span></div>
+			</div>
+			<!-- <i class="iconfont icon-iconfontcolor04 link"></i> -->
+			<div class="clear-fix"></div>
+			<div class="data flex link">
+				<div class="flex-item">
+					<span class="text first">{{userStatistics.total_distance}}</span>
+					<br>
+					<span class="text sub">累计公里</span>
+				</div>
+				<div class="flex-item">
+					<span class="text first">{{userStatistics.total_day}}</span>
+					<br>
+					<span class="text sub">打卡天数</span>
+				</div>
+				<div class="flex-item">
+					<span class="text first">{{userStatistics.total_profit/100}}</span>
+					<br>
+					<span class="text sub">累计奖金</span>
+				</div>
+				<div class="flex-item" v-on:click="getPersonalCard()">
+					<span class="text first"><i class="iconfont icon-xiazai"></i></span>
+					<br>
+					<span class="text sub">数据卡</span>
+				</div>
+			</div>
+			<div class="user-info" v-on:click="gotoUserInfo()">
+				<div class="text" style="float: left;">个人信息 <span class="tags" v-if="notFillNumber!=0">{{notFillNumber}}</span></div>
+				<i class="iconfont icon-xiangyou1"></i>
+			</div>
+		</div>
+		<div class="block-title">我的跑班</div>
+		<div class="body flex flex-start">
+			<a class="item flex-item flex-item-3 link" onclick="MtaH5.clickStat('MyClass');" href="/page/user_team" >
+				<i class="iconfont icon-3 color-blue"></i><br>
+				<span class="text title">正在参加</span><br>
+				<!-- <span class="text sub-title">查看当前跑班</span> -->
+			</a>
+			<a class="item flex-item flex-item-3 link" v-on:click="gotoSettingTime()" href="javascript:void(0);" >
+				<i class="iconfont icon-fcstubiao25 color-red"></i><br>
+				<span class="text title">提醒设置</span><br>
+				<!-- <span class="text sub-title">查看当前跑班</span> -->
+			</a>
+			
+			<a class="item flex-item flex-item-3 link" v-on:click="gotoContinuedClass()" href="javascript:void(0);" >
+				<i class="iconfont icon-shuaxin color-blue"></i><br>
+				<span class="text title">自动续班</span><br>
+				<!-- <span class="text sub-title">查看当前跑班</span> -->
+			</a>
+			
+			<a class="item flex-item flex-item-3 link" v-on:click="gotoManageClass()" href="javascript:void(0);" >
+				<i class="iconfont icon-shezhi color-blue"></i><br>
+				<span class="text title">班级设置</span><br>
+				<!-- <span class="text sub-title">查看当前跑班</span> -->
+			</a>
+			<a v-if="!monitorTeam" class="item flex-item flex-item-3">
+			
+			</a>
+		</div>
+
+		<div class="block-title">常用功能</div>
+		<div class="body flex flex-start">
+			<a class="item flex-item flex-item-3 link" onclick="MtaH5.clickStat('ROAccount');" href="/page/user_account">
+				<i class="iconfont icon-qian color-blue"></i><br>
+				<span class="text title">RO账户</span><br>
+				<!-- <span class="text sub-title">￥{{userStatistics.account_money/100}}</span> -->
+			</a>
+			<a class="item flex-item flex-item-3 link" onclick="MtaH5.clickStat('shopCenter');" href="/page/shop">
+				<i class="iconfont icon-gouwuche color-blue"></i><br>
+				<span class="text title">局市</span><br>
+				<!-- <span class="text sub-title">{{userStatistics.total_point}}局票</span> -->
+			</a>
+			<a class="item flex-item flex-item-3 link" onclick="MtaH5.clickStat('EmergencyContact');" href="/page/feedback/emergency">
+				<i class="iconfont icon-weixin color-red"></i><br>
+				<span class="text title">问题咨询</span><br>
+				<!-- <span class="text sub-title">人工客服</span> -->
+			</a>
+			<!-- <a class="item flex-item flex-item-3 link" v-on:click="getPersonalCard()">
+				<i class="iconfont icon-yingyong color-blue"></i><br>
+				<span class="text title">RO卡</span><br>
+				<span class="text sub-title">点击获取</span>
+			</a> -->
+		</div>
+
+		<!-- <div class="menu-block">
+			<a class="menu-list" v-if="monitorTeam" v-on:click="gotoManageClass()">
+				<i class="iconfont icon-shezhi vertical-middle color-red"></i>
+				<label class="name vertical-middle"><span class="text">管理班级</span></label>
+				<i class="right-icon iconfont icon-xiangyou1"></i>
+			</a>
+			<a class="menu-list" v-on:click="gotoSettingTime()">
+				<i class="iconfont icon-fcstubiao25 vertical-middle color-red"></i>
+				<label class="name vertical-middle"><span class="text">提醒设置</span></label>
+				<i class="right-icon iconfont icon-xiangyou1"></i>
+			</a>
+		</div> -->
+
+		<!-- <div class="menu-block margin-t-1">
+			<div class="menu-list no-icon">
+				<i class="iconfont icon-shuaxin vertical-middle color-blue"></i>
+				<label class="name vertical-middle"><span class="text">自动续班</span></label>
+				<span class="right-icon">
+					<input type="checkbox" class="dz-switch" id="private-class">
+				</span>
+			</div>
+		</div>
+		<p class="text auto-continue">开启后，若RO账户余额充足，将自动续当前班级下周。</p> -->
+
+		<div class="menu-block">
+			<span class="next-plan-head">
+				跑步日历表
+				<span v-if="progress" class="progress-run-word color-96">本周目标：{{participation.start_date | yearCut}}~{{participation.start_date | finishDate | yearCut}} 跑步{{progress.duration}}天</span>
+				<span v-if="progress" class="progress-run-tags">
+					<span class="run-list {{tag.type}}" style="background: {{tag.distance | backgroundColor}}" v-for="tag in progressTags">{{tag.distance}}</span>
+				</span>
+			</span>
+			<div class="date-list-head flex">
+				<span onclick="MtaH5.clickStat('Calendar');" class="iconfont icon-xiangzuo1 flex-item" v-if="monthList[0]>=minMonth" style="font-size: 1.25rem;" v-on:click="changeMonth(monthList[0])">{{monthList[0]}}</span><span class="flex-item">{{monthList[1]}}</span><span onclick="MtaH5.clickStat('Calendar');" class="iconfont icon-xiangyou2 flex-item" style="font-size: 1.25rem;" v-if="monthList[2]&&monthList[2]<=maxMonth" v-on:click="changeMonth(monthList[2])">{{monthList[2]}}</span>
+			</div>
+			<div class="date-list-body">
+				<div class="{{parseInt(choosedMonth.split('-')[1])==list.month?'':'not-toMonth'}}" v-for="list in dayList">{{list.day}}<span v-if="parseInt(choosedMonth.split('-')[1])==list.month&&runDayList.indexOf(list.day)!=-1" style="background: {{runDayListDistance[runDayList.indexOf(list.day)] | backgroundColor}}">{{runDayListDistance[runDayList.indexOf(list.day)]+"K"}}</span></div>
+			</div>
+		</div>
+
+		<div class="footer">
+			<img src="../static/images/logo-black.png" alt="RO不跑就出局">
+		</div>
+	</div>
+</body>
+
+</html>
+<link rel="import" href="./common/footer.html?__inline">
+<script type="text/javascript" src="../static/js/userCenter.js"></script>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link rel="import" href="./common/header.html?__inline">
+		<link rel="stylesheet" type="text/css" href="../static/css/rankList.scss">
+		<title>排行榜</title>
+		
+	</head>
+	<body id="rank-list-v" v-cloak>
+		<!-- 排行榜banner -->
+		<div class="rank-head index-head-tab">
+			<div class="bg"></div>
+			<span class="vertical-middle {{firstType=='runClass'?'active':''}}" id="myslef-class" data-value="runClass" onclick="MtaH5.clickStat('rankList_runClass');">班内
+			</span>
+			<div class="head-info banji" v-if="firstType=='runPlate'">每日总公里数排序，0点重置</div>
+			<div class="head-info" v-show="firstType=='runClass'">
+				<div id="cells">{{start_date}}~{{finish_date}}</div>
+				<em id="last-week" class="iconfont icon-xiangzuo1 flex-item" onclick='getrunlist(1)'>上周</em>
+				<em id="next-week" class="iconfont icon-xiangyou2 flex-item" onclick='getrunlist(2)'>下周</em>
+			</div>
+			<span class="vertical-middle {{firstType=='runPlate'?'active':''}}" data-value="runPlate"  onclick="MtaH5.clickStat('rankList_runPlate');">
+				班级
+			</span>
+		</div>
+		<!-- 排行榜新增数据标注 -->
+		<!--   <div class="rank-list-body runclass-bz" v-show="firstType=='runClass'">
+								<p class="text wansailv">本周奖金 </p>
+								<p class="text wansailv">返契约金</p>
+								<i class="iconfont icon-bangzhu" v-on:click="wansailv()"></i>
+			</div>
+			<div class="rank-list-body runPlate-bz" v-show="firstType=='runPlate'">
+								<p class="text wansailv1">人均奖金 </p>
+								<p class="text wansailv1">班坚持率</p>
+								<i class="iconfont icon-bangzhu" v-on:click="wansailv1()"></i>
+		</div> -->
+		<!-- 排行榜用户个人总排名 -->
+		
+		<div class="rank-list-body classbody" v-show="firstType=='runClass'&&user">
+			<div class="rank-list-item">
+				<div class="head-img" style="background: url({{user.avatar | nullImg}}) no-repeat center;background-size: cover;"></div>
+				<span class="user-info" style="width:4rem;">{{user.name |nullName}}<br><span class="color-96">第{{user.rank<=1000?user.rank+"名":"1000名以外"}}</span></span>
+				<span class="user-pro vertical-middle person">
+					<span class="distance-list progress-run-tags">
+						<span style="background: {{list.distance | backgroundColor}}" v-for="list in user.progress" class="run-list">{{list.distance!=0?list.distance.toFixed(0):""}}</span>
+					</span>
+				</span>
+				<!-- 率展示demo -->
+				<!-- <div class="text-center favor-info vertical-middle" v-bind:class="list.thumb_up?'favorited':''" style="left:66%">
+									<span class="favor-number">{{user.thumb_up_count}}</span><br>
+									<span class="favor-number">{{user.thumb_up_count}}</span>
+				</div> -->
+				<div class="text-center favor-info vertical-middle" v-bind:class="user.thumb_up?'favorited':''">
+					<i class="iconfont icon-dianzan1"></i>
+					<span class="favor-number" id="favor-numberbj" v-on:click="favorMyself($index)">{{user.thumb_up_count}}
+					</span><br>
+				</div>
+			</div>
+		</div>
+		<!-- 排行榜用户所在班级排名 -->
+		
+		<div class="rank-list-body" v-show="firstType=='runPlate'&&selfClass">
+			<div class="rank-list-item">
+				<span class="rank-index vertical-middle">{{selfClass.rank<=1000?selfClass.rank:"1000名以外"}}</span>
+				<div class="head-img vertical-middle" style="background: url({{selfClass.avatar | nullImg}}) no-repeat center;background-size: cover;"></div>
+				<span class="user-info limit-length">{{selfClass.name}}</span>
+				<!-- 添加进度 -->
+				<div class="skillbar clearfix" >
+					<div class="skillbar-bar" style="background-color:#fc4548;width:{{(selfClass.distance/firstRun)*100}}%"></div>
+				</div>
+				<span class="user-pro vertical-middle">
+					<span class="class-distance">{{parseInt(selfClass.distance)}}公里</span>
+				</span>
+				
+			</div>
+		</div>
+		<!-- 排行榜班内用户总排名列表-->
+		<div class="rank-list-body classbody" v-show="firstType=='runClass'&&rankList.length!=0">
+			<div class="rank-list-item" v-for="list in rankList">
+				<span class="rank-index vertical-middle">{{list.rank}}</span>
+				<div class="head-img vertical-middle" style="background: url({{list.avatar | nullImg}}) no-repeat center;background-size: cover;">
+				</div>
+				<span class="user-info preson">{{list.name |nullName}}</span>
+				<span class="rank-number vertical-middle" id="favor-number">
+					<span class="distance-list progress-run-tags" v-if="rankList.length!=0">
+						<span style="background: {{tags | backgroundColor}}" v-for="tags in list.sign_in" class="run-list">{{tags!=0?tags.toFixed(0):""}}
+						</span>
+					</span>
+				</span>
+				<!-- 率展示demo -->
+				<!-- <div class="text-center favor-info vertical-middle" v-bind:class="list.thumb_up?'favorited':''" style="left:66%">
+									<span class="favor-number">{{list.thumb_up_count}}</span><br>
+									<span class="favor-number">{{list.thumb_up_count}}</span>
+				</div> -->
+				<div class="text-center favor-info vertical-middle" v-bind:class="list.thumb_up?'favorited':''">
+					<i class="iconfont icon-dianzan1"></i>
+					<span class="favor-number" id="favor-numberbj" v-on:click="favor($index)">{{list.thumb_up_count}}
+					</span><br>
+				</div>
+			</div>
+			<!-- <span class="jionpeople-all" onclick="getrunnerWall(true)">全部展开</span><i class="iconfont icon-xiangxia2"></i> -->
+			<!-- <div class="text-center font-30" v-if="hasMore&&firstType=='runPlate'" style="margin-top: 0.86rem;" onclick="moreList()">更多排名<i class="iconfont icon-xiangxia2"></i>
+			</div>
+			<div class="text-center font-30 color-96" v-if="!hasMore&&firstType=='runPlate'" style="margin-top: 0.86rem;">没有更多了
+			</div> -->
+		</div>
+		<!-- 排行榜班内用户插班总排名列表-->
+		<div class="rank-list-body flexRankList classbody" v-show="firstType=='runClass'&&flexRankList">
+			<!-- <span class="block-title">本期插班</span> -->
+			<div class="rank-list-item" v-for="list in flexRankList">
+				<span class="rank-index vertical-middle">{{list.rank}}</span>
+				<div class="head-img vertical-middle" style="background: url({{list.avatar | nullImg}}) no-repeat center;background-size: cover;"></div>
+				<span class="user-info preson">{{list.name |nullName}}</span>
+				<span class="rank-number vertical-middle" id="favor-number">
+					<span class="distance-list progress-run-tags">
+						<span style="background: {{tags | backgroundColor}}" v-for="tags in list.sign_in" class="run-list">{{tags!=0&&tags!=null?tags.toFixed(0):""}}</span>
+					</span>
+				</span>
+				<!-- 率展示demo -->
+				<!-- <div class="text-center favor-info vertical-middle" v-bind:class="list.thumb_up?'favorited':''" style="left:66%">
+									<span class="favor-number">{{list.thumb_up_count}}</span><br>
+									<span class="favor-number">{{list.thumb_up_count}}</span>
+				</div> -->
+				<div class="text-center favor-info vertical-middle" v-bind:class="list.thumb_up?'favorited':''">
+					<i class="iconfont icon-dianzan1"></i>
+					<span class="favor-number" id="favor-numberbj" v-on:click="favor($index)">{{list.thumb_up_count}}
+					</span><br>
+				</div>
+			</div>
+			<!-- <div class="text-center font-30" v-if="hasMore&&firstType=='runClass'" style="margin-top: 0.86rem;" onclick="moreList()">更多排名<i class="iconfont icon-xiangxia2"></i></div>
+			<div class="text-center font-30 color-96" v-if="!hasMore&&firstType=='runClass'" style="margin-top: 0.86rem;">没有更多了</div> -->
+		</div>
+		
+		<!-- 排行榜班班级总排名列表 -->
+		<div class="rank-list-body" v-show="firstType=='runPlate'">
+			<div class="rank-list-item" v-for="list in rankList" v-on:click="toClass(list.team_id)">
+				<span class="rank-index vertical-middle">{{list.rank}}</span>
+				<div class="head-img vertical-middle" style="background: url({{list.avatar | nullImg}}) no-repeat center;background-size: cover;"></div>
+				<span class="user-info limit-length">{{list.name |nullName}}</span>
+				<!-- 添加进度 -->
+				<div class="skillbar clearfix" >
+					<div class="skillbar-bar" style="background-color:#11cd6e;width:{{(list.distance/firstRun)*100}}%"></div>
+				</div>
+				<span class="rank-number vertical-middle" id="favor-number1">
+					<span class="class-distance">{{parseInt(list.distance)}}公里</span>
+				</span>
+				<!-- <i class="iconfont icon-xiangyou1"></i> -->
+				<!-- <div class="text-center favor-info vertical-middle" v-bind:class="list.thumb_up?'favorited':''">
+									<span class="favor-number">{{list.thumb_up_count}}</span><br>
+									<i class="iconfont icon-dianzan" v-on:click="favor($index)"></i>
+				</div> -->
+			</div>
+			<div class="text-center font-30" v-if="rankList&&hasMore&&firstType=='runPlate'" style="margin-top: 0.86rem;padding-bottom: 0.86rem;font-size:0.86rem;color:#969696" onclick="moreList()">更多排名<i class="iconfont icon-xiangxia2" style="font-size:0.86rem;color:#969696"></i></div>
+			<div class="text-center font-30 color-96" v-if="!hasMore&&firstType=='runPlate'" style="margin-top: 0.86rem;padding-bottom: 0.86rem;">没有更多了</div>
+		</div>
+		<!-- 跑友墙展开 -->
+		<!-- <div class="class-join-people-body runnerWall" v-show="firstType=='runClass'">
+			<span class="text">下周报名&nbsp•&nbsp<span class="number">{{Fcount}}人</span></span>
+			
+			<span class="jionpeople-all" onclick="getrunnerWall()">{{moreText}}<i class="iconfont"></i></span>
+			<div class="box">
+				<div class="join-list-box"><div class="join-list" v-for="list in nextJoin">
+					<img class="head-img" v-bind:src="list.avatar | nullImg" alt="{{list.avatar | nickname}}"><span class="name">{{list.nickname| nullName}}</span>
+				</div></div>
+			</div>
+		</div> -->
+		<!--BEGIN toast-->
+		<div id="toast" style="display: none;">
+			<div class="dz_toast">
+				<p class="dz_toast_content color-fff">操作成功</p>
+			</div>
+		</div>
+		<!--end toast-->
+	</body>
+</html>
+<link rel="import" href="./common/footer.html?__inline">
+<script type="text/javascript" src="../static/js/rankList.js"></script>
